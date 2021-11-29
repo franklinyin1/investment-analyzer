@@ -1,6 +1,8 @@
 'use strict'
 
-const {db, models: {User} } = require('../server/db')
+const {db, models: {User, Financial} } = require('../server/db')
+
+const process = require("./process");
 
 /**
  * seed - this function clears the database, updates tables to
@@ -17,6 +19,56 @@ async function seed() {
   ])
 
   console.log(`seeded ${users.length} users`)
+
+  // Creating Financials
+  //process forms an array from all the financials num.txt
+  let financials = await process()
+
+  //split financials into batches
+  let financials1 = financials.slice(0, Math.round(financials.length/2))
+  let financials2 = financials.slice(Math.round(financials.length/2))
+
+  financials1 = await Promise.all(
+    financials1.map((financial) => {
+      return Financial.create({
+        adsh: financial[0],
+        tag: financial[1],
+        version: financial[2],
+        coreg: financial[3],
+        ddate: financial[4],
+        qtrs: financial[5],
+        uom: financial[6],
+        value: financial[7],
+        footnote: financial[8]
+      })
+    })
+  )
+
+  // financials2 = await Promise.all(
+  //   financials2.map((financial) => {
+  //     return Financial.create({
+  //       adsh: financial[0],
+  //       tag: financial[1],
+  //       version: financial[2],
+  //       coreg: financial[3],
+  //       ddate: financial[4],
+  //       qtrs: financial[5],
+  //       uom: financial[6],
+  //       value: financial[7],
+  //       footnote: financial[8]
+  //     })
+  //   })
+  // )
+
+  financials = [...financials1, ...financials2]
+
+  console.log(`seeded ${financials.length} financials`)
+
+
+  /*
+
+  */
+
   console.log(`seeded successfully`)
   return {
     users: {
@@ -24,6 +76,8 @@ async function seed() {
       murphy: users[1]
     }
   }
+
+
 }
 
 /*
