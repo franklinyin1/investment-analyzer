@@ -9,7 +9,7 @@ const process = require("./process");
  *      match the models, and populates the database.
  */
 async function seed() {
-  await db.sync({ force: true }) // clears db and matches models to tables
+  await db.sync()
   console.log('db synced!')
 
   // Creating Users
@@ -20,29 +20,29 @@ async function seed() {
 
   console.log(`seeded ${users.length} users`)
 
-  // Creating Financials
-  //process forms an array from all the financials num.txt
-  let financials = await process()
+  // // Creating Financials
+  // //process forms an array from all the financials num.txt
+  // let financials = await process()
 
-  //split financials into batches. Remove the first entry which is the labels
-  let financials1 = financials.slice(1, Math.round(financials.length/2))
-  let financials2 = financials.slice(Math.round(financials.length/2))
+  // //split financials into batches. Remove the first entry which is the labels
+  // let financials1 = financials.slice(1, Math.round(financials.length/2))
+  // let financials2 = financials.slice(Math.round(financials.length/2))
 
-  financials1 = await Promise.all(
-    financials1.map((financial) => {
-      return Financial.create({
-        adsh: financial[0],
-        tag: financial[1],
-        version: financial[2],
-        coreg: financial[3],
-        ddate: financial[4],
-        qtrs: financial[5],
-        uom: financial[6],
-        value: financial[7],
-        footnote: financial[8]
-      })
-    })
-  )
+  // financials1 = await Promise.all(
+  //   financials1.map((financial) => {
+  //     return Financial.create({
+  //       adsh: financial[0],
+  //       tag: financial[1],
+  //       version: financial[2],
+  //       coreg: financial[3],
+  //       ddate: financial[4],
+  //       qtrs: financial[5],
+  //       uom: financial[6],
+  //       value: financial[7],
+  //       footnote: financial[8]
+  //     })
+  //   })
+  // )
 
   // financials2 = await Promise.all(
   //   financials2.map((financial) => {
@@ -60,9 +60,9 @@ async function seed() {
   //   })
   // )
 
-  financials = [...financials1, ...financials2]
+  // financials = [...financials1, ...financials2]
 
-  console.log(`seeded ${financials.length} financials`)
+  // console.log(`seeded ${financials.length} financials`)
 
 
   /*

@@ -3,9 +3,8 @@ const fsPromise = require("fs/promises");
 const fs = require("fs");
 
 async function process() {
-  const lineTokenizer = new natural.RegexpTokenizer({ pattern: /\n/ });
+  const lineTokenizer = new natural.RegexpTokenizer({ pattern: /\n/});
   const tabTokenizer = new natural.RegexpTokenizer({ pattern: /\t/})
-  const wordTokenizer = new natural.WordTokenizer();
 
   let num = await fsPromise.readFile("./sec-data/2021q3/num.txt", "utf8");
   let pre = await fsPromise.readFile("./sec-data/2021q3/pre.txt", "utf8");
@@ -18,7 +17,7 @@ async function process() {
 
   //split each array entry into an another array delimited by tabs
   financials = financials.map((financial) => {
-    return tabTokenizer.tokenize(financial)
+    return financial.split("\t")
   })
 
   return financials

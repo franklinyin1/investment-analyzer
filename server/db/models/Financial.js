@@ -32,3 +32,12 @@ const Financial = db.define('financial', {
 })
 
 module.exports = Financial
+
+/**
+ * hooks
+ */
+const convertEmptyStringToZero = async(financial) => {
+  if (financial.value === '') financial.value = 0
+}
+
+Financial.beforeCreate(convertEmptyStringToZero)
