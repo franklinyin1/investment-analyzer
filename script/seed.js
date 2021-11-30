@@ -24,8 +24,8 @@ async function seed() {
   //process forms an array from all the financials num.txt
   let financials = await process()
 
-  //split financials into batches
-  let financials1 = financials.slice(0, Math.round(financials.length/2))
+  //split financials into batches. Remove the first entry which is the labels
+  let financials1 = financials.slice(1, Math.round(financials.length/2))
   let financials2 = financials.slice(Math.round(financials.length/2))
 
   financials1 = await Promise.all(

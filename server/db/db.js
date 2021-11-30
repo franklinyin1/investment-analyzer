@@ -4,7 +4,13 @@ const pkg = require('../../package.json')
 const databaseName = pkg.name + (process.env.NODE_ENV === 'test' ? '-test' : '')
 
 const config = {
-  logging: false
+  logging: false,
+  pool: {
+    max: 30,
+    min: 0,
+    acquire: 6000000,
+    idle: 5000
+  }
 };
 
 if(process.env.LOGGING === 'true'){

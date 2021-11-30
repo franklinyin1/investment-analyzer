@@ -18,7 +18,7 @@ const Financial = db.define('financial', {
     type: Sequelize.STRING
   },
   qtrs: {
-    type: Sequelize.INTEGER
+    type: Sequelize.STRING
   },
   uom: {
     type: Sequelize.STRING
@@ -27,7 +27,7 @@ const Financial = db.define('financial', {
     type: Sequelize.FLOAT
   },
   footnote: {
-    type: Sequelize.STRING
+    type: Sequelize.TEXT
   }
 })
 
