@@ -1,6 +1,6 @@
 'use strict'
 
-const {db, models: {User, Financial} } = require('../server/db')
+const {db, models: {User, Financial, Presentation} } = require('../server/db')
 
 const process = require("./process");
 
@@ -9,20 +9,24 @@ const process = require("./process");
  *      match the models, and populates the database.
  */
 async function seed() {
+
+  //not currently dropping db tables
   await db.sync()
   console.log('db synced!')
 
-  // Creating Users
-  const users = await Promise.all([
-    User.create({ username: 'cody', password: '123' }),
-    User.create({ username: 'murphy', password: '123' }),
-  ])
+  //process is used to gather the Q3 data
+  let {financials, presentation} = await process()
 
-  console.log(`seeded ${users.length} users`)
+  // // Creating Users
+  // const users = await Promise.all([
+  //   User.create({ username: 'cody', password: '123' }),
+  //   User.create({ username: 'murphy', password: '123' }),
+  // ])
+
+  // console.log(`seeded ${users.length} users`)
 
   // // Creating Financials
-  // //process forms an array from all the financials num.txt
-  // let financials = await process()
+
 
   // //split financials into batches. Remove the first entry which is the labels
   // let financials1 = financials.slice(1, Math.round(financials.length/2))
@@ -64,17 +68,38 @@ async function seed() {
 
   // console.log(`seeded ${financials.length} financials`)
 
+  // // Creating Presentation Table
 
-  /*
+  // //slice off the first element, which is the label
+  // presentation = presentation.slice(1)
 
-  */
+  // console.log('presentation:', presentation)
+
+  // presentation = await Promise.all(
+  //   presentation.map((data) => {
+  //     return Presentation.create({
+  //       adsh: data[0],
+  //       report: data[1],
+  //       line: data[2],
+  //       stmt: data[3],
+  //       inpth: data[4],
+  //       rfile: data[5],
+  //       tag: data[6],
+  //       version: data[7],
+  //       plabel: data[8],
+  //       negating: data[9]
+  //     })
+  //   })
+  // )
+
+  // console.log(`seeded ${presentation.length} presentation data`)
 
   console.log(`seeded successfully`)
   return {
-    users: {
-      cody: users[0],
-      murphy: users[1]
-    }
+    // users: {
+    //   cody: users[0],
+    //   murphy: users[1]
+    // }
   }
 
 

@@ -8,7 +8,7 @@ const config = {
   pool: {
     max: 30,
     min: 0,
-    acquire: 6000000,
+    acquire: 60000000,
     idle: 5000
   }
 };
