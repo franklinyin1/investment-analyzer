@@ -52,7 +52,7 @@ class Home extends React.Component {
         );
         cell.push(<td key={`cell${i}-4`}>{company.financials[i - 1].qtrs}</td>);
         cell.push(
-          <td key={`cell${i}-5`}>{company.financials[i - 1].value}</td>
+          <td key={`cell${i}-5`}>{company.financials[i - 1].value.toLocaleString()}</td>
         );
         cell.push(<td key={`cell${i}-6`}>{company.financials[i - 1].uom}</td>);
         rows.push(
