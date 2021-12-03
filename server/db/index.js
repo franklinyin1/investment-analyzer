@@ -5,6 +5,7 @@ const db = require('./db')
 const User = require('./models/User')
 const Financial = require('./models/Financial')
 const Presentation = require('./models/Presentation')
+const Submission = require('./models/Submission')
 
 //associations could go here!
 
@@ -13,6 +14,7 @@ module.exports = {
   models: {
     User,
     Financial,
-    Presentation
+    Presentation,
+    Submission
   },
 }

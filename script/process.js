@@ -26,7 +26,13 @@ async function process() {
     return data.split("\t")
   })
 
-  return {financials, presentation}
+  let submissions = lineTokenizer.tokenize(sub)
+
+  submissions = submissions.map((submission) => {
+    return submission.split("\t")
+  })
+
+  return {financials, presentation, submissions}
 
 }
 
