@@ -10,7 +10,7 @@ async function process() {
   let pre = await fsPromise.readFile("./sec-data/2021q3/pre.txt", "utf8");
   let sub = await fsPromise.readFile("./sec-data/2021q3/sub.txt", "utf8");
   let tag = await fsPromise.readFile("./sec-data/2021q3/tag.txt", "utf8");
-
+  let tickers = await fsPromise.readFile("./ticker-json/company-tickers.json", "utf8")
 
   //split each row into a separate entry in the array
   let financials = lineTokenizer.tokenize(num)
@@ -38,7 +38,9 @@ async function process() {
     return tag.split("\t")
   })
 
-  return {financials, presentation, submissions, tags}
+  tickers = JSON.parse(tickers)
+
+  return {financials, presentation, submissions, tags, tickers}
 
 }
 

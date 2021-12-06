@@ -1,6 +1,6 @@
 'use strict'
 
-const {db, models: {User, Financial, Presentation, Submission, Tag} } = require('../server/db')
+const {db, models: {User, Financial, Presentation, Submission, Tag, Ticker} } = require('../server/db')
 
 const process = require("./process");
 
@@ -14,8 +14,8 @@ async function seed() {
   await db.sync({alter:true})
   console.log('db synced!')
 
-  //process is used to gather the Q3 data
-  let {financials, presentation, submissions, tags} = await process()
+  //process is used to gather important data from other directories
+  let {financials, presentation, submissions, tags, tickers} = await process()
 
   // //use this syntax to destroy a DB table
   // Submission.destroy({
@@ -150,25 +150,44 @@ async function seed() {
   // Creating Tags Table
 
   //slice off the first element, which is the label
-  tags = tags.slice(1)
+  // tags = tags.slice(1)
 
-  tags = await Promise.all(
-    tags.map((tag) => {
-      return Tag.create({
-        tag: tag[0],
-        version: tag[1],
-        custom: tag[2],
-        abstract: tag[3],
-        dataype: tag[4],
-        iord: tag[5],
-        crdr: tag[6],
-        tlabel: tag[7],
-        doc: tag[8]
+  // tags = await Promise.all(
+  //   tags.map((tag) => {
+  //     return Tag.create({
+  //       tag: tag[0],
+  //       version: tag[1],
+  //       custom: tag[2],
+  //       abstract: tag[3],
+  //       dataype: tag[4],
+  //       iord: tag[5],
+  //       crdr: tag[6],
+  //       tlabel: tag[7],
+  //       doc: tag[8]
+  //     })
+  //   })
+  // )
+
+  // console.log(`seeded ${tags.length} tag data`)
+
+  //Creating tickers table
+
+  let tickersArray = []
+  for (const ticker in tickers) {
+    tickersArray.push(tickers[ticker])
+  }
+
+  tickers = await Promise.all(
+    tickersArray.map((ticker) => {
+      return Ticker.create({
+        cik_str: ticker.cik_str,
+        ticker: ticker.ticker,
+        title: ticker.title
       })
     })
   )
 
-  console.log(`seeded ${tags.length} tag data`)
+  console.log(`seeded ${tickers.length} ticker data`)
 
   console.log(`seeded successfully`)
   return {
