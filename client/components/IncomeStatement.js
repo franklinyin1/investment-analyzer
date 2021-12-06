@@ -26,27 +26,42 @@ class IncomeStatement extends React.Component {
         let presentation = company.presentations.filter((presentation) => {
           return presentation.adsh === financial.adsh && presentation.stmt === 'IS' && presentation.tag === financial.tag
         })
-        // console.log('financial:', financial)
-        // console.log('adsh:', adsh)
-        // console.log('presentation:', presentation)
         return presentation.length > 0
       })
 
-      for (let i = 1; i < financials.length; i++) {
+      //filter financials to only include current quarter
+      let currentQuarter = '20210630'
+      let currentQuarterFinancials = financials.filter((financial) => {
+        return financial.ddate === currentQuarter && financial.qtrs === '1'
+      })
+
+      //add presentation detail as a key-value pair of each financial object
+      currentQuarterFinancials = currentQuarterFinancials.map(financial => {
+        let presentation = company.presentations.filter((presentation) => {
+          return presentation.adsh === financial.adsh && presentation.stmt === 'IS' && presentation.tag === financial.tag
+        })
+        financial.presentation = presentation
+        return financial
+      })
+
+      //sort the current quarter financials based on order of appearance in the income statement
+      currentQuarterFinancials = currentQuarterFinancials.sort((x,y) => x.presentation.line - y.presentation.line)
+
+      for (let i = 1; i < currentQuarterFinancials.length; i++) {
         let rowId = `row${i}`;
         let cell = [];
-        cell.push(<td key={`cell${i}-1`}>{financials[i - 1].tag}</td>);
+        cell.push(<td key={`cell${i}-1`}>{currentQuarterFinancials[i - 1].tag}</td>);
         cell.push(
-          <td key={`cell${i}-2`}>{financials[i - 1].version}</td>
+          <td key={`cell${i}-2`}>{currentQuarterFinancials[i - 1].version}</td>
         );
         cell.push(
-          <td key={`cell${i}-3`}>{financials[i - 1].ddate}</td>
+          <td key={`cell${i}-3`}>{currentQuarterFinancials[i - 1].ddate}</td>
         );
-        cell.push(<td key={`cell${i}-4`}>{financials[i - 1].qtrs}</td>);
+        cell.push(<td key={`cell${i}-4`}>{currentQuarterFinancials[i - 1].qtrs}</td>);
         cell.push(
-          <td key={`cell${i}-5`}>{financials[i - 1].value.toLocaleString()}</td>
+          <td key={`cell${i}-5`}>{currentQuarterFinancials[i - 1].value.toLocaleString()}</td>
         );
-        cell.push(<td key={`cell${i}-6`}>{financials[i - 1].uom}</td>);
+        cell.push(<td key={`cell${i}-6`}>{currentQuarterFinancials[i - 1].uom}</td>);
         rows.push(
           <tr key={i} id={rowId}>
             {cell}
