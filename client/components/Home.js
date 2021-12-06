@@ -5,6 +5,7 @@ import { fetchCompany } from "../store/company";
 
 import IncomeStatement from "./IncomeStatement";
 import BalanceSheet from "./BalanceSheet";
+import CashFlowStatement from "./CashFlowStatement";
 
 class Home extends React.Component {
   constructor(props) {
@@ -86,6 +87,7 @@ class Home extends React.Component {
             <h2>Displaying the financial data of: {company.company.title} ({company.company.ticker})</h2>
             <IncomeStatement company={company}/>
             <BalanceSheet company={company}/>
+            <CashFlowStatement company={company}/>
             <h3>All Stats</h3>
             <table id="simple-board">
               <tbody>{rows}</tbody>

@@ -19,8 +19,6 @@ class BalanceSheet extends React.Component {
     ];
 
     if (company.financials) {
-      console.log('company.financials:', company.financials)
-      console.log('company.presentations:', company.presentations)
 
       //filter financials to only include income statement items
       let financials = company.financials.filter((financial) => {
@@ -30,15 +28,11 @@ class BalanceSheet extends React.Component {
         return presentation.length > 0
       })
 
-      console.log('financials:', financials)
-
       //filter financials to only include current quarter
       let currentQuarter = '20210630'
       let currentQuarterFinancials = financials.filter((financial) => {
         return financial.ddate === currentQuarter
       })
-
-      console.log('currentQuarterFinancials:', currentQuarterFinancials)
 
       //add presentation detail as a key-value pair of each financial object
       currentQuarterFinancials = currentQuarterFinancials.map(financial => {
@@ -53,17 +47,11 @@ class BalanceSheet extends React.Component {
         return financial
       })
 
-      console.log('currentQuarterFinancials2:', currentQuarterFinancials)
-
       //sort the current quarter financials based on order of appearance in the income statement
       currentQuarterFinancials = currentQuarterFinancials.sort((x,y) => x.presentation[0].line - y.presentation[0].line)
 
-      console.log('currentQuarterFinancials3:', currentQuarterFinancials)
-
       //remove all current quarter financials without a specified line on the income statement
       currentQuarterFinancials = currentQuarterFinancials.filter((financial) => financial.presentation[0].line !== Infinity)
-
-      console.log('currentQuarterFinancials4:', currentQuarterFinancials)
 
       for (let i = 1; i < currentQuarterFinancials.length; i++) {
         let rowId = `row${i}`;
