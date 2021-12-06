@@ -7,7 +7,7 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      companyName: "",
+      ticker: "",
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -21,13 +21,13 @@ class Home extends React.Component {
 
   handleSubmit(evt) {
     evt.preventDefault();
-    this.props.fetchCompany(this.state.companyName);
-    this.setState({ companyName: "" });
+    this.props.fetchCompany(this.state.ticker);
+    this.setState({ ticker: "" });
   }
 
   render() {
     const { handleSubmit, handleChange } = this;
-    const { companyName } = this.state;
+    const { ticker } = this.state;
     const { company } = this.props;
     let rows = [
       [
@@ -67,14 +67,14 @@ class Home extends React.Component {
       <React.Fragment>
         <form id="submit-company" onSubmit={handleSubmit}>
           <div id="companyPrompt">
-            <label htmlFor="companyName">
+            <label htmlFor="ticker">
               <span>Enter Company Name:</span>
             </label>
           </div>
           <input
-            name="companyName"
+            name="ticker"
             onChange={handleChange}
-            value={companyName}
+            value={ticker}
           />
           <button type="submit">Submit</button>
         </form>
@@ -102,7 +102,7 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    fetchCompany: (companyName) => dispatch(fetchCompany(companyName)),
+    fetchCompany: (ticker) => dispatch(fetchCompany(ticker)),
   };
 };
 

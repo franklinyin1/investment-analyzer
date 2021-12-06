@@ -1,17 +1,16 @@
 const router = require("express").Router();
 const {
-  models: { Financial, Presentation, Submission, Tag },
+  models: { Financial, Presentation, Submission, Tag, Ticker },
 } = require("../db");
 
-//GET request /api/companies/:companyName
-router.get("/:companyName", async (req, res, next) => {
+//GET request /api/companies/:ticker
+router.get("/:ticker", async (req, res, next) => {
   try {
-    const companyName = req.params.companyName;
+    const ticker = req.params.ticker.toUpperCase();
 
-    console.log("companyName:", companyName);
+    const company = await Ticker.findOne({where: {ticker}})
 
-
-    const submissions = await Submission.findAll({where: {name: companyName}})
+    const submissions = await Submission.findAll({where: {cik: company.cik_str}})
 
     let financials = []
 

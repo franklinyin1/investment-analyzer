@@ -12,9 +12,9 @@ const setCompany = (company) => {
 }
 
 //THUNK CREATORS
-export const fetchCompany = (companyName) => {
+export const fetchCompany = (ticker) => {
   return async (dispatch) => {
-    const { data } = await axios.get(`/api/companies/${companyName}`)
+    const { data } = await axios.get(`/api/companies/${ticker}`)
     return dispatch(setCompany(data))
   }
 }
