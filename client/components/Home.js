@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { fetchCompany } from "../store/company";
 
 import IncomeStatement from "./IncomeStatement";
+import BalanceSheet from "./BalanceSheet";
 
 class Home extends React.Component {
   constructor(props) {
@@ -84,6 +85,7 @@ class Home extends React.Component {
           <React.Fragment>
             <h2>Displaying the financial data of: {company.company.title} ({company.company.ticker})</h2>
             <IncomeStatement company={company}/>
+            <BalanceSheet company={company}/>
             <h3>All Stats</h3>
             <table id="simple-board">
               <tbody>{rows}</tbody>
