@@ -68,7 +68,7 @@ class Home extends React.Component {
         <form id="submit-company" onSubmit={handleSubmit}>
           <div id="companyPrompt">
             <label htmlFor="ticker">
-              <span>Enter Company Name:</span>
+              <span>Enter Stock Ticker:</span>
             </label>
           </div>
           <input
@@ -79,9 +79,12 @@ class Home extends React.Component {
           <button type="submit">Submit</button>
         </form>
         {rows.length > 1 ? (
-          <table id="simple-board">
-            <tbody>{rows}</tbody>
-          </table>
+          <React.Fragment>
+            <h3>Displaying the financial data of: {company.submissions[0].name}</h3>
+            <table id="simple-board">
+              <tbody>{rows}</tbody>
+            </table>
+          </React.Fragment>
         ) : (
           ""
         )}
