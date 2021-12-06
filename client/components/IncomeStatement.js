@@ -1,35 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { fetchCompany } from "../store/company";
-
-import IncomeStatement from "./IncomeStatement";
-
-class Home extends React.Component {
+class IncomeStatement extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      ticker: "",
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleChange(evt) {
-    this.setState({
-      [evt.target.name]: evt.target.value,
-    });
-  }
-
-  handleSubmit(evt) {
-    evt.preventDefault();
-    this.props.fetchCompany(this.state.ticker);
-    this.setState({ ticker: "" });
   }
 
   render() {
-    const { handleSubmit, handleChange } = this;
-    const { ticker } = this.state;
     const { company } = this.props;
     let rows = [
       [
@@ -67,24 +44,9 @@ class Home extends React.Component {
 
     return (
       <React.Fragment>
-        <form id="submit-company" onSubmit={handleSubmit}>
-          <div id="companyPrompt">
-            <label htmlFor="ticker">
-              <span>Enter Stock Ticker:</span>
-            </label>
-          </div>
-          <input
-            name="ticker"
-            onChange={handleChange}
-            value={ticker}
-          />
-          <button type="submit">Submit</button>
-        </form>
         {rows.length > 1 ? (
           <React.Fragment>
-            <h2>Displaying the financial data of: {company.company.title} ({company.company.ticker})</h2>
-            <IncomeStatement company={company}/>
-            <h3>All Stats</h3>
+            <h3>Income Statement</h3>
             <table id="simple-board">
               <tbody>{rows}</tbody>
             </table>
@@ -100,17 +62,5 @@ class Home extends React.Component {
 /**
  * CONTAINER
  */
-const mapState = (state) => {
-  return {
-    username: state.auth.username,
-    company: state.company,
-  };
-};
 
-const mapDispatch = (dispatch) => {
-  return {
-    fetchCompany: (ticker) => dispatch(fetchCompany(ticker)),
-  };
-};
-
-export default connect(mapState, mapDispatch)(Home);
+export default connect(null)(IncomeStatement);
