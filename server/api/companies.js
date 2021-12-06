@@ -13,13 +13,17 @@ router.get("/:ticker", async (req, res, next) => {
     const submissions = await Submission.findAll({where: {cik: company.cik_str}})
 
     let financials = []
+    let presentations = []
 
     for (const submission of submissions) {
       let submissionFinancials = await Financial.findAll({where: {adsh: submission.adsh}})
       financials = [...financials, ...submissionFinancials]
+
+      let submissionPresentations = await Presentation.findAll({where: {adsh: submission.adsh}})
+      presentations = [...presentations, ...submissionPresentations]
     }
 
-    res.status(200).json({submissions, financials, company})
+    res.status(200).json({submissions, financials, company, presentations})
   } catch (error) {
     next(error);
   }

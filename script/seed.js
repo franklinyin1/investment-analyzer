@@ -170,24 +170,24 @@ async function seed() {
 
   // console.log(`seeded ${tags.length} tag data`)
 
-  //Creating tickers table
+  // //Creating tickers table
 
-  let tickersArray = []
-  for (const ticker in tickers) {
-    tickersArray.push(tickers[ticker])
-  }
+  // let tickersArray = []
+  // for (const ticker in tickers) {
+  //   tickersArray.push(tickers[ticker])
+  // }
 
-  tickers = await Promise.all(
-    tickersArray.map((ticker) => {
-      return Ticker.create({
-        cik_str: ticker.cik_str,
-        ticker: ticker.ticker,
-        title: ticker.title
-      })
-    })
-  )
+  // tickers = await Promise.all(
+  //   tickersArray.map((ticker) => {
+  //     return Ticker.create({
+  //       cik_str: ticker.cik_str,
+  //       ticker: ticker.ticker,
+  //       title: ticker.title
+  //     })
+  //   })
+  // )
 
-  console.log(`seeded ${tickers.length} ticker data`)
+  // console.log(`seeded ${tickers.length} ticker data`)
 
   console.log(`seeded successfully`)
   return {

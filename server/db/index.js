@@ -11,6 +11,12 @@ const Ticker = require('./models/Ticker')
 
 //associations could go here!
 
+// //failed attempt to associate financial and presentation - adsh can't be used as a foreign key because it's a string
+// Financial.hasMany(Presentation, {
+//   foreignKey: 'adsh'
+// })
+// Presentation.belongsTo(Financial)
+
 module.exports = {
   db,
   models: {
