@@ -19,7 +19,7 @@ router.get("/:ticker", async (req, res, next) => {
       financials = [...financials, ...submissionFinancials]
     }
 
-    res.status(200).json({submissions, financials})
+    res.status(200).json({submissions, financials, company})
   } catch (error) {
     next(error);
   }

@@ -80,7 +80,7 @@ class Home extends React.Component {
         </form>
         {rows.length > 1 ? (
           <React.Fragment>
-            <h3>Displaying the financial data of: {company.submissions[0].name}</h3>
+            <h3>Displaying the financial data of: {company.company.title} ({company.company.ticker})</h3>
             <table id="simple-board">
               <tbody>{rows}</tbody>
             </table>
