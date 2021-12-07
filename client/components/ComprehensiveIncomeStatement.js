@@ -24,7 +24,7 @@ class ComprehensiveIncomeStatement extends React.Component {
       //filter financials to only include income statement items
       let financials = company.financials.filter((financial) => {
         let presentation = company.presentations.filter((presentation) => {
-          return presentation.adsh === financial.adsh && presentation.stmt === 'CI'
+          return presentation.adsh === financial.adsh && presentation.stmt === 'CI' && presentation.tag === financial.tag
         })
         return presentation.length > 0
       })

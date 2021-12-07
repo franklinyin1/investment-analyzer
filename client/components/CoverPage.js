@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-class BalanceSheet extends React.Component {
+class CoverPage extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -23,10 +23,12 @@ class BalanceSheet extends React.Component {
       //filter financials to only include income statement items
       let financials = company.financials.filter((financial) => {
         let presentation = company.presentations.filter((presentation) => {
-          return presentation.adsh === financial.adsh && presentation.stmt === 'BS' && presentation.tag === financial.tag
+          return presentation.adsh === financial.adsh && presentation.stmt === 'CP' && presentation.tag === financial.tag
         })
         return presentation.length > 0
       })
+
+      console.log('financials:', financials)
 
       //filter financials to only include current quarter
       let currentQuarter = '20210630'
@@ -34,10 +36,13 @@ class BalanceSheet extends React.Component {
         return financial.ddate === currentQuarter
       })
 
+      console.log('currentQuarterFinancials:', currentQuarterFinancials)
+      console.log('company.presentations:', company.presentations)
+
       //add presentation detail as a key-value pair of each financial object
       currentQuarterFinancials = currentQuarterFinancials.map(financial => {
         let presentation = company.presentations.filter((presentation) => {
-          return presentation.adsh === financial.adsh && presentation.stmt === 'BS' && presentation.tag === financial.tag
+          return presentation.adsh === financial.adsh && presentation.stmt === 'CP' && presentation.tag === financial.tag
         })
         if (presentation.length > 0){
           financial.presentation = presentation
@@ -46,7 +51,6 @@ class BalanceSheet extends React.Component {
         }
         return financial
       })
-
       //sort the current quarter financials based on order of appearance in the income statement
       currentQuarterFinancials = currentQuarterFinancials.sort((x,y) => x.presentation[0].line - y.presentation[0].line)
 
@@ -79,7 +83,7 @@ class BalanceSheet extends React.Component {
       <React.Fragment>
         {rows.length > 1 ? (
           <React.Fragment>
-            <h3>Balance Sheet</h3>
+            <h3>Cover Page</h3>
             <table id="simple-board">
               <tbody>{rows}</tbody>
             </table>
@@ -96,4 +100,4 @@ class BalanceSheet extends React.Component {
  * CONTAINER
  */
 
-export default connect(null)(BalanceSheet);
+export default connect(null)(CoverPage);

@@ -48,8 +48,6 @@ class UnclassifiableStatement extends React.Component {
         return financial
       })
 
-      console.log('currentQuarterFinancials:', currentQuarterFinancials)
-
       //sort the current quarter financials based on order of appearance in the income statement
       currentQuarterFinancials = currentQuarterFinancials.sort((x,y) => x.presentation[0].line - y.presentation[0].line)
 

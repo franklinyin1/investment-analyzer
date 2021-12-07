@@ -24,7 +24,7 @@ class IncomeStatement extends React.Component {
       //filter financials to only include income statement items
       let financials = company.financials.filter((financial) => {
         let presentation = company.presentations.filter((presentation) => {
-          return presentation.adsh === financial.adsh && presentation.stmt === 'IS'
+          return presentation.adsh === financial.adsh && presentation.stmt === 'IS' && presentation.tag === financial.tag
         })
         return presentation.length > 0
       })
