@@ -16,6 +16,7 @@ class Home extends React.Component {
     super(props);
     this.state = {
       ticker: "",
+      loading: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -27,15 +28,16 @@ class Home extends React.Component {
     });
   }
 
-  handleSubmit(evt) {
+  async handleSubmit(evt) {
     evt.preventDefault();
-    this.props.fetchCompany(this.state.ticker);
-    this.setState({ ticker: "" });
+    this.setState({ loading: true })
+    await this.props.fetchCompany(this.state.ticker);
+    this.setState({ ticker: "", loading: false });
   }
 
   render() {
     const { handleSubmit, handleChange } = this;
-    const { ticker } = this.state;
+    const { ticker, loading } = this.state;
     const { company } = this.props;
     let rows = [
       [
@@ -45,24 +47,51 @@ class Home extends React.Component {
         <td key={`cell${0}-4`}>Quarters</td>,
         <td key={`cell${0}-5`}>Value</td>,
         <td key={`cell${0}-6`}>Unit Of Measure</td>,
+        <td key={`cell${0}-7`}>Line</td>,
+        <td key={`cell${0}-8`}>Presentation Label</td>,
+        <td key={`cell${0}-9`}>Statement</td>,
+
       ],
     ];
+
     if (company.financials) {
-      for (let i = 1; i < company.financials.length; i++) {
+
+      let financials = company.financials
+
+      //add presentation detail as a key-value pair of each financial object
+      financials = financials.map(financial => {
+        let presentation = company.presentations.filter((presentation) => {
+          return presentation.adsh === financial.adsh && presentation.tag === financial.tag
+        })
+        if (presentation.length > 0){
+          financial.presentation = presentation
+        } else {
+          financial.presentation = [{line: Infinity}]
+        }
+        return financial
+      })
+
+      //sort the current quarter financials based on order of appearance in the income statement
+      financials = financials.sort((x,y) => x.presentation[0].line - y.presentation[0].line)
+
+      for (let i = 1; i < financials.length; i++) {
         let rowId = `row${i}`;
         let cell = [];
-        cell.push(<td key={`cell${i}-1`}>{company.financials[i - 1].tag}</td>);
+        cell.push(<td key={`cell${i}-1`}>{financials[i - 1].tag}</td>);
         cell.push(
-          <td key={`cell${i}-2`}>{company.financials[i - 1].version}</td>
+          <td key={`cell${i}-2`}>{financials[i - 1].version}</td>
         );
         cell.push(
-          <td key={`cell${i}-3`}>{company.financials[i - 1].ddate}</td>
+          <td key={`cell${i}-3`}>{financials[i - 1].ddate}</td>
         );
-        cell.push(<td key={`cell${i}-4`}>{company.financials[i - 1].qtrs}</td>);
+        cell.push(<td key={`cell${i}-4`}>{financials[i - 1].qtrs}</td>);
         cell.push(
-          <td key={`cell${i}-5`}>{company.financials[i - 1].value.toLocaleString()}</td>
+          <td key={`cell${i}-5`}>{financials[i - 1].value.toLocaleString()}</td>
         );
-        cell.push(<td key={`cell${i}-6`}>{company.financials[i - 1].uom}</td>);
+        cell.push(<td key={`cell${i}-6`}>{financials[i - 1].uom}</td>);
+        cell.push(<td key={`cell${i}-7`}>{financials[i - 1].presentation[0].line}</td>);
+        cell.push(<td key={`cell${i}-8`}>{financials[i - 1].presentation[0].plabel}</td>);
+        cell.push(<td key={`cell${i}-9`}>{financials[i - 1].presentation[0].stmt}</td>);
         rows.push(
           <tr key={i} id={rowId}>
             {cell}
@@ -86,6 +115,7 @@ class Home extends React.Component {
           />
           <button type="submit">Submit</button>
         </form>
+        {loading ? <h3>Loading...</h3> : ""}
         {rows.length > 1 ? (
           <React.Fragment>
             <h2>Displaying the financial data of: {company.company.title} ({company.company.ticker})</h2>
