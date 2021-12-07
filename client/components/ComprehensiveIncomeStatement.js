@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-class EquityStatement extends React.Component {
+class ComprehensiveIncomeStatement extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -24,7 +24,7 @@ class EquityStatement extends React.Component {
       //filter financials to only include income statement items
       let financials = company.financials.filter((financial) => {
         let presentation = company.presentations.filter((presentation) => {
-          return presentation.adsh === financial.adsh && presentation.stmt === 'EQ'
+          return presentation.adsh === financial.adsh && presentation.stmt === 'CI'
         })
         return presentation.length > 0
       })
@@ -38,7 +38,7 @@ class EquityStatement extends React.Component {
       //add presentation detail as a key-value pair of each financial object
       currentQuarterFinancials = currentQuarterFinancials.map(financial => {
         let presentation = company.presentations.filter((presentation) => {
-          return presentation.adsh === financial.adsh && presentation.stmt === 'EQ' && presentation.tag === financial.tag
+          return presentation.adsh === financial.adsh && presentation.stmt === 'CI' && presentation.tag === financial.tag
         })
         if (presentation.length > 0){
           financial.presentation = presentation
@@ -81,7 +81,7 @@ class EquityStatement extends React.Component {
       <React.Fragment>
         {rows.length > 1 ? (
           <React.Fragment>
-            <h3>Equity Statement</h3>
+            <h3>Comprehensive Income Statement</h3>
             <table id="simple-board">
               <tbody>{rows}</tbody>
             </table>
@@ -98,4 +98,4 @@ class EquityStatement extends React.Component {
  * CONTAINER
  */
 
-export default connect(null)(EquityStatement);
+export default connect(null)(ComprehensiveIncomeStatement);
