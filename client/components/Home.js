@@ -3,13 +3,13 @@ import { connect } from "react-redux";
 
 import { fetchCompany } from "../store/company";
 
-import IncomeStatement from "./IncomeStatement";
-import BalanceSheet from "./BalanceSheet";
-import CashFlowStatement from "./CashFlowStatement";
-import EquityStatement from "./EquityStatement";
-import ComprehensiveIncomeStatement from "./ComprehensiveIncomeStatement";
-import UnclassifiableStatement from "./UnclassifiableStatement";
-import CoverPage from "./CoverPage";
+import IncomeStatement from "./FinancialStatements/IncomeStatement";
+import BalanceSheet from "./FinancialStatements/BalanceSheet";
+import CashFlowStatement from "./FinancialStatements/CashFlowStatement";
+import EquityStatement from "./FinancialStatements/EquityStatement";
+import ComprehensiveIncomeStatement from "./FinancialStatements/ComprehensiveIncomeStatement";
+import UnclassifiableStatement from "./FinancialStatements/UnclassifiableStatement";
+import CoverPage from "./FinancialStatements/CoverPage";
 
 class Home extends React.Component {
   constructor(props) {
