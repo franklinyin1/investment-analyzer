@@ -8,6 +8,7 @@ import BalanceSheet from "./BalanceSheet";
 import CashFlowStatement from "./CashFlowStatement";
 import EquityStatement from "./EquityStatement";
 import ComprehensiveIncomeStatement from "./ComprehensiveIncomeStatement";
+import UnclassifiableStatement from "./UnclassifiableStatement";
 
 class Home extends React.Component {
   constructor(props) {
@@ -92,6 +93,7 @@ class Home extends React.Component {
             <CashFlowStatement company={company}/>
             <EquityStatement company={company}/>
             <ComprehensiveIncomeStatement company={company}/>
+            <UnclassifiableStatement company={company}/>
             <h3>All Stats</h3>
             <table id="simple-board">
               <tbody>{rows}</tbody>
