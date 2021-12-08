@@ -11,6 +11,8 @@ import ComprehensiveIncomeStatement from "./FinancialStatements/ComprehensiveInc
 import UnclassifiableStatement from "./FinancialStatements/UnclassifiableStatement";
 import CoverPage from "./FinancialStatements/CoverPage";
 
+import MaterialTable from "material-table";
+
 class Home extends React.Component {
   constructor(props) {
     super(props);
@@ -39,20 +41,22 @@ class Home extends React.Component {
     const { handleSubmit, handleChange } = this;
     const { ticker, loading } = this.state;
     const { company } = this.props;
-    let rows = [
-      [
-        <td key={`cell${0}-1`}>Tag</td>,
-        <td key={`cell${0}-2`}>Version</td>,
-        <td key={`cell${0}-3`}>Period End Date</td>,
-        <td key={`cell${0}-4`}>Quarters</td>,
-        <td key={`cell${0}-5`}>Value</td>,
-        <td key={`cell${0}-6`}>Unit Of Measure</td>,
-        <td key={`cell${0}-7`}>Line</td>,
-        <td key={`cell${0}-8`}>Presentation Label</td>,
-        <td key={`cell${0}-9`}>Statement</td>,
+    // let rows = [
+    //   [
+    //     <td key={`cell${0}-1`}>Tag</td>,
+    //     <td key={`cell${0}-2`}>Version</td>,
+    //     <td key={`cell${0}-3`}>Period End Date</td>,
+    //     <td key={`cell${0}-4`}>Quarters</td>,
+    //     <td key={`cell${0}-5`}>Value</td>,
+    //     <td key={`cell${0}-6`}>Unit Of Measure</td>,
+    //     <td key={`cell${0}-7`}>Line</td>,
+    //     <td key={`cell${0}-8`}>Presentation Label</td>,
+    //     <td key={`cell${0}-9`}>Statement</td>,
 
-      ],
-    ];
+    //   ],
+    // ];
+
+    let tableData = [];
 
     if (company.financials) {
 
@@ -74,29 +78,41 @@ class Home extends React.Component {
       //sort the current quarter financials based on order of appearance in the income statement
       financials = financials.sort((x,y) => x.presentation[0].line - y.presentation[0].line)
 
-      for (let i = 1; i < financials.length; i++) {
-        let rowId = `row${i}`;
-        let cell = [];
-        cell.push(<td key={`cell${i}-1`}>{financials[i - 1].tag}</td>);
-        cell.push(
-          <td key={`cell${i}-2`}>{financials[i - 1].version}</td>
-        );
-        cell.push(
-          <td key={`cell${i}-3`}>{financials[i - 1].ddate}</td>
-        );
-        cell.push(<td key={`cell${i}-4`}>{financials[i - 1].qtrs}</td>);
-        cell.push(
-          <td key={`cell${i}-5`}>{financials[i - 1].value.toLocaleString()}</td>
-        );
-        cell.push(<td key={`cell${i}-6`}>{financials[i - 1].uom}</td>);
-        cell.push(<td key={`cell${i}-7`}>{financials[i - 1].presentation[0].line}</td>);
-        cell.push(<td key={`cell${i}-8`}>{financials[i - 1].presentation[0].plabel}</td>);
-        cell.push(<td key={`cell${i}-9`}>{financials[i - 1].presentation[0].stmt}</td>);
-        rows.push(
-          <tr key={i} id={rowId}>
-            {cell}
-          </tr>
-        );
+      for (let i = 0; i < financials.length; i++) {
+        let row = {
+          tag: financials[i].tag,
+          version: financials[i].version,
+          periodEndDate: financials[i].ddate,
+          quarters: financials[i].qtrs,
+          value: financials[i].value.toLocaleString(),
+          unitOfMeasure: financials[i].uom,
+          line: financials[i].presentation[0].line,
+          presentationLabel: financials[i].presentation[0].plabel,
+          statement: financials[i].presentation[0].stmt
+        }
+        tableData.push(row)
+        // let rowId = `row${i}`;
+        // let cell = [];
+        // cell.push(<td key={`cell${i}-1`}>{financials[i - 1].tag}</td>);
+        // cell.push(
+        //   <td key={`cell${i}-2`}>{financials[i - 1].version}</td>
+        // );
+        // cell.push(
+        //   <td key={`cell${i}-3`}>{financials[i - 1].ddate}</td>
+        // );
+        // cell.push(<td key={`cell${i}-4`}>{financials[i - 1].qtrs}</td>);
+        // cell.push(
+        //   <td key={`cell${i}-5`}>{financials[i - 1].value.toLocaleString()}</td>
+        // );
+        // cell.push(<td key={`cell${i}-6`}>{financials[i - 1].uom}</td>);
+        // cell.push(<td key={`cell${i}-7`}>{financials[i - 1].presentation[0].line}</td>);
+        // cell.push(<td key={`cell${i}-8`}>{financials[i - 1].presentation[0].plabel}</td>);
+        // cell.push(<td key={`cell${i}-9`}>{financials[i - 1].presentation[0].stmt}</td>);
+        // rows.push(
+        //   <tr key={i} id={rowId}>
+        //     {cell}
+        //   </tr>
+        // );
       }
     }
 
@@ -116,7 +132,7 @@ class Home extends React.Component {
           <button type="submit">Submit</button>
         </form>
         {loading ? <h3>Loading...</h3> : ""}
-        {rows.length > 1 ? (
+        {tableData.length > 0 ? (
           <React.Fragment>
             <h2>Displaying the financial data of: {company.company.title} ({company.company.ticker})</h2>
             <IncomeStatement company={company}/>
@@ -126,10 +142,28 @@ class Home extends React.Component {
             <ComprehensiveIncomeStatement company={company}/>
             <UnclassifiableStatement company={company}/>
             <CoverPage company={company}/>
-            <h3>All Stats</h3>
-            <table id="simple-board">
+            {/* <h3>All Stats</h3> */}
+            <h1></h1>
+            <div style={{maxWidth: '100%'}}>
+              <MaterialTable
+                columns={[
+                  {title: 'Tag', field: 'tag'},
+                  {title: 'Version', field: 'version'},
+                  {title: 'Period End Date', field: 'periodEndDate'},
+                  {title: 'Quarters', field: 'quarters'},
+                  {title: 'Value', field: 'value'},
+                  {title: 'Unit of Measure', field: 'unitOfMeasure'},
+                  {title: 'Line', field: 'line'},
+                  {title: 'Presentation Label', field: 'presentationLabel'},
+                  {title: 'Statement', field: 'statement'}
+                ]}
+                data = {tableData}
+                title="All Stats"
+              />
+            </div>
+            {/* <table id="simple-board">
               <tbody>{rows}</tbody>
-            </table>
+            </table> */}
           </React.Fragment>
         ) : (
           ""
