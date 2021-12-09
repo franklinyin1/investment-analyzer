@@ -144,18 +144,19 @@ class Home extends React.Component {
             <CoverPage company={company}/>
             {/* <h3>All Stats</h3> */}
             <h1></h1>
-            <div style={{maxWidth: '100%'}}>
+            {/* <div style={{maxWidth: '100%'}}> */}
+            <div>
               <MaterialTable
                 columns={[
                   {title: 'Tag', field: 'tag'},
                   {title: 'Version', field: 'version'},
                   {title: 'Period End Date', field: 'periodEndDate'},
-                  {title: 'Quarters', field: 'quarters'},
-                  {title: 'Value', field: 'value'},
+                  {title: 'Quarters', field: 'quarters', align: 'right'},
+                  {title: 'Value', field: 'value', align: 'right'},
                   {title: 'Unit of Measure', field: 'unitOfMeasure'},
                   {title: 'Line', field: 'line'},
-                  {title: 'Presentation Label', field: 'presentationLabel'},
-                  {title: 'Statement', field: 'statement'}
+                  {title: 'Presentation Label', field: 'presentationLabel', emptyValue: () => <em>N/A</em>},
+                  {title: 'Statement', field: 'statement', emptyValue: () => <em>N/A</em>}
                 ]}
                 data = {tableData}
                 title="All Stats"
