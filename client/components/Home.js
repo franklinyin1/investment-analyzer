@@ -152,7 +152,7 @@ class Home extends React.Component {
                   {title: 'Version', field: 'version'},
                   {title: 'Period End Date', field: 'periodEndDate'},
                   {title: 'Quarters', field: 'quarters', align: 'right'},
-                  {title: 'Value', field: 'value', align: 'right'},
+                  {title: 'Value', field: 'value', align: 'right', type:'currency'},
                   {title: 'Unit of Measure', field: 'unitOfMeasure'},
                   {title: 'Line', field: 'line'},
                   {title: 'Presentation Label', field: 'presentationLabel', emptyValue: () => <em>N/A</em>},
