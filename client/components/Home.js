@@ -160,7 +160,7 @@ class Home extends React.Component {
                 ]}
                 data = {tableData}
                 title="All Stats"
-                options = {{filtering:true}}
+                options = {{filtering:true, paging: false}}
               />
             </div>
             {/* <table id="simple-board">
