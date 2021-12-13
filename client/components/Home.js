@@ -18,7 +18,7 @@ class Home extends React.Component {
     super(props);
     this.state = {
       ticker: "",
-      loading: false
+      loading: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -32,7 +32,7 @@ class Home extends React.Component {
 
   async handleSubmit(evt) {
     evt.preventDefault();
-    this.setState({ loading: true })
+    this.setState({ loading: true });
     await this.props.fetchCompany(this.state.ticker);
     this.setState({ ticker: "", loading: false });
   }
@@ -59,24 +59,28 @@ class Home extends React.Component {
     let tableData = [];
 
     if (company.financials) {
-
-      let financials = company.financials
+      let financials = company.financials;
 
       //add presentation detail as a key-value pair of each financial object
-      financials = financials.map(financial => {
+      financials = financials.map((financial) => {
         let presentation = company.presentations.filter((presentation) => {
-          return presentation.adsh === financial.adsh && presentation.tag === financial.tag
-        })
-        if (presentation.length > 0){
-          financial.presentation = presentation
+          return (
+            presentation.adsh === financial.adsh &&
+            presentation.tag === financial.tag
+          );
+        });
+        if (presentation.length > 0) {
+          financial.presentation = presentation;
         } else {
-          financial.presentation = [{line: Infinity}]
+          financial.presentation = [{ line: Infinity }];
         }
-        return financial
-      })
+        return financial;
+      });
 
       //sort the current quarter financials based on order of appearance in the income statement
-      financials = financials.sort((x,y) => x.presentation[0].line - y.presentation[0].line)
+      financials = financials.sort(
+        (x, y) => x.presentation[0].line - y.presentation[0].line
+      );
 
       for (let i = 0; i < financials.length; i++) {
         let row = {
@@ -88,9 +92,9 @@ class Home extends React.Component {
           unitOfMeasure: financials[i].uom,
           line: financials[i].presentation[0].line,
           presentationLabel: financials[i].presentation[0].plabel,
-          statement: financials[i].presentation[0].stmt
-        }
-        tableData.push(row)
+          statement: financials[i].presentation[0].stmt,
+        };
+        tableData.push(row);
         // let rowId = `row${i}`;
         // let cell = [];
         // cell.push(<td key={`cell${i}-1`}>{financials[i - 1].tag}</td>);
@@ -124,43 +128,56 @@ class Home extends React.Component {
               <span>Enter Stock Ticker:</span>
             </label>
           </div>
-          <input
-            name="ticker"
-            onChange={handleChange}
-            value={ticker}
-          />
+          <input name="ticker" onChange={handleChange} value={ticker} />
           <button type="submit">Submit</button>
         </form>
         {loading ? <h3>Loading...</h3> : ""}
         {tableData.length > 0 ? (
           <React.Fragment>
-            <h2>Displaying the financial data of: {company.company.title} ({company.company.ticker})</h2>
-            <IncomeStatement company={company}/>
-            <BalanceSheet company={company}/>
-            <CashFlowStatement company={company}/>
-            <EquityStatement company={company}/>
-            <ComprehensiveIncomeStatement company={company}/>
-            <UnclassifiableStatement company={company}/>
-            <CoverPage company={company}/>
+            <h2>
+              Displaying the financial data of: {company.company.title} (
+              {company.company.ticker})
+            </h2>
+            <IncomeStatement company={company} />
+            <BalanceSheet company={company} />
+            <CashFlowStatement company={company} />
+            <EquityStatement company={company} />
+            <ComprehensiveIncomeStatement company={company} />
+            <UnclassifiableStatement company={company} />
+            <CoverPage company={company} />
             {/* <h3>All Stats</h3> */}
             <h1></h1>
             {/* <div style={{maxWidth: '100%'}}> */}
             <div>
               <MaterialTable
                 columns={[
-                  {title: 'Tag', field: 'tag'},
-                  {title: 'Version', field: 'version'},
-                  {title: 'Period End Date', field: 'periodEndDate'},
-                  {title: 'Quarters', field: 'quarters', align: 'right'},
-                  {title: 'Value', field: 'value', align: 'right'},
-                  {title: 'Unit of Measure', field: 'unitOfMeasure'},
-                  {title: 'Line', field: 'line'},
-                  {title: 'Presentation Label', field: 'presentationLabel', emptyValue: () => <em>N/A</em>},
-                  {title: 'Statement', field: 'statement', emptyValue: () => <em>N/A</em>}
+                  { title: "Tag", field: "tag" },
+                  { title: "Version", field: "version" },
+                  { title: "Period End Date", field: "periodEndDate" },
+                  { title: "Quarters", field: "quarters", align: "right" },
+                  { title: "Value", field: "value", align: "right" },
+                  { title: "Unit of Measure", field: "unitOfMeasure" },
+                  { title: "Line", field: "line" },
+                  {
+                    title: "Presentation Label",
+                    field: "presentationLabel",
+                    emptyValue: () => <em>N/A</em>,
+                  },
+                  {
+                    title: "Statement",
+                    field: "statement",
+                    emptyValue: () => <em>N/A</em>,
+                  },
                 ]}
-                data = {tableData}
+                data={tableData}
                 title="All Stats"
-                options = {{filtering:true, paging: false, exportButton: true, grouping: true}}
+                options={{
+                  filtering: true,
+                  paging: false,
+                  exportButton: true,
+                  grouping: true,
+                  columnsButton: true,
+                }}
               />
             </div>
             {/* <table id="simple-board">
