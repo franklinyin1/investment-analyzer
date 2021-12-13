@@ -161,12 +161,12 @@ class Home extends React.Component {
                   {
                     title: "Presentation Label",
                     field: "presentationLabel",
-                    emptyValue: () => <em>N/A</em>,
+                    emptyValue: () => <div>N/A</div>,
                   },
                   {
                     title: "Statement",
                     field: "statement",
-                    emptyValue: () => <em>N/A</em>,
+                    emptyValue: () => <div>N/A</div>,
                   },
                 ]}
                 data={tableData}
@@ -177,7 +177,8 @@ class Home extends React.Component {
                   exportButton: true,
                   grouping: true,
                   columnsButton: true,
-                  rowStyle: (data, index) => index % 2 == 0 ? {background: "#f5f5f5"} : null
+                  rowStyle: (data, index) => index % 2 == 0 ? {background: "#f5f5f5"} : null,
+                  headerStyle: {background: "#00004d", color: "white"}
                 }}
               />
             </div>
