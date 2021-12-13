@@ -177,6 +177,7 @@ class Home extends React.Component {
                   exportButton: true,
                   grouping: true,
                   columnsButton: true,
+                  rowStyle: (data, index) => index % 2 == 0 ? {background: "#f5f5f5"} : null
                 }}
               />
             </div>
