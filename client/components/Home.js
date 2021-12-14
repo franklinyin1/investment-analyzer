@@ -46,6 +46,36 @@ class Home extends React.Component {
 
     let tableData = [];
 
+    let columns = [
+      { title: "Tag", field: "tag" },
+      { title: "Version", field: "version", align: "center" },
+      {
+        title: "Period End Date",
+        field: "periodEndDate",
+        align: "center",
+      },
+      { title: "Quarters", field: "quarters", align: "center" },
+      { title: "Value", field: "value", align: "center" },
+      {
+        title: "Unit of Measure",
+        field: "unitOfMeasure",
+        align: "center",
+      },
+      { title: "Line", field: "line", align: "center" },
+      {
+        title: "Presentation Label",
+        field: "presentationLabel",
+        emptyValue: () => <div>N/A</div>,
+        align: "center",
+      },
+      {
+        title: "Statement",
+        field: "statement",
+        emptyValue: () => <div>N/A</div>,
+        align: "center",
+      },
+    ]
+
     if (company.financials) {
       let financials = company.financials;
 
@@ -133,35 +163,7 @@ class Home extends React.Component {
             <h1></h1>
             <div>
               <MaterialTable
-                columns={[
-                  { title: "Tag", field: "tag" },
-                  { title: "Version", field: "version", align: "center" },
-                  {
-                    title: "Period End Date",
-                    field: "periodEndDate",
-                    align: "center",
-                  },
-                  { title: "Quarters", field: "quarters", align: "center" },
-                  { title: "Value", field: "value", align: "center" },
-                  {
-                    title: "Unit of Measure",
-                    field: "unitOfMeasure",
-                    align: "center",
-                  },
-                  { title: "Line", field: "line", align: "center" },
-                  {
-                    title: "Presentation Label",
-                    field: "presentationLabel",
-                    emptyValue: () => <div>N/A</div>,
-                    align: "center",
-                  },
-                  {
-                    title: "Statement",
-                    field: "statement",
-                    emptyValue: () => <div>N/A</div>,
-                    align: "center",
-                  },
-                ]}
+                columns={columns}
                 data={tableData}
                 title="All Stats"
                 options={{
