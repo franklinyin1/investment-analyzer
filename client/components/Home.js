@@ -13,6 +13,8 @@ import CoverPage from "./FinancialStatements/CoverPage";
 
 import MaterialTable from "material-table";
 
+import XLSX from "xlsx"
+
 class Home extends React.Component {
   constructor(props) {
     super(props);
@@ -120,6 +122,26 @@ class Home extends React.Component {
       }
     }
 
+    const downloadExcel = () => {
+      const newData = tableData.map((row) => {
+        delete row.tableData
+        return row
+      })
+      const workSheet = XLSX.utils.json_to_sheet(newData)
+      const workBook = XLSX.utils.book_new()
+      XLSX.utils.book_append_sheet(workBook, workSheet, "financials")
+
+      //buffer to deal with bulk data
+      let buffer = XLSX.write(workBook, {bookType:"xlsx", type:"buffer"})
+
+      //binary string
+      XLSX.write(workBook, {bookType:"xlsx", type:"binary"})
+
+      //download
+      XLSX.writeFile(workBook, "financials.xlsx")
+
+    }
+
     return (
       <React.Fragment>
         <form id="submit-company" onSubmit={handleSubmit}>
@@ -177,9 +199,18 @@ class Home extends React.Component {
                   exportButton: true,
                   grouping: true,
                   columnsButton: true,
-                  rowStyle: (data, index) => index % 2 == 0 ? {background: "#f5f5f5"} : null,
-                  headerStyle: {background: "#00004d", color: "white"}
+                  rowStyle: (data, index) =>
+                    index % 2 == 0 ? { background: "#f5f5f5" } : null,
+                  headerStyle: { background: "#00004d", color: "white" },
                 }}
+                actions={[
+                  {
+                    icon: () => <button>Export to Excel</button>,
+                    tooltip: "Export to Excel",
+                    onClick: () => downloadExcel(),
+                    isFreeAction: true,
+                  },
+                ]}
               />
             </div>
             {/* <table id="simple-board">

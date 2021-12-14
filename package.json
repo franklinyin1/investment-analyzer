@@ -32,7 +32,8 @@
     "morgan": "^1.9.1",
     "natural": "^5.1.11",
     "pg": "^8.5.1",
-    "sequelize": "^6.3.5"
+    "sequelize": "^6.3.5",
+    "xlsx": "^0.17.4"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
