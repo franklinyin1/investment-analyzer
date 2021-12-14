@@ -43,20 +43,6 @@ class Home extends React.Component {
     const { handleSubmit, handleChange } = this;
     const { ticker, loading } = this.state;
     const { company } = this.props;
-    // let rows = [
-    //   [
-    //     <td key={`cell${0}-1`}>Tag</td>,
-    //     <td key={`cell${0}-2`}>Version</td>,
-    //     <td key={`cell${0}-3`}>Period End Date</td>,
-    //     <td key={`cell${0}-4`}>Quarters</td>,
-    //     <td key={`cell${0}-5`}>Value</td>,
-    //     <td key={`cell${0}-6`}>Unit Of Measure</td>,
-    //     <td key={`cell${0}-7`}>Line</td>,
-    //     <td key={`cell${0}-8`}>Presentation Label</td>,
-    //     <td key={`cell${0}-9`}>Statement</td>,
-
-    //   ],
-    // ];
 
     let tableData = [];
 
@@ -97,28 +83,6 @@ class Home extends React.Component {
           statement: financials[i].presentation[0].stmt,
         };
         tableData.push(row);
-        // let rowId = `row${i}`;
-        // let cell = [];
-        // cell.push(<td key={`cell${i}-1`}>{financials[i - 1].tag}</td>);
-        // cell.push(
-        //   <td key={`cell${i}-2`}>{financials[i - 1].version}</td>
-        // );
-        // cell.push(
-        //   <td key={`cell${i}-3`}>{financials[i - 1].ddate}</td>
-        // );
-        // cell.push(<td key={`cell${i}-4`}>{financials[i - 1].qtrs}</td>);
-        // cell.push(
-        //   <td key={`cell${i}-5`}>{financials[i - 1].value.toLocaleString()}</td>
-        // );
-        // cell.push(<td key={`cell${i}-6`}>{financials[i - 1].uom}</td>);
-        // cell.push(<td key={`cell${i}-7`}>{financials[i - 1].presentation[0].line}</td>);
-        // cell.push(<td key={`cell${i}-8`}>{financials[i - 1].presentation[0].plabel}</td>);
-        // cell.push(<td key={`cell${i}-9`}>{financials[i - 1].presentation[0].stmt}</td>);
-        // rows.push(
-        //   <tr key={i} id={rowId}>
-        //     {cell}
-        //   </tr>
-        // );
       }
     }
 
@@ -166,9 +130,7 @@ class Home extends React.Component {
             <ComprehensiveIncomeStatement company={company} />
             <UnclassifiableStatement company={company} />
             <CoverPage company={company} />
-            {/* <h3>All Stats</h3> */}
             <h1></h1>
-            {/* <div style={{maxWidth: '100%'}}> */}
             <div>
               <MaterialTable
                 columns={[
@@ -222,9 +184,6 @@ class Home extends React.Component {
                 ]}
               />
             </div>
-            {/* <table id="simple-board">
-              <tbody>{rows}</tbody>
-            </table> */}
           </React.Fragment>
         ) : (
           ""
