@@ -154,7 +154,6 @@ class Home extends React.Component {
               {company.company.ticker})
             </h2>
             <IncomeStatement company={company} />
-            <h3></h3>
             <BalanceSheet company={company} />
             <CashFlowStatement company={company} />
             <EquityStatement company={company} />

@@ -85,6 +85,7 @@ class EquityStatement extends React.Component {
             <table id="simple-board">
               <tbody>{rows}</tbody>
             </table>
+            <h1></h1>
           </React.Fragment>
         ) : (
           ""
