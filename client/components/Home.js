@@ -13,7 +13,7 @@ import CoverPage from "./FinancialStatements/CoverPage";
 
 import MaterialTable from "material-table";
 
-import XLSX from "xlsx"
+import XLSX from "xlsx";
 
 class Home extends React.Component {
   constructor(props) {
@@ -124,23 +124,22 @@ class Home extends React.Component {
 
     const downloadExcel = () => {
       const newData = tableData.map((row) => {
-        delete row.tableData
-        return row
-      })
-      const workSheet = XLSX.utils.json_to_sheet(newData)
-      const workBook = XLSX.utils.book_new()
-      XLSX.utils.book_append_sheet(workBook, workSheet, "financials")
+        delete row.tableData;
+        return row;
+      });
+      const workSheet = XLSX.utils.json_to_sheet(newData);
+      const workBook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(workBook, workSheet, "financials");
 
       //buffer to deal with bulk data
-      let buffer = XLSX.write(workBook, {bookType:"xlsx", type:"buffer"})
+      let buffer = XLSX.write(workBook, { bookType: "xlsx", type: "buffer" });
 
       //binary string
-      XLSX.write(workBook, {bookType:"xlsx", type:"binary"})
+      XLSX.write(workBook, { bookType: "xlsx", type: "binary" });
 
       //download
-      XLSX.writeFile(workBook, "financials.xlsx")
-
-    }
+      XLSX.writeFile(workBook, "financials.xlsx");
+    };
 
     return (
       <React.Fragment>
@@ -174,21 +173,31 @@ class Home extends React.Component {
               <MaterialTable
                 columns={[
                   { title: "Tag", field: "tag" },
-                  { title: "Version", field: "version" },
-                  { title: "Period End Date", field: "periodEndDate" },
-                  { title: "Quarters", field: "quarters", align: "right" },
-                  { title: "Value", field: "value", align: "right" },
-                  { title: "Unit of Measure", field: "unitOfMeasure" },
-                  { title: "Line", field: "line" },
+                  { title: "Version", field: "version", align: "center" },
+                  {
+                    title: "Period End Date",
+                    field: "periodEndDate",
+                    align: "center",
+                  },
+                  { title: "Quarters", field: "quarters", align: "center" },
+                  { title: "Value", field: "value", align: "center" },
+                  {
+                    title: "Unit of Measure",
+                    field: "unitOfMeasure",
+                    align: "center",
+                  },
+                  { title: "Line", field: "line", align: "center" },
                   {
                     title: "Presentation Label",
                     field: "presentationLabel",
                     emptyValue: () => <div>N/A</div>,
+                    align: "center",
                   },
                   {
                     title: "Statement",
                     field: "statement",
                     emptyValue: () => <div>N/A</div>,
+                    align: "center",
                   },
                 ]}
                 data={tableData}
