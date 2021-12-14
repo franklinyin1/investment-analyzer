@@ -28,16 +28,11 @@ class CoverPage extends React.Component {
         return presentation.length > 0
       })
 
-      console.log('financials:', financials)
-
       //filter financials to only include current quarter
       let currentQuarter = '20210630'
       let currentQuarterFinancials = financials.filter((financial) => {
         return financial.ddate === currentQuarter
       })
-
-      console.log('currentQuarterFinancials:', currentQuarterFinancials)
-      console.log('company.presentations:', company.presentations)
 
       //add presentation detail as a key-value pair of each financial object
       currentQuarterFinancials = currentQuarterFinancials.map(financial => {

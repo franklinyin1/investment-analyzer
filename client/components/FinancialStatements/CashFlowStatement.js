@@ -32,16 +32,6 @@ class CashFlowStatement extends React.Component {
       },
     ];
 
-    // let rows = [
-    //   [
-    //     <td key={`cell${0}-1`}>Tag</td>,
-    //     <td key={`cell${0}-2`}>Version</td>,
-    //     <td key={`cell${0}-3`}>Period End Date</td>,
-    //     <td key={`cell${0}-4`}>Quarters</td>,
-    //     <td key={`cell${0}-5`}>Value</td>,
-    //     <td key={`cell${0}-6`}>Unit Of Measure</td>,
-    //   ],
-    // ];
 
     if (company.financials) {
       //filter financials to only include income statement items
@@ -120,30 +110,6 @@ class CashFlowStatement extends React.Component {
       //download
       XLSX.writeFile(workBook, "incomeStatement.xlsx");
     };
-
-    // for (let i = 1; i < currentQuarterFinancials.length; i++) {
-    //   let rowId = `row${i}`;
-    //   let cell = [];
-    //   cell.push(<td key={`cell${i}-1`}>{currentQuarterFinancials[i - 1].presentation[0].plabel}</td>);
-    //   // cell.push(<td key={`cell${i}-1`}>{currentQuarterFinancials[i - 1].tag}</td>);
-    //   cell.push(
-    //     <td key={`cell${i}-2`}>{currentQuarterFinancials[i - 1].version}</td>
-    //   );
-    //   cell.push(
-    //     <td key={`cell${i}-3`}>{currentQuarterFinancials[i - 1].ddate}</td>
-    //   );
-    //   cell.push(<td key={`cell${i}-4`}>{currentQuarterFinancials[i - 1].qtrs}</td>);
-    //   cell.push(
-    //     <td key={`cell${i}-5`}>{currentQuarterFinancials[i - 1].value.toLocaleString()}</td>
-    //   );
-    //   cell.push(<td key={`cell${i}-6`}>{currentQuarterFinancials[i - 1].uom}</td>);
-    //   rows.push(
-    //     <tr key={i} id={rowId}>
-    //       {cell}
-    //     </tr>
-    //   );
-    // }
-    // }
 
     return (
       <React.Fragment>
