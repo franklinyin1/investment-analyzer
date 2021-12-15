@@ -9,7 +9,7 @@ import CashFlowStatement from "./FinancialStatements/CashFlowStatement";
 import EquityStatement from "./FinancialStatements/EquityStatement";
 import ComprehensiveIncomeStatement from "./FinancialStatements/ComprehensiveIncomeStatement";
 import UnclassifiableStatement from "./FinancialStatements/UnclassifiableStatement";
-import CoverPage from "./FinancialStatements/CoverPage";
+import CoverPage from "../helper-functions/CoverPage";
 
 import MaterialTable from "material-table";
 

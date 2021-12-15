@@ -3,8 +3,6 @@ import { connect } from "react-redux";
 
 import MaterialTable from "material-table";
 
-import XLSX from "xlsx";
-
 function createMaterialTable(columns, tableData, title, downloadExcel) {
   return (
     <MaterialTable
