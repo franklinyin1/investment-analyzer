@@ -100,7 +100,7 @@ class UnclassifiableStatement extends React.Component {
       XLSX.writeFile(workBook, "incomeStatement.xlsx");
     };
 
-    let materialTable = UnclassifiableStatement(columns, tableData, "Unclassifiable Statement", downloadExcel)
+    let materialTable = CreateMaterialTable(columns, tableData, "Unclassifiable Statement", downloadExcel)
 
     return (
       <React.Fragment>
