@@ -108,7 +108,7 @@ class CoverPage extends React.Component {
       XLSX.writeFile(workBook, "balanceSheet.xlsx");
     };
 
-    let materialTable = CreateMaterialTable(columns, tableData, "Income Statement", downloadExcel)
+    let materialTable = CreateMaterialTable(columns, tableData, "Cover Page", downloadExcel)
 
     return (
       <React.Fragment>
