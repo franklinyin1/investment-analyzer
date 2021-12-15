@@ -9,7 +9,7 @@ function filterFinancials(company, statementName, currentQuarter, numQtrs){
 
   //filter financials to only include current quarter
   let currentQuarterFinancials = financials.filter((financial) => {
-    return financial.ddate === currentQuarter && financial.qtrs === numQtrs
+    return financial.ddate === currentQuarter && (financial.qtrs === numQtrs || numQtrs === null)
   })
 
   //add presentation detail as a key-value pair of each financial object
