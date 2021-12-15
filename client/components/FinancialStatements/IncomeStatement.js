@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import CreateMaterialTable from "./CreateMaterialTable"
+import CreateMaterialTable from "../../helper-functions/CreateMaterialTable"
 
 import XLSX from "xlsx";
 
