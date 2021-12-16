@@ -154,12 +154,12 @@ class Home extends React.Component {
               {company.company.ticker})
             </h2>
             <IncomeStatement company={company} />
-            <BalanceSheet company={company} />
-            <CashFlowStatement company={company} />
-            <EquityStatement company={company} />
-            <ComprehensiveIncomeStatement company={company} />
-            <UnclassifiableStatement company={company} />
-            <CoverPage company={company} />
+            {/* <BalanceSheet company={company} /> */}
+            {/* <CashFlowStatement company={company} /> */}
+            {/* <EquityStatement company={company} /> */}
+            {/* <ComprehensiveIncomeStatement company={company} /> */}
+            {/* <UnclassifiableStatement company={company} /> */}
+            {/* <CoverPage company={company} /> */}
             <h1></h1>
             <div>
               <MaterialTable
