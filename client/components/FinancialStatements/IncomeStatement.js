@@ -66,14 +66,6 @@ class IncomeStatement extends React.Component {
         QoQGrowthRates[i] = Number(currentQuarterFinancials[i].value)/Number(priorQuarterFinancials[i].value) - 1
       }
 
-      // let QoQGrowthRates = currentQuarterFinancials.map((financial) => {
-      //   let tag = financial.tag
-      //   let priorQuarterFinancial = priorQuarterFinancials.filter((priorQtrFinancial) => {
-      //     return priorQtrFinancial.tag === tag
-      //   })
-      //   return Number(financial.value) / Number(priorQuarterFinancial[0].value) - 1
-      // })
-
 
       for (let i = 0; i < currentQuarterFinancials.length; i++) {
         let row = {

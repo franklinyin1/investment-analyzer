@@ -14,7 +14,7 @@ function convertDateAndQuartersToFiscalPeriod(date, quarters) {
       fiscalPeriod = 'Q4'
     }
   } else if (quarters === '2') {
-    if (month === '6') {
+    if (month === '06') {
       fiscalPeriod = 'H1'
     } else if (month === '12') {
       fiscalPeriod = 'H2'
