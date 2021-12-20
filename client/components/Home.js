@@ -11,9 +11,8 @@ import ComprehensiveIncomeStatement from "./FinancialStatements/ComprehensiveInc
 import UnclassifiableStatement from "./FinancialStatements/UnclassifiableStatement";
 import CoverPage from "./FinancialStatements/CoverPage";
 
-import MaterialTable from "material-table";
-
-import XLSX from "xlsx";
+import AllFinancials from "./AllFinancials";
+import Title from "./Title";
 
 class Home extends React.Component {
   constructor(props) {
@@ -44,97 +43,6 @@ class Home extends React.Component {
     const { ticker, loading } = this.state;
     const { company } = this.props;
 
-    let tableData = [];
-
-    let columns = [
-      { title: "Tag", field: "tag" },
-      { title: "Version", field: "version", align: "center" },
-      {
-        title: "Period End Date",
-        field: "periodEndDate",
-        align: "center",
-      },
-      { title: "Quarters", field: "quarters", align: "center" },
-      { title: "Value", field: "value", align: "center" },
-      {
-        title: "Unit of Measure",
-        field: "unitOfMeasure",
-        align: "center",
-      },
-      { title: "Line", field: "line", align: "center" },
-      {
-        title: "Presentation Label",
-        field: "presentationLabel",
-        emptyValue: () => <div>N/A</div>,
-        align: "center",
-      },
-      {
-        title: "Statement",
-        field: "statement",
-        emptyValue: () => <div>N/A</div>,
-        align: "center",
-      },
-    ]
-
-    if (company.financials) {
-      let financials = company.financials;
-
-      //add presentation detail as a key-value pair of each financial object
-      financials = financials.map((financial) => {
-        let presentation = company.presentations.filter((presentation) => {
-          return (
-            presentation.adsh === financial.adsh &&
-            presentation.tag === financial.tag
-          );
-        });
-        if (presentation.length > 0) {
-          financial.presentation = presentation;
-        } else {
-          financial.presentation = [{ line: Infinity }];
-        }
-        return financial;
-      });
-
-      //sort the current quarter financials based on order of appearance in the income statement
-      financials = financials.sort(
-        (x, y) => x.presentation[0].line - y.presentation[0].line
-      );
-
-      for (let i = 0; i < financials.length; i++) {
-        let row = {
-          tag: financials[i].tag,
-          version: financials[i].version,
-          periodEndDate: financials[i].ddate,
-          quarters: financials[i].qtrs,
-          value: financials[i].value.toLocaleString(),
-          unitOfMeasure: financials[i].uom,
-          line: financials[i].presentation[0].line,
-          presentationLabel: financials[i].presentation[0].plabel,
-          statement: financials[i].presentation[0].stmt,
-        };
-        tableData.push(row);
-      }
-    }
-
-    const downloadExcel = () => {
-      const newData = tableData.map((row) => {
-        delete row.tableData;
-        return row;
-      });
-      const workSheet = XLSX.utils.json_to_sheet(newData);
-      const workBook = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(workBook, workSheet, "financials");
-
-      //buffer to deal with bulk data
-      let buffer = XLSX.write(workBook, { bookType: "xlsx", type: "buffer" });
-
-      //binary string
-      XLSX.write(workBook, { bookType: "xlsx", type: "binary" });
-
-      //download
-      XLSX.writeFile(workBook, "financials.xlsx");
-    };
-
     return (
       <React.Fragment>
         <form id="submit-company" onSubmit={handleSubmit}>
@@ -147,49 +55,17 @@ class Home extends React.Component {
           <button type="submit">Submit</button>
         </form>
         {loading ? <h3>Loading...</h3> : ""}
-        {tableData.length > 0 ? (
-          <React.Fragment>
-            <h2>
-              Displaying the financial data of: {company.company.title} (
-              {company.company.ticker})
-            </h2>
-            <IncomeStatement company={company} />
-            {/* <BalanceSheet company={company} /> */}
-            {/* <CashFlowStatement company={company} /> */}
-            {/* <EquityStatement company={company} /> */}
-            {/* <ComprehensiveIncomeStatement company={company} /> */}
-            {/* <UnclassifiableStatement company={company} /> */}
-            {/* <CoverPage company={company} /> */}
-            <h1></h1>
-            <div>
-              <MaterialTable
-                columns={columns}
-                data={tableData}
-                title="All Stats"
-                options={{
-                  filtering: true,
-                  paging: false,
-                  exportButton: true,
-                  grouping: true,
-                  columnsButton: true,
-                  rowStyle: (data, index) =>
-                    index % 2 == 0 ? { background: "#f5f5f5" } : null,
-                  headerStyle: { background: "#00004d", color: "white" },
-                }}
-                actions={[
-                  {
-                    icon: () => <button>Export to Excel</button>,
-                    tooltip: "Export to Excel",
-                    onClick: () => downloadExcel(),
-                    isFreeAction: true,
-                  },
-                ]}
-              />
-            </div>
-          </React.Fragment>
-        ) : (
-          ""
-        )}
+        <React.Fragment>
+          <Title company={company} />
+          <IncomeStatement company={company} />
+          {/* <BalanceSheet company={company} /> */}
+          {/* <CashFlowStatement company={company} /> */}
+          {/* <EquityStatement company={company} /> */}
+          {/* <ComprehensiveIncomeStatement company={company} /> */}
+          {/* <UnclassifiableStatement company={company} /> */}
+          {/* <CoverPage company={company} /> */}
+          <AllFinancials company={company} />
+        </React.Fragment>
       </React.Fragment>
     );
   }
