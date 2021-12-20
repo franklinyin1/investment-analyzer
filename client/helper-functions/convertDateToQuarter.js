@@ -1,14 +1,14 @@
 function convertDateAndQuartersToFiscalPeriod(date, quarters) {
   let year = date.slice(0, 4)
-  let month = date.slice(5, 6)
+  let month = date.slice(4, 6)
   let day = date.slice(6, 8)
   let fiscalPeriod
-  if (quarters === '1') {
-    if (month === '3') {
+  if (quarters === '1' || quarters === null) {
+    if (month === '03') {
       fiscalPeriod = 'Q1'
-    } else if (month === '6') {
+    } else if (month === '06') {
       fiscalPeriod = 'Q2'
-    } else if (month === '9') {
+    } else if (month === '09') {
       fiscalPeriod = 'Q3'
     } else if (month === '12') {
       fiscalPeriod = 'Q4'

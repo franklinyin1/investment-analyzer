@@ -7,6 +7,8 @@ import XLSX from "xlsx";
 
 import filterFinancials from '../../helper-functions/filterFinancials'
 
+import convertDateAndQuartersToFiscalPeriod from "../../helper-functions/convertDateToQuarter";
+
 class BalanceSheet extends React.Component {
   constructor(props) {
     super(props);
@@ -15,35 +17,51 @@ class BalanceSheet extends React.Component {
   render() {
     const { company } = this.props;
 
+    let currentQuarter = '20210630'
+    let quarters = null
+    let priorQuarter = '20201231'
+
+    let currentFiscalPeriod = convertDateAndQuartersToFiscalPeriod(currentQuarter, quarters)
+    let priorFiscalPeriod = convertDateAndQuartersToFiscalPeriod(priorQuarter, quarters)
+
     let tableData = [];
 
+    let oneMillion = 1000000
+
     let columns = [
-      { title: "Presentation Label", field: "presentationLabel" },
-      { title: "Version", field: "version", align: "center" },
-      {
-        title: "Period End Date",
-        field: "periodEndDate",
+      { title: "$ in millions, unless otherwise noted", field: "presentationLabel" },
+      { title: priorFiscalPeriod,
+        field: "priorValue",
         align: "center",
       },
-      { title: "Value", field: "value", align: "center" },
+      { title: currentFiscalPeriod, field: "currentValue", align: "center" },
       {
-        title: "Unit of Measure",
-        field: "unitOfMeasure",
+        title: "Tag",
+        field: "tag",
         align: "center",
       },
+      { title: "YTD Growth", field: "YTDGrowth"}
     ];
 
     if (company.financials) {
 
-      let currentQuarterFinancials = filterFinancials(company, 'BS', '20210630', null)
+      let currentQuarterFinancials = filterFinancials(company, 'BS', currentQuarter, quarters)
+
+      let priorQuarterFinancials = filterFinancials(company, 'BS', priorQuarter, quarters)
+
+      let YTDGrowthRates = []
+
+      for (let i = 0; i < currentQuarterFinancials.length; i++){
+        YTDGrowthRates[i] = Number(currentQuarterFinancials[i].value)/Number(priorQuarterFinancials[i].value) - 1
+      }
 
       for (let i = 0; i < currentQuarterFinancials.length; i++) {
         let row = {
+          tag: currentQuarterFinancials[i].tag,
           presentationLabel: currentQuarterFinancials[i].presentation[0].plabel,
-          version: currentQuarterFinancials[i].version,
-          periodEndDate: currentQuarterFinancials[i].ddate,
-          value: currentQuarterFinancials[i].value.toLocaleString(),
-          unitOfMeasure: currentQuarterFinancials[i].uom,
+          priorValue: (priorQuarterFinancials[i].value/oneMillion).toLocaleString(),
+          currentValue: (currentQuarterFinancials[i].value/oneMillion).toLocaleString(),
+          YTDGrowth: Math.round(YTDGrowthRates[i]*100) + '%'
         };
 
         tableData.push(row);
