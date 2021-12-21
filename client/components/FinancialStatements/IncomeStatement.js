@@ -10,8 +10,8 @@ import filterFinancials from '../../helper-functions/filterFinancials'
 import convertDateAndQuartersToFiscalPeriod from "../../helper-functions/convertDateToQuarter";
 
 import determineNumQtrs from "../../helper-functions/determineNumQtrs";
-
 import determinePriorQtr from "../../helper-functions/determinePriorQtr";
+import determineGrowthLabel from "../../helper-functions/determineGrowthLabel";
 
 class IncomeStatement extends React.Component {
   constructor(props) {
@@ -31,10 +31,10 @@ class IncomeStatement extends React.Component {
       let statementName = 'IS'
       let quarters = determineNumQtrs(company.submissions, currentQuarter, statementName)
       let priorQuarter = determinePriorQtr(company.submissions, currentQuarter, statementName)
+      let growthLabel = determineGrowthLabel(company.submissions, currentQuarter, statementName)
 
       let currentFiscalPeriod = convertDateAndQuartersToFiscalPeriod(currentQuarter, quarters)
       let priorFiscalPeriod = convertDateAndQuartersToFiscalPeriod(priorQuarter, quarters)
-
 
       let oneMillion = 1000000
 
@@ -43,7 +43,7 @@ class IncomeStatement extends React.Component {
         { title: priorFiscalPeriod, field: "priorValue", align: "center"},
         { title: currentFiscalPeriod, field: "currentValue", align: "center" },
         { title: "Tag", field: "tag" },
-        { title: "QoQ Growth", field: "QoQGrowth"}
+        { title: growthLabel, field: "growth"}
       ]
 
       let currentQuarterFinancials = filterFinancials(company, statementName, currentQuarter, quarters)
@@ -68,10 +68,10 @@ class IncomeStatement extends React.Component {
       //   }
       // })
 
-      let QoQGrowthRates = []
+      let growthRates = []
 
       for (let i = 0; i < currentQuarterFinancials.length; i++){
-        QoQGrowthRates[i] = Number(currentQuarterFinancials[i].value)/Number(priorQuarterFinancials[i].value) - 1
+        growthRates[i] = Number(currentQuarterFinancials[i].value)/Number(priorQuarterFinancials[i].value) - 1
       }
 
 
@@ -81,7 +81,7 @@ class IncomeStatement extends React.Component {
           presentationLabel: currentQuarterFinancials[i].presentation[0].plabel,
           priorValue: (priorQuarterFinancials[i].value/oneMillion).toLocaleString(),
           currentValue: (currentQuarterFinancials[i].value/oneMillion).toLocaleString(),
-          QoQGrowth: Math.round(QoQGrowthRates[i]*100) + '%'
+          growth: Math.round(growthRates[i]*100) + '%'
         };
 
         tableData.push(row);
