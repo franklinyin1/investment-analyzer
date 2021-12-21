@@ -1,5 +1,6 @@
 let summationStats = [
   //Income Statement
+  'CostsAndExpenses',
   'OperatingIncomeLoss',
   'NetIncomeLoss',
   //Balance Sheet

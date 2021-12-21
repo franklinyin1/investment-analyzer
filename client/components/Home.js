@@ -42,6 +42,7 @@ class Home extends React.Component {
     const { handleSubmit, handleChange } = this;
     const { ticker, loading } = this.state;
     const { company } = this.props;
+    console.log('company:', company)
 
     return (
       <React.Fragment>
@@ -58,7 +59,7 @@ class Home extends React.Component {
         <React.Fragment>
           <Title company={company} />
           <IncomeStatement company={company} />
-          <BalanceSheet company={company} />
+          {/* <BalanceSheet company={company} /> */}
           <CashFlowStatement company={company} />
           {/* <EquityStatement company={company} /> */}
           {/* <ComprehensiveIncomeStatement company={company} /> */}

@@ -9,6 +9,8 @@ import filterFinancials from '../../helper-functions/filterFinancials'
 
 import convertDateAndQuartersToFiscalPeriod from "../../helper-functions/convertDateToQuarter";
 
+import determineNumQtrs from "../../helper-functions/determineNumQtrs";
+
 class IncomeStatement extends React.Component {
   constructor(props) {
     super(props);
@@ -17,28 +19,32 @@ class IncomeStatement extends React.Component {
   render() {
     const { company } = this.props;
 
-    let currentQuarter = '20210630'
-    let quarters = '1'
-    let priorQuarter = '20200630'
-
-    let currentFiscalPeriod = convertDateAndQuartersToFiscalPeriod(currentQuarter, quarters)
-    let priorFiscalPeriod = convertDateAndQuartersToFiscalPeriod(priorQuarter, quarters)
+    let columns
 
     let tableData = [];
 
-    let oneMillion = 1000000
-
-    let columns = [
-      { title: "$ in millions, unless otherwise noted", field: "presentationLabel" },
-      { title: priorFiscalPeriod, field: "priorValue", align: "center"},
-      { title: currentFiscalPeriod, field: "currentValue", align: "center" },
-      { title: "Tag", field: "tag" },
-      { title: "QoQ Growth", field: "QoQGrowth"}
-    ]
-
     if (company.financials) {
 
-      let currentQuarterFinancials = filterFinancials(company, 'IS', currentQuarter, quarters)
+      let currentQuarter = '20210630'
+      let statementName = 'IS'
+      let quarters = determineNumQtrs(company.submissions, currentQuarter, statementName)
+      let priorQuarter = '20200630'
+
+      let currentFiscalPeriod = convertDateAndQuartersToFiscalPeriod(currentQuarter, quarters)
+      let priorFiscalPeriod = convertDateAndQuartersToFiscalPeriod(priorQuarter, quarters)
+
+
+      let oneMillion = 1000000
+
+      columns = [
+        { title: "$ in millions, unless otherwise noted", field: "presentationLabel" },
+        { title: priorFiscalPeriod, field: "priorValue", align: "center"},
+        { title: currentFiscalPeriod, field: "currentValue", align: "center" },
+        { title: "Tag", field: "tag" },
+        { title: "QoQ Growth", field: "QoQGrowth"}
+      ]
+
+      let currentQuarterFinancials = filterFinancials(company, statementName, currentQuarter, quarters)
 
       // //convert all expenses to negative
       // currentQuarterFinancials = currentQuarterFinancials.map(financial => {

@@ -9,6 +9,8 @@ import filterFinancials from '../../helper-functions/filterFinancials'
 
 import convertDateAndQuartersToFiscalPeriod from "../../helper-functions/convertDateToQuarter";
 
+import determineNumQtrs from "../../helper-functions/determineNumQtrs";
+
 class BalanceSheet extends React.Component {
   constructor(props) {
     super(props);
@@ -17,33 +19,37 @@ class BalanceSheet extends React.Component {
   render() {
     const { company } = this.props;
 
-    let currentQuarter = '20210630'
-    let quarters = null
-    let priorQuarter = '20201231'
-
-    let currentFiscalPeriod = convertDateAndQuartersToFiscalPeriod(currentQuarter, quarters)
-    let priorFiscalPeriod = convertDateAndQuartersToFiscalPeriod(priorQuarter, quarters)
+    let columns
 
     let tableData = [];
 
-    let oneMillion = 1000000
-
-    let columns = [
-      { title: "$ in millions, unless otherwise noted", field: "presentationLabel" },
-      { title: priorFiscalPeriod,
-        field: "priorValue",
-        align: "center",
-      },
-      { title: currentFiscalPeriod, field: "currentValue", align: "center" },
-      {
-        title: "Tag",
-        field: "tag",
-        align: "center",
-      },
-      { title: "YTD Growth", field: "YTDGrowth"}
-    ];
-
     if (company.financials) {
+
+      let currentQuarter = '20210630'
+      let statementName = 'BS'
+      let quarters = determineNumQtrs(company.submissions, currentQuarter, statementName)
+      let priorQuarter = '20201231'
+
+      let currentFiscalPeriod = convertDateAndQuartersToFiscalPeriod(currentQuarter, quarters)
+      let priorFiscalPeriod = convertDateAndQuartersToFiscalPeriod(priorQuarter, quarters)
+
+
+      let oneMillion = 1000000
+
+      columns = [
+        { title: "$ in millions, unless otherwise noted", field: "presentationLabel" },
+        { title: priorFiscalPeriod,
+          field: "priorValue",
+          align: "center",
+        },
+        { title: currentFiscalPeriod, field: "currentValue", align: "center" },
+        {
+          title: "Tag",
+          field: "tag",
+          align: "center",
+        },
+        { title: "YTD Growth", field: "YTDGrowth"}
+      ];
 
       let currentQuarterFinancials = filterFinancials(company, 'BS', currentQuarter, quarters)
 

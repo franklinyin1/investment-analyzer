@@ -1,5 +1,5 @@
 function filterFinancials(company, statementName, currentQuarter, numQtrs){
-  //filter financials to only include income statement items
+  //filter financials to only include statementName items
   let financials = company.financials.filter((financial) => {
     let presentation = company.presentations.filter((presentation) => {
       return presentation.adsh === financial.adsh && presentation.stmt === statementName && presentation.tag === financial.tag
