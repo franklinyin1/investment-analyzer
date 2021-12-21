@@ -11,6 +11,8 @@ import convertDateAndQuartersToFiscalPeriod from "../../helper-functions/convert
 
 import determineNumQtrs from "../../helper-functions/determineNumQtrs";
 
+import determinePriorQtr from "../../helper-functions/determinePriorQtr";
+
 class BalanceSheet extends React.Component {
   constructor(props) {
     super(props);
@@ -28,7 +30,7 @@ class BalanceSheet extends React.Component {
       let currentQuarter = '20210630'
       let statementName = 'BS'
       let quarters = determineNumQtrs(company.submissions, currentQuarter, statementName)
-      let priorQuarter = '20201231'
+      let priorQuarter = determinePriorQtr(company.submissions, currentQuarter, statementName)
 
       let currentFiscalPeriod = convertDateAndQuartersToFiscalPeriod(currentQuarter, quarters)
       let priorFiscalPeriod = convertDateAndQuartersToFiscalPeriod(priorQuarter, quarters)

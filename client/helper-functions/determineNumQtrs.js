@@ -7,6 +7,7 @@ function determineNumQtrs(submissions, currentQuarter, statementName) {
   submissions = submissions.filter((submission) => {
     return submission.form === '10-Q' || submission.form === '10-K'
   })
+
   if (submissions[0].form === '10-K') {
     return '4'
   }

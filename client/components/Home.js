@@ -59,7 +59,7 @@ class Home extends React.Component {
         <React.Fragment>
           <Title company={company} />
           <IncomeStatement company={company} />
-          {/* <BalanceSheet company={company} /> */}
+          <BalanceSheet company={company} />
           <CashFlowStatement company={company} />
           {/* <EquityStatement company={company} /> */}
           {/* <ComprehensiveIncomeStatement company={company} /> */}
