@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import CreateMaterialTable from "../../helper-functions/CreateMaterialTable"
+import createMaterialTable from "../../helper-functions/createMaterialTable"
 
 import XLSX from "xlsx";
 
@@ -69,7 +69,7 @@ class CoverPage extends React.Component {
       XLSX.writeFile(workBook, "balanceSheet.xlsx");
     };
 
-    let materialTable = CreateMaterialTable(columns, tableData, "Cover Page", downloadExcel)
+    let materialTable = createMaterialTable(columns, tableData, "Cover Page", downloadExcel)
 
     return (
       <React.Fragment>

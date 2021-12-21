@@ -1,7 +1,8 @@
 import React from "react";
-import { connect } from "react-redux";
 
 import MaterialTable from "material-table";
+
+import summations from "./summations";
 
 function createMaterialTable(columns, tableData, title, downloadExcel) {
   return (
@@ -13,8 +14,15 @@ function createMaterialTable(columns, tableData, title, downloadExcel) {
         paging: false,
         exportButton: true,
         columnsButton: true,
-        rowStyle: (data, index) =>
-          index % 2 == 0 ? { background: "#f5f5f5" } : null,
+        rowStyle: (data, index) => {
+          let returnObj = {}
+          index % 2 == 0 ? returnObj.background = "#f5f5f5" : returnObj.background = null
+          summations(data.tag) ?
+          returnObj.borderTop = '2px solid #000000' : returnObj.borderTop = null
+          summations(data.tag) ?
+          returnObj.fontWeight = 'bold' : returnObj.fontWeight = null
+          return returnObj
+        },
         headerStyle: { background: "#00004d", color: "white" },
       }}
       actions={[

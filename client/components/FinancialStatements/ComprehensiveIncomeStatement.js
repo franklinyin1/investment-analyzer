@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import CreateMaterialTable from "../../helper-functions/CreateMaterialTable"
+import createMaterialTable from "../../helper-functions/createMaterialTable"
 
 import XLSX from "xlsx";
 
@@ -82,7 +82,7 @@ class ComprehensiveIncomeStatement extends React.Component {
       XLSX.writeFile(workBook, "incomeStatement.xlsx");
     };
 
-    let materialTable = CreateMaterialTable(columns, tableData, "Comprehensive Income Statement", downloadExcel)
+    let materialTable = createMaterialTable(columns, tableData, "Comprehensive Income Statement", downloadExcel)
 
     return (
       <React.Fragment>
