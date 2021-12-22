@@ -3,6 +3,10 @@ const {
   models: { Financial, Presentation, Submission, Tag, Ticker },
 } = require("../db");
 
+const axios = require("axios")
+require('dotenv').config()
+let ALPHA_VANTAGE_KEY = process.env.ALPHA_VANTAGE_KEY
+
 //GET request /api/companies/:ticker
 router.get("/:ticker", async (req, res, next) => {
   try {
@@ -23,7 +27,13 @@ router.get("/:ticker", async (req, res, next) => {
       presentations = [...presentations, ...submissionPresentations]
     }
 
-    res.status(200).json({submissions, financials, company, presentations})
+    const alphaVantageURL = `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${ticker}&apikey=${ALPHA_VANTAGE_KEY}`;
+
+    let priceData = await axios.get(alphaVantageURL)
+
+    priceData = priceData.data['Global Quote']
+
+    res.status(200).json({submissions, financials, company, presentations, priceData})
   } catch (error) {
     next(error);
   }
