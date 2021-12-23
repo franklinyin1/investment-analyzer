@@ -81,8 +81,12 @@ class CapitalizationTable extends React.Component {
         let filingFinancial = financials.filter((financial) => {
           return financial.tag === tag
         })
-        console.log('filingFinancial:', filingFinancial)
-        return [data[0], filingFinancial[0].value/oneMillion]
+        if (filingFinancial.length) {
+          console.log('filingFinancial:', filingFinancial)
+          return [data[0], filingFinancial[0].value/oneMillion]
+        } else {
+          return [data[0], 0]
+        }
       })
 
       console.log('filingData:', filingData)
@@ -108,22 +112,23 @@ class CapitalizationTable extends React.Component {
       //next, let's update the calculated statistics
       for (let i = 0 ; i < capitalizationTableStats.length; i++){
         console.log('capitalizationTableStats:', capitalizationTableStats)
-        // let currentStatistic = capitalizationTableStats[i]
         if (capitalizationTableStats[i][1] !== 'Calculated') {
           continue
         } else {
           if (capitalizationTableStats[i][0] === 'MarketCap') {
-            console.log('entered market cap')
             capitalizationTableStats[i][3] = capitalizationTableStats[0][3] * capitalizationTableStats[1][3]
           } else if (capitalizationTableStats[i][0] === 'TotalAssetValue') {
-            console.log('entered total asset value')
             capitalizationTableStats[i][3] = capitalizationTableStats[2][3] + capitalizationTableStats[3][3] + capitalizationTableStats[4][3] + capitalizationTableStats[5][3]
           } else if (capitalizationTableStats[i][0] === 'EnterpriseValue') {
-            console.log('entered enterprise value')
             capitalizationTableStats[i][3] = capitalizationTableStats[6][3] - capitalizationTableStats[7][3]
           }
         }
       }
+
+      //filter all lines with value of 0
+      capitalizationTableStats = capitalizationTableStats.filter((statistic) => {
+        return statistic[3] !== 0
+      })
 
       // capitalizationTableStats = capitalizationTableStats.map((statistic) => {
       //   if (statistic[1] !== 'Calculated') {
