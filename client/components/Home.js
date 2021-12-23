@@ -13,6 +13,7 @@ import CoverPage from "./FinancialStatements/CoverPage";
 
 import AllFinancials from "./AllFinancials";
 import Title from "./Title";
+import CapitalizationTable from "./CapitalizationTable";
 
 class Home extends React.Component {
   constructor(props) {
@@ -58,6 +59,7 @@ class Home extends React.Component {
         {loading ? <h3>Loading...</h3> : ""}
         <React.Fragment>
           <Title company={company} />
+          <CapitalizationTable company={company} />
           <IncomeStatement company={company} />
           <BalanceSheet company={company} />
           <CashFlowStatement company={company} />

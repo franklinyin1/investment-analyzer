@@ -1,17 +1,17 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import createMaterialTable from "../../helper-functions/createMaterialTable"
+import createMaterialTable from "../../helper-functions/FinancialStatements/createMaterialTable"
 
 import XLSX from "xlsx";
 
-import filterFinancials from '../../helper-functions/filterFinancials'
+import filterFinancials from '../../helper-functions/FinancialStatements/filterFinancials'
 
-import convertDateAndQuartersToFiscalPeriod from "../../helper-functions/convertDateToQuarter";
+import convertDateAndQuartersToFiscalPeriod from "../../helper-functions/FinancialStatements/convertDateToQuarter";
 
-import determineNumQtrs from "../../helper-functions/determineNumQtrs";
-import determinePriorQtr from "../../helper-functions/determinePriorQtr";
-import determineGrowthLabel from "../../helper-functions/determineGrowthLabel";
+import determineNumQtrs from "../../helper-functions/FinancialStatements/determineNumQtrs";
+import determinePriorQtr from "../../helper-functions/FinancialStatements/determinePriorQtr";
+import determineGrowthLabel from "../../helper-functions/FinancialStatements/determineGrowthLabel";
 
 class IncomeStatement extends React.Component {
   constructor(props) {

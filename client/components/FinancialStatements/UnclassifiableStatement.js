@@ -1,11 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import createMaterialTable from "../../helper-functions/createMaterialTable"
+import createMaterialTable from "../../helper-functions/FinancialStatements/createMaterialTable"
 
 import XLSX from "xlsx";
 
-import filterFinancials from "../../helper-functions/filterFinancials";
+import filterFinancials from "../../helper-functions/FinancialStatements/filterFinancials";
 
 class UnclassifiableStatement extends React.Component {
   constructor(props) {
