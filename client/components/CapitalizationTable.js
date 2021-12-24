@@ -42,13 +42,6 @@ class CapitalizationTable extends React.Component {
 
     if (company.financials) {
       let currentQuarter = "20210630";
-      // let statementName = 'IS'
-      // let quarters = determineNumQtrs(company.submissions, currentQuarter, statementName)
-      // let priorQuarter = determinePriorQtr(company.submissions, currentQuarter, statementName)
-      // let growthLabel = determineGrowthLabel(company.submissions, currentQuarter, statementName)
-
-      // let currentFiscalPeriod = convertDateAndQuartersToFiscalPeriod(currentQuarter, quarters)
-      // let priorFiscalPeriod = convertDateAndQuartersToFiscalPeriod(priorQuarter, quarters)
 
       let oneMillion = 1000000;
 
@@ -62,18 +55,6 @@ class CapitalizationTable extends React.Component {
         { title: date, field: "value", align: "center" },
         { title: "Tag", field: "tag" },
       ];
-
-      // let currentQuarterFinancials = filterFinancials(company, statementName, currentQuarter, quarters)
-
-      // let priorQuarterFinancials = filterFinancials(company, 'IS', priorQuarter, quarters)
-
-      // let growthRates = []
-
-      // for (let i = 0; i < currentQuarterFinancials.length; i++){
-      //   growthRates[i] = Number(currentQuarterFinancials[i].value)/Number(priorQuarterFinancials[i].value) - 1
-      // }
-
-      console.log("company.financials:", company.financials);
 
       //filter financials to only include current quarter balance sheet items
       let financials = company.financials.filter((financial) => {
@@ -161,26 +142,6 @@ class CapitalizationTable extends React.Component {
         }
       );
 
-      // capitalizationTableStats = capitalizationTableStats.map((statistic) => {
-      //   if (statistic[1] !== 'Calculated') {
-      //     return statistic
-      //   } else {
-      //     if (statistic[0] === 'MarketCap') {
-      //       //shares outstanding times share preice
-      //       return [statistic[0], statistic[1], statistic[2], capitalizationTableStats[0][3] * capitalizationTableStats[1][3]]
-      //     } else if (statistic[0] === 'TotalAssetValue') {
-      //       console.log('capitalizationTableStats:', capitalizationTableStats)
-      //       console.log('capitalizationTableStats[2][3]:', capitalizationTableStats[2][3])
-      //       console.log('capitalizationTableStats[3][3]:', capitalizationTableStats[3][3])
-      //       console.log('capitalizationTableStats[4][3]:', capitalizationTableStats[4][3])
-      //       console.log('capitalizationTableStats[5][3]:', capitalizationTableStats[5][3])
-      //       return [statistic[0], statistic[1], statistic[2], capitalizationTableStats[2][3] + capitalizationTableStats[3][3] + capitalizationTableStats[4][3] + capitalizationTableStats[5][3]]
-      //     } else if (statistic[0] === 'EnterpriseValue') {
-      //       return [statistic[0], statistic[1], statistic[2], capitalizationTableStats[6][3] - capitalizationTableStats[7][3]]
-      //     }
-      //   }
-      // })
-
       for (let i = 0; i < capitalizationTableStats.length; i++) {
         let row
         if (capitalizationTableStats[i][0] !== "StockPrice") {
@@ -188,9 +149,6 @@ class CapitalizationTable extends React.Component {
             tag: capitalizationTableStats[i][0],
             presentationLabel: capitalizationTableStats[i][2],
             value: Math.round(capitalizationTableStats[i][3]).toLocaleString(),
-            // priorValue: (priorQuarterFinancials[i].value/oneMillion).toLocaleString(),
-            // currentValue: (currentQuarterFinancials[i].value/oneMillion).toLocaleString(),
-            // growth: Math.round(growthRates[i]*100) + '%'
           };
         } else {
           row = {
