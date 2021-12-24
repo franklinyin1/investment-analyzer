@@ -15,7 +15,7 @@ import AllFinancials from "./AllFinancials";
 import Title from "./Title";
 import CapitalizationTable from "./CapitalizationTable";
 
-class Home extends React.Component {
+class Companies extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -90,4 +90,4 @@ const mapDispatch = (dispatch) => {
   };
 };
 
-export default connect(mapState, mapDispatch)(Home);
+export default connect(mapState, mapDispatch)(Companies);
