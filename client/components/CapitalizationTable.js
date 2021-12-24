@@ -143,19 +143,19 @@ class CapitalizationTable extends React.Component {
       );
 
       for (let i = 0; i < capitalizationTableStats.length; i++) {
-        let row
+        let row = {
+          tag: capitalizationTableStats[i][0],
+          presentationLabel: capitalizationTableStats[i][2],
+        };
         if (capitalizationTableStats[i][0] !== "StockPrice") {
-          row = {
-            tag: capitalizationTableStats[i][0],
-            presentationLabel: capitalizationTableStats[i][2],
-            value: Math.round(capitalizationTableStats[i][3]).toLocaleString(),
-          };
+          row.value = Math.round(
+            capitalizationTableStats[i][3]
+          ).toLocaleString();
         } else {
-          row = {
-            tag: capitalizationTableStats[i][0],
-            presentationLabel: capitalizationTableStats[i][2],
-            value: (capitalizationTableStats[i][3]).toLocaleString('en-US', { style: "currency", currency: "USD"}),
-          }
+          row.value = capitalizationTableStats[i][3].toLocaleString("en-US", {
+            style: "currency",
+            currency: "USD",
+          });
         }
 
         tableData.push(row);
