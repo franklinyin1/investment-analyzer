@@ -67,8 +67,8 @@ class BalanceSheet extends React.Component {
         let row = {
           tag: currentQuarterFinancials[i].tag,
           presentationLabel: currentQuarterFinancials[i].presentation[0].plabel,
-          priorValue: (priorQuarterFinancials[i].value/oneMillion).toLocaleString(),
-          currentValue: (currentQuarterFinancials[i].value/oneMillion).toLocaleString(),
+          priorValue: (priorQuarterFinancials[i].value/oneMillion).toLocaleString('en-US', { style: 'decimal', maximumFractionDigits : 0, minimumFractionDigits : 0 }),
+          currentValue: (currentQuarterFinancials[i].value/oneMillion).toLocaleString('en-US', { style: 'decimal', maximumFractionDigits : 0, minimumFractionDigits : 0 }),
           growth: Math.round(growthRates[i]*100) + '%'
         };
 

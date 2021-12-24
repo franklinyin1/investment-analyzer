@@ -15,24 +15,44 @@ class CapitalizationTable extends React.Component {
 
     //tag, source, presentation label, value
     let capitalizationTableStats = [
+      //0
       [
         "CommonStockSharesOutstanding",
         "Filing",
-        "Common Stock Shares Outstanding",
+        "Common Stock Shares Outstanding (millions of shares)",
         null,
       ],
+      //1
       ["StockPrice", "API", "Stock Price (per share)", null],
+      //2
       ["MarketCap", "Calculated", "Market Cap", null],
+      //3
       ["LongTermDebtAndCapitalLeaseObligations", "Filing", "Total Debt", null],
+      //4
       [
         "ConvertiblePreferredStockNonredeemableOrRedeemableIssuerOptionValue",
         "Filing",
         "Preferred Stock",
         null,
       ],
+      //5
+      [
+        "LongTermDebtCurrent",
+        "Filing",
+        "Current Portion of Long-term Debt",
+        null,
+      ],
+      //6
+      ["LongTermDebtNoncurrent", "Filing", "Long-term Debt", null],
+      //7
       ["LiabilitiesCurrent", "Filing", "Current Liabilities", null],
+      //8 - calculated to exclude current-portion of long-term debt, to make sure that this is not being double-counted
+      ["LiabilitiesCurrent", "Calculated", "Current Liabilities", null],
+      //9
       ["TotalAssetValue", "Calculated", "Total Asset Value", null],
+      //10
       ["AssetsCurrent", "Filing", "Current Assets", null],
+      //11
       ["EnterpriseValue", "Calculated", "Enterprise Value", null],
     ];
 
@@ -121,16 +141,32 @@ class CapitalizationTable extends React.Component {
         } else {
           if (capitalizationTableStats[i][0] === "MarketCap") {
             capitalizationTableStats[i][3] =
+              //shares outstanding * share price
               capitalizationTableStats[0][3] * capitalizationTableStats[1][3];
+          } else if (capitalizationTableStats[i][0] === "LiabilitiesCurrent") {
+            capitalizationTableStats[i][3] =
+              //current liabilities
+              capitalizationTableStats[7][3] -
+              //current portion of long-term debt
+              capitalizationTableStats[5][3];
           } else if (capitalizationTableStats[i][0] === "TotalAssetValue") {
             capitalizationTableStats[i][3] =
+              //market cap
               capitalizationTableStats[2][3] +
+              //total debt
               capitalizationTableStats[3][3] +
+              //preferred stock
               capitalizationTableStats[4][3] +
+              //current portion of long-term debt
               capitalizationTableStats[5][3];
+            //long-term debt
+            capitalizationTableStats[6][3];
+            //use the calculated verison of long-term liabilities to ensure that current portion of long-term debt is not being double-counted
+            capitalizationTableStats[8][3];
           } else if (capitalizationTableStats[i][0] === "EnterpriseValue") {
             capitalizationTableStats[i][3] =
-              capitalizationTableStats[6][3] - capitalizationTableStats[7][3];
+              //total asset value less total current assets
+              capitalizationTableStats[9][3] - capitalizationTableStats[10][3];
           }
         }
       }
@@ -138,7 +174,10 @@ class CapitalizationTable extends React.Component {
       //filter all lines with value of 0
       capitalizationTableStats = capitalizationTableStats.filter(
         (statistic) => {
-          return statistic[3] !== 0;
+          //exclude the filing verison of total current liabilities, as we will instead show the calculated verison of total current liabilities (that excludes current portion of long-term debt)
+          let notFilingVersionOfCurrentLiabilities = !(statistic[0] === 'LiabilitiesCurrent' && statistic[1] === 'Filing');
+          //exclude all statistics that equal 0 as well as notFilingVersionOfCurrentLiabilities
+          return statistic[3] !== 0 && notFilingVersionOfCurrentLiabilities
         }
       );
 
