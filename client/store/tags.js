@@ -14,7 +14,6 @@ const setTags = (tags) => {
 //THUNK CREATORS
 export const fetchTags = () => {
   return async (dispatch) => {
-    console.log('entered Thunk')
     const { data } = await axios.get(`/api/tags/`)
     return dispatch(setTags(data))
   }

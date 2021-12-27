@@ -6,8 +6,6 @@ const {
 //GET request /api/tags/
 router.get("/", async (req, res, next) => {
   try {
-    console.log('entered get request')
-
     const tags = await Tag.findAll()
 
     res.status(200).json(tags)
