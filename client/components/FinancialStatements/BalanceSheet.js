@@ -50,7 +50,8 @@ class BalanceSheet extends React.Component {
           field: "tag",
           align: "center",
         },
-        { title: growthLabel, field: "growth"}
+        { title: growthLabel, field: "growth"},
+        { title: "Version", field: "version"}
       ];
 
       let currentQuarterFinancials = filterFinancials(company, 'BS', currentQuarter, quarters)
@@ -69,7 +70,8 @@ class BalanceSheet extends React.Component {
           presentationLabel: currentQuarterFinancials[i].presentation[0].plabel,
           priorValue: (priorQuarterFinancials[i].value/oneMillion).toLocaleString('en-US', { style: 'decimal', maximumFractionDigits : 0, minimumFractionDigits : 0 }),
           currentValue: (currentQuarterFinancials[i].value/oneMillion).toLocaleString('en-US', { style: 'decimal', maximumFractionDigits : 0, minimumFractionDigits : 0 }),
-          growth: Math.round(growthRates[i]*100) + '%'
+          growth: Math.round(growthRates[i]*100) + '%',
+          version: currentQuarterFinancials[i].version,
         };
 
         tableData.push(row);
