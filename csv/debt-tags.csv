@@ -383,7 +383,7 @@ ConvertibleLoanCurrent,Convertible Loan Current,1,0001104659-21-103450,1,0,C,,"T
 InterestInVariableInterestEntityDebtDiscount,InterestInVariableInterestEntityDebtDiscount,,0001213900-21-041880,1,0,C,,,I,1
 LiabilitiesOtherThanLongTermDebtAndLeaseObligationsNoncurrent,"Liabilities, Other Than Long-Term Debt And Lease Obligations, Noncurrent",,0001710155-21-000052,1,0,C,,"Liabilities, Other Than Long-Term Debt And Lease Obligations, Noncurrent",I,1
 ConvertibleDebtUnAmortizedDiscount,Amortized Discount,,0001654954-21-008804,1,0,C,,,I,1
-LongTermDebtAndRightOfUseLeaseLiabilities,Long Term Debt And Right Of Use Lease Liabilities,,0001564590-21-043956,1,0,C,,Long term debt and right of use lease liabilities.,I,1
+LongTermDebtAndRightOfUseLeaseLiabilities,Long Term Debt And Right Of Use Lease Liabilities,1,0001564590-21-043956,1,0,C,,Long term debt and right of use lease liabilities.,I,1
 LongTermDebtLessCurrentPortion,"Long-term debt, less current portion",,0001654954-21-008852,1,0,C,,"Amount after unamortized (discount) premium and debt issuance costs of long-term debt classified as noncurrent and excluding amounts to be repaid within one year or the normal operating cycle, if longer. Includes, but not limited to, notes payable, bonds",I,1
 LongTermDebtLiability,Long-term debt,,0001493152-21-019511,1,0,C,,Long term debt liability.,I,1
 LongTermDebtsNoncurrent,LongTermDebtsNoncurrent,,0001213900-21-042035,1,0,C,,Long-term debt noncurrent.,I,1
