@@ -1,0 +1,115 @@
+﻿Tag,TLabel,Custom,Abstract,CRDR,Datatype,Doc,IORD,Count
+StandardProductWarrantyAccrual,Standard Product Warranty Accrual,0,0,C,,Amount as of the balance sheet date of the aggregate standard product warranty liability. Does not include the balance for the extended product warranty liability.,I,1
+FinancialInstrumentsOwnedCorporateEquitiesAtFairValue,"Financial Instruments, Owned, Corporate Equities, at Fair Value",0,0,D,,"The fair value as of the balance sheet date of firm holdings in corporate stocks (common and preferred), stock options, warrants and any other financial instrument which represents, or provides the ability to obtain, ownership rights in a corporation. Includes both pledged (to counterparties as collateral for financing transactions) and unpledged holdings.",I,1
+WarrantsNotSettleableInCashFairValueDisclosure,"Warrants Not Settleable in Cash, Fair Value Disclosure",0,0,C,,Fair value portion of warrants not settleable in cash classified as equity.,I,1
+ExtendedProductWarrantyAccrualNoncurrent,"Extended Product Warranty Accrual, Noncurrent",0,0,C,,"Amount at end of the reporting period of the aggregate extended product warranty liability that is expected to be paid after one year from the balance sheet date or normal operating cycle, if longer. Does not include the balance for the standard product warranty liability.",I,1
+FinancialLiabilities,Financial liabilities,0,0,C,,"The amount of liabilities that are: (a) a contractual obligation: (i) to deliver cash or another financial asset to another entity; or (ii) to exchange financial assets or financial liabilities with another entity under conditions that are potentially unfavourable to the entity; or (b) a contract that will, or may be, settled in the entitys own equity instruments and is: (i) a non-derivative for which the entity is, or may be, obliged to deliver a variable number of the entitys own equity instruments; or (ii) a derivative that will, or may be, settled other than by the exchange of a fixed amount of cash or another financial asset for a fixed number of the entitys own equity instruments. For this purpose, rights, options or warrants to acquire a fixed number of the entitys own equity instruments for a fixed amount of any currency are equity instruments if the entity offers the rights, options or warrants pro rata to all of its existing owners of the same class of its own non-derivative equity instruments. Also, for those purposes the entitys own equity instruments do not include puttable financial instruments that are classified as equity instruments in accordance with paragraphs 16A-16B of IAS 32, instruments that impose on the entity an obligation to deliver to another party a pro rata share of the net assets of the entity only on liquidation and are classified as equity instruments in accordance with paragraphs 16C-16D of IAS 32, or instruments that are contracts for the future receipt or delivery of the entitys own equity instruments. As an exception, an instrument that meets the definition of a financial liability is classified as an equity instrument if it has all the features and meets the conditions in paragraphs 16A-16B or paragraphs 16C-16D of IAS 32. [Refer: Financial instruments, class [member]; Financial assets; Derivatives [member]]",I,1
+ShorttermWarrantyProvision,Current warranty provision,0,0,C,,The amount of current provision for warranties. [Refer: Warranty provision],I,1
+LongtermWarrantyProvision,Non-current warranty provision,0,0,C,,The amount of non-current provision for warranties. [Refer: Warranty provision],I,1
+PrivateWarrantsDerivativeLiability,Private Warrants Derivative Liability,1,0,C,,Private warrants derivative liability.,I,1
+NoncurrentPortionOfWarrantLiability,Noncurrent Portion Of Warrant Liability,1,0,C,,Noncurrent portion of warrant liability.,I,1
+FairValueLiabilityOfPrivateWarrants,Fair value liability of Private Warrants,1,0,C,,,I,1
+FairValueLiabilityOfPublicWarrants,Fair value liability of Public Warrants,1,0,C,,Fair value of financial and nonfinancial obligations.,I,1
+WarrantObligations,Warrant Obligations,1,0,C,,Warrant Obligations,I,1
+AssumedCommonStockWarrantLiabilitiesNoncurrent,Assumed Common Stock Warrant Liabilities Noncurrent,1,0,C,,,I,1
+MarketableSecuritiesAndWarrants,Marketable securities and warrants,1,0,D,,Marketable securities and warrants.,I,1
+WarrantExerciseProceedsHeldInTrust,Warrant Exercise Proceeds Held In Trust,1,0,C,,Warrant exercise proceeds held in trust.,I,1
+ClassOfWarrantOrRightIssued,"Class Of Warrant Or Right, Issued",1,0,,,"Class Of Warrant Or Right, Issued",I,1
+WarrantAndRightsOutstandingCurrent,"Warrant And Rights Outstanding, Current",1,0,C,,"Warrant And Rights Outstanding, Current",I,1
+WarrantAndRightsOutstandingNoncurrent,"Warrant And Rights Outstanding, Noncurrent",1,0,C,,"Warrant And Rights Outstanding, Noncurrent",I,1
+CurrentCommonStockWarrantLiabilities,Current common stock warrant liabilities,1,0,C,,Amount of current common stock warrant liabilities.,I,1
+NonCurrentCommonStockWarrantLiabilities,Non-current common stock warrant liabilities,1,0,C,,Amount of non-current common stock warrant liabilities.,I,1
+AccruedLiabilitiesAndOtherLiabilitiesCurrentExcludingWarranty,Accrued Liabilities And Other Liabilities Current Excluding Warranty,1,0,C,,Accrued liabilities and other liabilities current excluding warranty.,I,1
+CurrentPortionOfWarrantLiability,Current portion of warrant liability,1,0,C,,,I,1
+Enph_ProductWarrantyAccrualCurrentFairValueDisclosure,enph_ProductWarrantyAccrualCurrentFairValueDisclosure,1,0,C,,enph_ProductWarrantyAccrualCurrentFairValueDisclosure,I,1
+Enph_ProductWarrantyAccrualNoncurrentFairValueDisclosure,enph_ProductWarrantyAccrualNoncurrentFairValueDisclosure,1,0,C,,enph_ProductWarrantyAccrualNoncurrentFairValueDisclosure,I,1
+ClassOfWarrantOrRightNumberOfSharesIssued,Class Of Warrant Or Right Number Of Shares Issued,1,0,,,Class of warrant or right number of shares issued.,I,1
+LoanRepurchaseCommitments,Loan Repurchase Commitments,1,0,D,,The fair value of financial instruments that represent the right of the Trust against the seller/servicer for loans that were not compliant with the representations and warranties of the loan underwriting. The Trust has the right to demand that the transferor replace ineligible loans with a compliant loan or repurchase the non-compliant loan.,I,1
+AvailableForSaleSecuritiesFairValueDisclosureHeldInTrust,Available For Sale Securities Fair Value Disclosure Held In Trust,1,0,D,,"This element represents the portion of the balance sheet assertion valued at fair value by the entity, which is held in a mortgage-backed security, whether such amount is presented as a separate caption or as a parenthetical disclosure. Additionally, this element may by used in connection with the fair value disclosures required in the footnote disclosures to the financial statements. The element may be used in both the balance sheet and disclosure in the same submission. This item represents Available-for-sale Securities which consist of all investments in certain debt and equity securities neither classified as trading or held-to-maturity securities. A debt security represents a creditor relationship with an enterprise. Debt securities include, among other items, US Treasury securities, US government securities, municipal securities, corporate bonds, convertible debt, commercial paper, and all securitized debt instruments. An equity security represents an ownership interest in an enterprise or the right to acquire or dispose of an ownership interest in an enterprise at fixed or determinable prices. Equity securities include, among other things, common stock, certain preferred stock, warrant rights, call options, and put options, but do not include convertible debt. An entity may opt to provide the reader with additional narrative text to better understand the nature of investments in debt and equity securities which are categorized as Available-for-sale.",I,1
+DebtInstrumentCarryingAmountNonCurrent,Debt Instrument Carrying Amount Non Current,1,0,C,,"Carrying amount of long-term debt excluding amounts to be repaid within one year, inclusive of amounts due on final repayment of the debt and the unamortized cost of associated share warrants.",I,1
+IssuedWarrants,Warrants (note 10),1,0,C,,Warrants issuance.,I,1
+TransactionCostsPayableForIssueOfSecuritiesandWarrants,Transaction Costs Payable For Issue Of Securities and Warrants,1,0,C,,The unpaid expenses related to offerings,I,1
+WarrantsAndRightsLiabilityNoncurrent,"Warrants And Rights Liability, Noncurrent",1,0,C,,"Warrants And Rights Liability, Noncurrent",I,1
+StandardAndExtendedProductWarrantyAccrualCurrent,"Standard And Extended Product Warranty Accrual, Current",1,0,C,,"Standard And Extended Product Warranty Accrual, Current",I,1
+WarrantsLiabilities,Warrants Liabilities,1,0,C,,Warrant liabilities.,I,1
+NoncurrentWarrantLiability,Noncurrent Warrant Liability,1,0,C,,Represents the information pertaining to Noncurrent warrant liability.,I,1
+Servicereceivable,Service receivable,1,0,D,,"Monetary value of future clinical trial services to be received in connection with issuance of common stock, preferred stock and warrants",I,1
+CustomerFinishedGoodsReturnsAccrual,Customer finished goods returns accrual,1,0,C,,The carrying value as of the balance sheet date of the estimated future unit returns (warranty returns) and finished goods returns (stock adjustment returns) for which a returned goods authorization has not been issued.,I,1
+ClassOfWarrantsOrRightIssued,Class Of Warrants Or Right Issued,1,0,,,Class of warrants or right issued.,I,1
+DerivativeWarrantLiabilityNonCurrent,Derivative Warrant Liability Non Current,1,0,C,,Derivative warrant liability non current.,I,1
+WarrantyReserveAndOtherLongTermLiabilities,Warranty Reserve And Other Long Term Liabilities,1,0,C,,Warranty reserve and other long-term liabilities.,I,1
+ClassOfWarrantOrRightPriceOfWarrantsOrRights,"Class of Warrant or Right, Price of Warrants or Rights",1,0,,,Price per share or per unit of warrants or rights outstanding.,I,1
+ReceivableForWarrantExercises,Receivable for warrant exercises,1,0,C,,Receivable for warrant exercises,I,1
+WarrantsOutstanding,Warrants Outstanding,1,0,,,Warrants outstanding.,I,1
+WarrantLiabilitiesValue,WarrantLiabilitiesValue,1,0,C,,,I,1
+PrivatePlacementWarrantsDerivativeLiability,PrivatePlacementWarrantsDerivativeLiability,1,0,C,,Private Placement Warrants derivative liability.,I,1
+FairValueOfWarrantsPotentiallySettleableInCash,Fair Value Of Warrants Potentially Settleable In Cash,1,0,C,,Fair value of warrants potentially settleable in cash.,I,1
+WarrantAssetNoncurrent,"Warrant Asset, Noncurrent",1,0,D,,"Warrant Asset, Noncurrent",I,1
+WarrantLiabilityPrivate,WarrantLiabilityPrivate,1,0,C,,Warrant liability  private.,I,1
+WarrantLiabilityPublic,WarrantLiabilityPublic,1,0,C,,Warrant liability - public.,I,1
+AccruedWarrantyExpense,Accrued warranty expense,1,0,C,,,I,1
+LiabilityForSettlementOfCommonStockWarrantLiability,Common stock warrant liabilities,1,0,C,,Liability For Settlement Of Common Stock Warrant Liability,I,1
+LiabilityClassifiedWarrantsCurrentPortion,"Liability classified warrants, current portion",1,0,C,,"Liability classified warrants, current portion.",I,1
+LiabilityClassifiedWarrantsNetOfCurrentPortion,"Liability classified warrants, net of current portion",1,0,C,,Aggregated carrying amounts of obligations as of the balance sheet date Liability classified warrants and other long-term liabilities.,I,1
+WarrantLiabilitiesSeeNote3,WarrantLiabilitiesSeeNote3,1,0,C,,WarrantLiabilitiesSeeNote3,I,1
+CommonStockPreFundedWarrantsExercisePrice,Common Stock Pre Funded Warrants Exercise Price,1,0,,,Common stock pre funded warrants exercise price.,I,1
+UnderwritingFeesDeferred,"Underwriting fees, Deferred",1,0,C,,Amount of costs incurred and deferred for underwriting fees in connection with the offering of Units in Initial Public Offering and Private Placement of Warrants.,I,1
+AccruedLiabilitiesExcludingProductWarrantyAccrualCurrent,"Accrued Liabilities, Excluding Product Warranty Accrual Current",1,0,C,,"Accrued Liabilities, Excluding Product Warranty Accrual Current",I,1
+AdditionalPaidInCapitalCommonStockWarrants,AdditionalPaidInCapitalCommonStockWarrants,1,0,C,,Value received from common stock warrant related transactions that are in excess of par value or stated value and amounts received from other warrant-related transactions. Includes only common stock warrant transactions.,I,1
+CommonStockWarrantLability,Common stock warrant liability,1,0,C,,The value of the common stock warrant liability.,I,1
+WarrantyProvisionCurrent,WarrantyProvisionCurrent,1,0,C,,Carrying value as of the balance sheet date of the estimated amount that a company will have to spend to repair or replace a product during its warranty period.,I,1
+LoanRepresentationAndWarrantyReserve,Loan Representation And Warranty Reserve,1,0,C,,Loan Representation And Warranty Reserve,I,1
+DerivativeAndWarrantLiabilityNoncurrent,Derivative and warrant liability,1,0,C,,Noncurrent Carrying amount of derivative and warrant liability.,I,1
+WarrantDerivativeLiability,Warrant derivative liability,1,0,C,,Warrant derivative liability.,I,1
+RedeemableConvertiblePreferredStockWarrantsNoncurrent,Redeemable Convertible Preferred Stock Warrants Noncurrent,1,0,C,,Redeemable convertible preferred stock warrants noncurrent.,I,1
+WarrantsUsedToPurchaseOrdinaryShares,Warrants Used To Purchase Ordinary Shares,1,0,C,,Warrants to purchase ordinary shares.,I,1
+AssumedCommonStockWarrantsLiabilityNoncurrent,Assumed Common Stock Warrants Liability Noncurrent,1,0,C,,Assumed common stock warrants liability noncurrent.,I,1
+InitialClassificationOfWarrantLiability,Initial Classification of Warrant Liability,1,0,C,,Initial classification of warrant liability.,I,1
+EmployeeStockWarrantsLiability,Employee stock warrants liability,1,0,C,,Employee stock warrants liability.,I,1
+DerivativeLiabilitiesNoncurrent1,Series B warrant liabilities,1,0,C,,,I,1
+DerivativeWarrantLiability,Derivative Warrant Liability,1,0,C,,Derivative warrant liability.,I,1
+IncludesUnamortizedDebtDiscountAndBeneficialConversionFeatureRelatedToDetachedWarrantsAndConvertibleNotesOf897603AndNoneAtJune302021AndDecember312020Respectively,"* Includes unamortized debt discount and beneficial conversion feature related to detached warrants and convertible notes of $897,603 and none at June 30, 2021 and December 31, 2020, respectively",1,0,C,,,I,1
+AdditionalPaidInCapitalStockWarrants,Additional Paid in Capital - Stock Warrants,1,0,C,,,I,1
+SubscriptionReceivableWarrants,Subscription Receivable Warrants,1,0,D,,Subscription Receivable - Warrants.,I,1
+PrivateWarrantLiabilities,Private Warrant Liabilities,1,0,C,,The carrying amount of private warrant liabilities measured at fair value.,I,1
+PreferredStockWarrantLiabilityCurrent,Preferred Stock Warrant Liability Current,1,0,C,,Preferred Stock Warrant Liability Current.,I,1
+PublicAndPrivatePlacementWarrants,Public And Private Placement Warrants,1,0,C,,Public And Private Placement Warrants,I,1
+CommonStockSubjectToPossibleRedemptionSharesRedemptionValue,CommonStockSubjectToPossibleRedemptionSharesRedemptionValue,1,0,,,"Amount to be paid share that is classified as temporary equity by entity upon redemption. Temporary equity is a security with redemption features that are outside the control of the issuer, is not classified as an asset or liability in conformity with GAAP, and is not mandatorily redeemable. Includes any type of security that is redeemable at a fixed or determinable price or on a fixed or determinable date or dates, is redeemable at the option of the holder, or has conditions for redemption which are not solely within the control of the issuer. If convertible, the issuer does not control the actions or events necessary to issue the maximum number of shares that could be required to be delivered under the conversion option if the holder exercises the option to convert the stock to another class of equity. If the security is a warrant or a rights issue, the warrant or rights issue is considered to be temporary equity if the issuer cannot demonstrate that it would be able to deliver upon the exercise of the option by the holder in all cases. Includes stock with put option held by ESOP and stock redeemable by holder only in the event of a change in control of the issuer.",I,1
+WarrantDerivativeLiabilities,Warrant Derivative Liabilities,1,0,C,,The amount of warrant derivative liabilities.,I,1
+CommonStockWarrantLiabilities,Common Stock Warrant Liabilities,1,0,C,,Common stock warrant liabilities.,I,1
+WarrantAsset,Warrant asset,1,0,D,,Warrant asset.,I,1
+WarrantyReserveNonCurrent,WarrantyReserveNonCurrent,1,0,C,,Carrying amount of reserve for warrant.,I,1
+WarrantAssets,Warrant assets,1,0,D,,Warrants Assets,I,1
+FairValueOfWarrantsIssuedInConnectionWithConversionOfConvertibleNotesPayable,FairValueOfWarrantsIssuedInConnectionWithConversionOfConvertibleNotesPayable,1,0,C,,Fair value of warrants issued in connection with conversion of convertible notes payable,I,1
+WarrantyReserveCurrent,WarrantyReserveCurrent,1,0,C,,The amount of current portion of warranty reserve.,I,1
+PreFundedWarrantsOutstanding,Pre Funded Warrants Outstanding,1,0,,,Pre-funded warrants outstanding.,I,1
+SaleOfPrivatePlacementWarrantToSponsorInPrivatePlacement,SaleOfPrivatePlacementWarrantToSponsorInPrivatePlacement,1,0,,,SaleOfPrivatePlacementWarrantToSponsorInPrivatePlacement,I,1
+IncrementalFairValueOfWarrantsModifiedToExtendMaturityDateOfConvertibleNotesPayable,IncrementalFairValueOfWarrantsModifiedToExtendMaturityDateOfConvertibleNotesPayable,1,0,C,,Incremental fair value of warrants modified to extend maturity date of convertible notes payable,I,1
+WarrantsLiabilitiesNonCurrent,Warrants Liabilities Non Current,1,0,C,,Warrants liabilities non-current.,I,1
+InvestmentInCommonStockAndWarrantsRelatedParty,"Investments in common stock and warrants, related parties",1,0,D,,,I,1
+RedeemableWarrants,Redeemable warrants,1,0,C,,Redeemable Warrants.,I,1
+WarrantsLiabilityCurrent,Warrant liability,1,0,C,,,I,1
+AccruedWarrantyLiabilityCurrent,AccruedWarrantyLiabilityCurrent,1,0,C,,Accrued warranty liability.,I,1
+PrivateWarrantLiability,PrivateWarrantLiability,1,0,C,,Private Warrant liability.,I,1
+CommonStockWarrantLiabilitiesCurrent,"Common Stock Warrant Liabilities, Current",1,0,C,,"Carrying value of warrant liabilities as on balance sheet date, expected to be settled during the following twelve months or within one business cycle, if longer.",I,1
+WarrantsReserve,Warrants Reserve,1,0,C,,Represents amount related to warrant.,I,1
+AdditionalPaidInCapitalAndWarrants,AdditionalPaidInCapitalAndWarrants,1,0,C,,Additional paid in capital and warrants.,I,1
+SaleOfWarrantsPricePerWarrant,Sale Of Warrants Price Per Warrant,1,0,,,Sale of warrants price per warrant.,I,1
+ProductWarrantyAccrualClassifiedNonCurrent,ProductWarrantyAccrualClassifiedNonCurrent,1,0,C,,Product warranty provisions.,I,1
+EscrowForWarrantExercise,Escrow for warrant exercise,1,0,C,,Escrow for warrant exercise,I,1
+InitialFairValueOfWarrantLiability,Initial fair value of warrant liability,1,0,C,,Initial fair value of warrant liability,I,1
+PreferredStockWarrantLiabilities,Preferred Stock Warrant Liabilities,1,0,C,,Preferred stock warrant liabilities,I,1
+NoncurrentWarrants,NoncurrentWarrants,1,0,C,,Non current warrants.,I,1
+Warrant,Warrant,1,0,C,,,I,1
+WarrantsNonCurrentLiabilities,WarrantsNonCurrentLiabilities,1,0,C,,The amount of warrants non current liabilities.,I,1
+WarrantsForRedeemableConvertiblePreferredShares,Warrants For Redeemable Convertible Preferred Shares,1,0,C,,Warrants for redeemable convertible preferred shares.,I,1
+DerivativeLiabilitiesWarrantCurrent,Derivative liability - warrants,1,0,C,,,I,1
+PreFundedWarrants,Pre Funded Warrants,1,0,C,,Represents amount related to pre-funded warrants.,I,1
+ChangeInFairValueOfWarrantsExercised,Change in fair value of warrants exercised,1,0,D,,Represents Change in fair value of warrants exercised.,I,1
+WarrantsHeldByRelatedParties,Warrants Held By Related Parties,1,0,C,,Warrants held by related parties.,I,1
+LongTermWarrantLiability,Long Term Warrant Liability,1,0,C,,Long term warrant liability.,I,1
+PreferredUnitWarrantLiabilityNoncurrent,Preferred Unit Warrant Liability,1,0,C,,Preferred unit warrant liability noncurrent.,I,1
+FairValueOfConvertibleComponentOfConvertibleBridgeLoans,Fair value of bifurcated convertible feature of convertible bridge loans,1,0,C,,Fair value of derivative warrants liability and convertible bridge loans classified into equity in connection with convertible bridge loans converted.,I,1
+PrepaidWarrantyCurrent,Prepaid Warranty Current,1,0,D,,Prepaid warranty current.,I,1
+PrepaidWarrantyNoncurrent,Prepaid Warranty Noncurrent,1,0,D,,Prepaid warranty noncurrent.,I,1
+ConvertiblePreferredStockWarrantLiability,ConvertiblePreferredStockWarrantLiability,1,0,C,,,I,1
