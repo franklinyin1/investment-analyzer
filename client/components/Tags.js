@@ -109,7 +109,7 @@ class Tags extends React.Component {
                 rowStyle: (data, index) =>
                   index % 2 == 0 ? { background: "#f5f5f5" } : null,
                 headerStyle: { background: "#00004d", color: "white" },
-                pageSizeOptions: [50, 100, 250, 1000, 5000, 10000],
+                pageSizeOptions: [50, 100, 250, 1000, 5000, 10000, 15000],
                 pageSize: 1000
               }}
               actions={[
