@@ -154,6 +154,63 @@ async function readCSVTags() {
   debtTagsStream.end()
   console.log('extracted debt-tags')
 
+  //read non-controlling-interest tags
+
+  const NCITagsCSV = await fsPromises.readFile("./csv/non-controlling_interest/interest-tags.csv");
+  const parsedNCITags = parse(NCITagsCSV);
+
+  parsedNCITags.shift();
+
+  let NCITags = parsedNCITags.map((NCITag) => {
+    if (NCITag[2] === '1') {
+      return NCITag[0]
+    }
+  })
+
+  NCITags = NCITags.filter((NCITag) => {
+    return NCITag !== undefined
+  })
+
+  const NCITagsPath = "./tags/NCI-tags.txt"
+
+  if (fs.existsSync(NCITagsPath)) {
+    await fsPromises.rm(NCITagsPath)
+  }
+
+  let NCITagsStream = fs.createWriteStream(NCITagsPath, {flags:'a'})
+  NCITagsStream.write(JSON.stringify(NCITags))
+  NCITagsStream.end()
+  console.log('extracted NCI-tags')
+
+  //read preferred-equity tags
+
+  const prefTagsCSV = await fsPromises.readFile("./csv/preferred-equity/pref-tags.csv");
+  const parsedPrefTags = parse(prefTagsCSV);
+
+  parsedPrefTags.shift();
+
+  let prefTags = parsedPrefTags.map((prefTag) => {
+    if (prefTag[2] === '1') {
+      return prefTag[0]
+    }
+  })
+
+  prefTags = prefTags.filter((prefTag) => {
+    return prefTag !== undefined
+  })
+
+  const prefTagsPath = "./tags/preferred-equity-tags.txt"
+
+  if (fs.existsSync(prefTagsPath)) {
+    await fsPromises.rm(prefTagsPath)
+  }
+
+  let prefTagsStream = fs.createWriteStream(prefTagsPath, {flags:'a'})
+  prefTagsStream.write(JSON.stringify(prefTags))
+  prefTagsStream.end()
+  console.log('extracted preferred-equity-tags')
+
+
 }
 
 readCSVTags()
