@@ -15,48 +15,76 @@ class CapitalizationTable extends React.Component {
   async render() {
     const { company } = this.props;
 
+    let debtPLabels = new Array(debtTags.length)
+    let debtValues = new Array(debtTags.length)
+
+    let preferredEquityPLabels = new Array(preferredEquityTags.length)
+    let preferredEquityValues = new Array(preferredEquityTags.length)
+
+    let NCIPLabels = new Array(NCITags.length)
+    let NCIValues = new Array(NCITags.length)
+
+    let cashPLabels = new Array(cashTags.length)
+    let cashValues = new Array(cashTags.length)
+
+
     //tag, source, presentation label, value
-    let capitalizationTableStats = [
-      //0
-      [
-        "CommonStockSharesOutstanding",
-        "Filing",
-        "Common Stock Shares Outstanding (millions of shares)",
-        null,
-      ],
-      //1
-      ["StockPrice", "API", "Stock Price (per share)", null],
-      //2
-      ["MarketCap", "Calculated", "Market Cap", null],
-      //3
-      ["LongTermDebtAndCapitalLeaseObligations", "Filing", "Total Debt", null],
-      //4
-      [
-        "ConvertiblePreferredStockNonredeemableOrRedeemableIssuerOptionValue",
-        "Filing",
-        "Preferred Stock",
-        null,
-      ],
-      //5
-      [
-        "LongTermDebtCurrent",
-        "Filing",
-        "Current Portion of Long-term Debt",
-        null,
-      ],
-      //6
-      ["LongTermDebtNoncurrent", "Filing", "Long-term Debt", null],
-      //7
-      ["LiabilitiesCurrent", "Filing", "Current Liabilities", null],
-      //8 - calculated to exclude current-portion of long-term debt, to make sure that this is not being double-counted
-      ["LiabilitiesCurrent", "Calculated", "Current Liabilities", null],
-      //9
-      ["TotalAssetValue", "Calculated", "Total Asset Value", null],
-      //10
-      ["AssetsCurrent", "Filing", "Current Assets", null],
-      //11
-      ["EnterpriseValue", "Calculated", "Enterprise Value", null],
-    ];
+    let capitalizationTableStats = {
+      "commonStockShares": {
+        "tags": "CommonStockSharesOutstanding",
+        "source": "Filing",
+        "presentationLabel(s)": "Common Stock Shares Outstanding (millions of shares)",
+        "values": null
+      },
+      "stockPrice": {
+        "tags": "StockPrice",
+        "source": "API",
+        "presentationLabels": "Stock Price (per share)",
+        "values": null
+      },
+      "marketCap": {
+        "tags": "MarketCap",
+        "source": "Calculated",
+        "presentationLabels": "Market Cap",
+        "values": null
+      },
+      "debt": {
+        "tags": debtTags,
+        "source": "Filing",
+        "presentationLabels": debtPLabels,
+        "values": debtValues
+      },
+      "preferredEquity": {
+        "tags": preferredEquityTags,
+        "source": "Filing",
+        "presentationLabels": preferredEquityPLabels,
+        "values": preferredEquityValues
+      },
+      "nonControllingInterest": {
+        "tags": NCITags,
+        "source": "Filing",
+        "presentationLabels:": NCIPLabels,
+        "values": NCIValues
+      },
+      "totalAssetValue": {
+        "tags": "TotalAssetValue",
+        "source": "Calculated",
+        "presentationLabels": "Total Asset Value",
+        "values": null
+      },
+      "cash": {
+        "tags": cashTags,
+        "source": "Filing",
+        "presentationLabels": cashPLabels,
+        "values": cashValues
+      },
+      "enterpriseValue": {
+        "tags": "EnterpriseValue",
+        "source": "Calculated",
+        "presentationLabels": "Enterprise Value",
+        "values": null
+      }
+    }
 
     let columns;
 
@@ -83,57 +111,113 @@ class CapitalizationTable extends React.Component {
         return financial.ddate === currentQuarter && financial.qtrs === "0";
       });
 
+      //add presentation detail as a key-value pair of each financial object
+      financials = financials.map(financial => {
+        let presentation = company.presentations.filter((presentation) => {
+          return presentation.adsh === financial.adsh && presentation.stmt === statementName && presentation.tag === financial.tag
+        })
+        if (presentation.length > 0){
+          financial.presentation = presentation
+        } else {
+          financial.presentation = [{line: Infinity}]
+        }
+        return financial
+      })
+
       console.log("financials:", financials);
 
-      //first, let's filter the capitalization table stats so that we only grab ones where we can fill in the info using financial filings
-      let filingData = capitalizationTableStats.filter((stat) => {
-        return stat[1] === "Filing";
-      });
+      //first, let's update all of the filing data in capitalization table stats
+      for (const key in capitalizationTableStats) {
 
-      //next, let's replace the second element of each filing data array entry with the actual value containedin the filings
-      filingData = filingData.map((data) => {
-        let tag = data[0];
-        let filingFinancial = financials.filter((financial) => {
-          return financial.tag === tag;
-        });
-        if (filingFinancial.length) {
-          console.log("filingFinancial:", filingFinancial);
-          return [data[0], filingFinancial[0].value / oneMillion];
-        } else {
-          return [data[0], 0];
+        let capitalizationData = capitalizationTableStats[key]
+
+        if (capitalizationData.source === 'Calculated') {
+          continue
         }
-      });
 
-      console.log("filingData:", filingData);
-
-      //next, let's update the capitalizationTableStats so that any items contained in SEC filings or determined through APIs are updated
-      capitalizationTableStats = capitalizationTableStats.map((statistic) => {
-        if (statistic[1] !== "Filing" && statistic[1] !== "API") {
-          return statistic;
-        } else if (statistic[1] === "Filing") {
-          let populatedData = filingData.filter((data) => {
-            return data[0] === statistic[0];
-          });
-          if (populatedData.length) {
-            return [
-              statistic[0],
-              statistic[1],
-              statistic[2],
-              populatedData[0][1],
-            ];
+        if (capitalizationData.source === 'API') {
+          //update share price
+          capitalizationData.value = Number(company.priceData["05. price"])
+        } else if (typeof capitalizationData.tags === "string") {
+          //check if we are dealing with an array of tags, or just a single tag
+          let tag = capitalizationData[0]
+          let filingFinancial = financials.filter((financial) => {
+            return financial.tag === tag
+          })
+          if (filingFinancial.length) {
+            capitalizationData.values = filingFinancial[0].value / oneMillion
           } else {
-            return [statistic[0], statistic[1], statistic[2], 0];
+            capitalizationData.values = 0
           }
-        } else if (statistic[1] === "API") {
-          //store price as cents
-          return [
-            statistic[0],
-            statistic[1],
-            statistic[2],
-            Number(company.priceData["05. price"]),
-          ];
+        } else {
+          //in this case, we are dealing with an array of tags (such as debt, pref, NCI, or cash)
+          let tags = capitalizationData[0]
+          for (const idx in tags) {
+            let tag = tags[idx]
+            let filingFinancial = financials.filter((financial) => {
+              return financial.tag = tag
+            })
+            if (filingFinancial.length) {
+              capitalizationData.values[idx] = filingFinancial[0].value / oneMillion
+              capitalizationData.presentationLabels[idx] = filingFinancial[0].presentation[0].plabel
+            } else {
+              capitalizationData.values[idx] = 0
+            }
+          }
         }
-      });
+      }
+
+      //next, let's update the capitalizationTableStats for debt, preferred-equity, NCI, and cash to remove any zero-values
+      for (const key in capitalizationTableStats) {
+
+        let capitalizationData = capitalizationTableStats[key]
+
+        if (capitalizationData.source === 'Calculated') {
+          continue
+        }
+
+      }
+
+
+      //next, let's update the calculated statistics
+      for (const key in capitalizationTableStats) {
+
+        let capitalizationData = capitalizationTableStats[key]
+
+        if (capitalizationData.source !== 'Calculated') {
+          continue
+        }
+
+        if (capitalizationData.tags === "MarketCap") {
+          //shares outstanding * share price
+          capitalizationData.values = capitalizationTableStats["commonStockShares"].values * capitalizationTableStats["stockPrice"].values
+        } else if (capitalizationData.tags === "TotalAssetValue") {
+          capitalizationData.values = capitalizationTableStats["marketCap"]
+          for (const debtValue of capitalizationTableStats["debt"].values) {
+            capitalizationData += debtValue
+          }
+
+
+          capitalizationTableStats[i][3] =
+            //market cap
+            capitalizationTableStats[2][3] +
+            //total debt
+            capitalizationTableStats[3][3] +
+            //preferred stock
+            capitalizationTableStats[4][3] +
+            //current portion of long-term debt
+            capitalizationTableStats[5][3];
+          //long-term debt
+          capitalizationTableStats[6][3];
+          //use the calculated verison of long-term liabilities to ensure that current portion of long-term debt is not being double-counted
+          capitalizationTableStats[8][3];
+        } else if (capitalizationTableStats[i][0] === "EnterpriseValue") {
+          capitalizationTableStats[i][3] =
+            //total asset value less total current assets
+            capitalizationTableStats[9][3] - capitalizationTableStats[10][3];
+        }
+
+      }
 
       //next, let's update the calculated statistics
       for (let i = 0; i < capitalizationTableStats.length; i++) {
