@@ -210,7 +210,6 @@ async function readCSVTags() {
   prefTagsStream.end()
   console.log('extracted preferred-equity-tags')
 
-
 }
 
 readCSVTags()

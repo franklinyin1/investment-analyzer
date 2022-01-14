@@ -1,16 +1,18 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import createMaterialTable from "../helper-functions/CapitalizationTable/createMaterialTable";
+import createMaterialTable from "../../helper-functions/CapitalizationTable/createMaterialTable";
 
 import XLSX from "xlsx";
+
+import {cashTags, debtTags, NCITags, preferredEquityTags } from "./Tags"
 
 class CapitalizationTable extends React.Component {
   constructor(props) {
     super(props);
   }
 
-  render() {
+  async render() {
     const { company } = this.props;
 
     //tag, source, presentation label, value
