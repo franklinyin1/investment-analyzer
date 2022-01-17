@@ -13,7 +13,7 @@ import CoverPage from "./FinancialStatements/CoverPage";
 
 import AllFinancials from "./AllFinancials";
 import Title from "./Title";
-import CapitalizationTable from "./CapitalizationTable";
+import CapitalizationTable from "./CapitalizationTable/CapitalizationTable";
 
 class Companies extends React.Component {
   constructor(props) {

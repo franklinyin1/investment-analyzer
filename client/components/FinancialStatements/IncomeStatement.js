@@ -75,15 +75,6 @@ class IncomeStatement extends React.Component {
         quarters
       );
 
-      // //convert all expenses to negative
-      // currentQuarterFinancials = currentQuarterFinancials.map(financial => {
-      //   if (financial.tag.includes("Expense") || financial.tag.includes("Cost")) {
-      //     return {...financial, value: financial.value*-1}
-      //   } else {
-      //     return financial
-      //   }
-      // })
-
       let priorQuarterFinancials = filterFinancials(
         company,
         "IS",
@@ -91,14 +82,6 @@ class IncomeStatement extends React.Component {
         quarters
       );
 
-      // //convert all expenses to negative
-      // priorQuarterFinancials = priorQuarterFinancials.map(financial => {
-      //   if (financial.tag.includes("Expense") || financial.tag.includes("Cost")) {
-      //     return {...financial, value: financial.value*-1}
-      //   } else {
-      //     return financial
-      //   }
-      // })
 
       let growthRates = [];
 

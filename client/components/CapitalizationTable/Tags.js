@@ -1,4 +1,4 @@
-let cashTags = [
+export const cashTags = [
   "CommercialPaperAtCarryingValue",
   "CashFDICInsuredAmount",
   "CashReserveDepositRequiredAndMade",
@@ -114,7 +114,7 @@ let cashTags = [
   "CashAndCashEquivalentsAtCarryingValueSuccessor",
 ];
 
-let debtTags = [
+export const debtTags = [
   "NonRecourseDebt",
   "ShortTermBorrowings",
   "ConvertibleSubordinatedDebtNoncurrent",
@@ -524,7 +524,7 @@ let debtTags = [
   "ConvertibleDebenture",
 ];
 
-let NCITags = [
+export const NCITags = [
   "BusinessCombinationAcquisitionOfLessThan100PercentNoncontrollingInterestFairValue",
   "RedeemableNoncontrollingInterestEquityRedemptionValue",
   "RedeemableNoncontrollingInterestEquityCommonFairValue",
@@ -563,7 +563,7 @@ let NCITags = [
   "TransactionReserveWithNonControllingInterest",
 ];
 
-let preferredEquityTags = [
+export const preferredEquityTags = [
   "PreferredStockIncludingAdditionalPaidInCapitalNetOfDiscount",
   "PreferredUnitsContributedCapital",
   "PreferredStockLiquidationPreferenceValue",
@@ -694,6 +694,4 @@ let preferredEquityTags = [
   "SeriesDPreferedStock",
   "ConvertiblePreferredShares",
 ];
-
-export default { cashTags, debtTags, NCITags, preferredEquityTags };
 
