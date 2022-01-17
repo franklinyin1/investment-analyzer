@@ -14,7 +14,7 @@ async function readCSVTags() {
 
   let cashTags = parsedCashTags.map((cashTag) => {
     if (cashTag[2] === '1') {
-      return cashTag[0]
+      return [cashTag[0], cashTag[1]]
     }
   })
 
@@ -40,7 +40,7 @@ async function readCSVTags() {
   parsedBondTags.shift()
   let bondTags = parsedBondTags.map(tag => {
     if (tag[2] === '1') {
-      return tag[0]
+      return [tag[0],tag[1]]
     }
   })
   bondTags = bondTags.filter(tag => {
@@ -52,7 +52,7 @@ async function readCSVTags() {
   parsedBorrowTags.shift()
   let borrowTags = parsedBorrowTags.map(tag => {
     if (tag[2] === '1') {
-      return tag[0]
+      return [tag[0],tag[1]]
     }
   })
   borrowTags = borrowTags.filter(tag => {
@@ -64,7 +64,7 @@ async function readCSVTags() {
   parsedDebtTags.shift()
   let debtTags = parsedDebtTags.map(tag => {
     if (tag[2] === '1') {
-      return tag[0]
+      return [tag[0],tag[1]]
     }
   })
   debtTags = debtTags.filter(tag => {
@@ -76,9 +76,10 @@ async function readCSVTags() {
   parsedFacilitiesTags.shift()
   let facilitiesTags = parsedFacilitiesTags.map(tag => {
     if (tag[2] === '1') {
-      return tag[0]
+      return [tag[0],tag[1]]
     }
   })
+
   facilitiesTags = facilitiesTags.filter(tag => {
     return tag !== undefined
   })
@@ -88,7 +89,7 @@ async function readCSVTags() {
   parsedFacilityTags.shift()
   let facilityTags = parsedFacilityTags.map(tag => {
     if (tag[2] === '1') {
-      return tag[0]
+      return [tag[0],tag[1]]
     }
   })
   facilityTags = facilityTags.filter(tag => {
@@ -100,7 +101,7 @@ async function readCSVTags() {
   parsedLineTags.shift()
   let lineTags = parsedLineTags.map(tag => {
     if (tag[2] === '1') {
-      return tag[0]
+      return [tag[0],tag[1]]
     }
   })
   lineTags = lineTags.filter(tag => {
@@ -112,7 +113,7 @@ async function readCSVTags() {
   parsedLoanTags.shift()
   let loanTags = parsedLoanTags.map(tag => {
     if (tag[2] === '1') {
-      return tag[0]
+      return [tag[0],tag[1]]
     }
   })
   loanTags = loanTags.filter(tag => {
@@ -124,7 +125,7 @@ async function readCSVTags() {
   parsedMortgageTags.shift()
   let mortgageTags = parsedMortgageTags.map(tag => {
     if (tag[2] === '1') {
-      return tag[0]
+      return [tag[0],tag[1]]
     }
   })
   mortgageTags = mortgageTags.filter(tag => {
@@ -136,7 +137,7 @@ async function readCSVTags() {
   parsedNoteTags.shift()
   let noteTags = parsedNoteTags.map(tag => {
     if (tag[2] === '1') {
-      return tag[0]
+      return [tag[0],tag[1]]
     }
   })
   noteTags = noteTags.filter(tag => {
@@ -163,7 +164,7 @@ async function readCSVTags() {
 
   let NCITags = parsedNCITags.map((NCITag) => {
     if (NCITag[2] === '1') {
-      return NCITag[0]
+      return [NCITag[0],NCITag[1]]
     }
   })
 
@@ -191,7 +192,7 @@ async function readCSVTags() {
 
   let prefTags = parsedPrefTags.map((prefTag) => {
     if (prefTag[2] === '1') {
-      return prefTag[0]
+      return [prefTag[0],prefTag[1]]
     }
   })
 
