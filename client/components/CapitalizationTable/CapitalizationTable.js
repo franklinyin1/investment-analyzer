@@ -5,7 +5,12 @@ import createMaterialTable from "../../helper-functions/CapitalizationTable/crea
 
 import XLSX from "xlsx";
 
-import { cashTags, debtTags, NCITags, preferredEquityTags } from "./Tags";
+import {
+  cashTagsAndPLabels,
+  debtTagsAndPLabels,
+  NCITagsAndPLabels,
+  preferredEquityTagsAndPLabels,
+} from "./TagsAndPLabels";
 
 class CapitalizationTable extends React.Component {
   constructor(props) {
@@ -15,24 +20,48 @@ class CapitalizationTable extends React.Component {
   render() {
     const { company } = this.props;
 
-    let debtPLabels = new Array(debtTags.length);
-    let debtValues = new Array(debtTags.length);
+    let debtTags = [];
+    let debtPLabels = [];
+    let debtValues = [];
+    for (const idx in debtTagsAndPLabels) {
+      debtTags.push(debtTagsAndPLabels[idx][0]);
+      debtPLabels.push(debtTagsAndPLabels[idx][1]);
+      debtValues.push(null);
+    }
 
-    let preferredEquityPLabels = new Array(preferredEquityTags.length);
-    let preferredEquityValues = new Array(preferredEquityTags.length);
+    let preferredEquityTags = [];
+    let preferredEquityPLabels = [];
+    let preferredEquityValues = [];
+    for (const idx in preferredEquityTagsAndPLabels) {
+      preferredEquityTags.push(preferredEquityTagsAndPLabels[idx][0]);
+      preferredEquityPLabels.push(preferredEquityTagsAndPLabels[idx][1]);
+      preferredEquityValues.push(null);
+    }
 
-    let NCIPLabels = new Array(NCITags.length);
-    let NCIValues = new Array(NCITags.length);
+    let NCITags = [];
+    let NCIPLabels = [];
+    let NCIValues = [];
+    for (const idx in NCITagsAndPLabels) {
+      NCITags.push(NCITagsAndPLabels[idx][0]);
+      NCIPLabels.push(NCITagsAndPLabels[idx][1]);
+      NCIValues.push(null);
+    }
 
-    let cashPLabels = new Array(cashTags.length);
-    let cashValues = new Array(cashTags.length);
+    let cashTags = [];
+    let cashPLabels = [];
+    let cashValues = [];
+    for (const idx in cashTagsAndPLabels) {
+      cashTags.push(cashTagsAndPLabels[idx][0]);
+      cashPLabels.push(cashTagsAndPLabels[idx][1]);
+      cashValues.push(null);
+    }
 
     //tag, source, presentation label, value
     let capitalizationTableStats = {
       commonStockShares: {
         tags: "CommonStockSharesOutstanding",
         source: "Filing",
-        "presentationLabel(s)":
+        presentationLabels:
           "Common Stock Shares Outstanding (millions of shares)",
         values: null,
       },
@@ -63,7 +92,7 @@ class CapitalizationTable extends React.Component {
       nonControllingInterest: {
         tags: NCITags,
         source: "Filing",
-        "presentationLabels:": NCIPLabels,
+        presentationLabels: NCIPLabels,
         values: NCIValues,
       },
       totalAssetValue: {
@@ -116,7 +145,7 @@ class CapitalizationTable extends React.Component {
         let presentation = company.presentations.filter((presentation) => {
           return (
             presentation.adsh === financial.adsh &&
-            presentation.stmt === 'BS' &&
+            presentation.stmt === "BS" &&
             presentation.tag === financial.tag
           );
         });
@@ -131,14 +160,12 @@ class CapitalizationTable extends React.Component {
       //first, let's update all of the filing data in capitalization table stats
       for (const key in capitalizationTableStats) {
         let capitalizationData = capitalizationTableStats[key];
-
         if (capitalizationData.source === "Calculated") {
           continue;
         }
-
         if (capitalizationData.source === "API") {
           //update share price
-          capitalizationData.value = Number(company.priceData["05. price"]);
+          capitalizationData.values = Number(company.priceData["05. price"]);
         } else if (typeof capitalizationData.tags === "string") {
           //check if we are dealing with an array of tags, or just a single tag
           let tag = capitalizationData[0];
@@ -161,7 +188,7 @@ class CapitalizationTable extends React.Component {
             if (filingFinancial.length) {
               capitalizationData.values[idx] =
                 filingFinancial[0].value / oneMillion;
-              if (filingFinancial.presentation){
+              if (filingFinancial.presentation) {
                 capitalizationData.presentationLabels[idx] =
                   filingFinancial[0].presentation[0].plabel;
               }
@@ -172,7 +199,7 @@ class CapitalizationTable extends React.Component {
         }
       }
 
-      console.log('capitalizationTableStats:', capitalizationTableStats)
+      console.log("capitalizationTableStats:", capitalizationTableStats);
 
       //next, let's update the capitalizationTableStats for debt, preferred-equity, NCI, and cash to remove any zero-values
       for (const key in capitalizationTableStats) {
@@ -205,11 +232,9 @@ class CapitalizationTable extends React.Component {
       //next, let's update the calculated statistics
       for (const key in capitalizationTableStats) {
         let capitalizationData = capitalizationTableStats[key];
-
         if (capitalizationData.source !== "Calculated") {
           continue;
         }
-
         if (capitalizationData.tags === "MarketCap") {
           //shares outstanding * share price
           capitalizationData.values =
@@ -220,16 +245,21 @@ class CapitalizationTable extends React.Component {
           for (const debtValue of capitalizationTableStats["debt"].values) {
             capitalizationData.values += debtValue;
           }
-          for (const preferredEquityValue of capitalizationTableStats["preferredEquity"].values) {
-            capitalizationData.values += preferredEquityValue
+          for (const preferredEquityValue of capitalizationTableStats[
+            "preferredEquity"
+          ].values) {
+            capitalizationData.values += preferredEquityValue;
           }
-          for (const NCIValue of capitalizationTableStats["nonControllingInterest"].values) {
-            capitalizationData.values += NCIValue
+          for (const NCIValue of capitalizationTableStats[
+            "nonControllingInterest"
+          ].values) {
+            capitalizationData.values += NCIValue;
           }
         } else if (capitalizationData.tags === "EnterpriseValue") {
-          capitalizationData.values = capitalizationTableStats["totalAssetValue"]
+          capitalizationData.values =
+            capitalizationTableStats["totalAssetValue"];
           for (const cashValue of capitalizationTableStats["cash"].values) {
-            capitalizationData.values -= cashValue
+            capitalizationData.values -= cashValue;
           }
         }
       }
@@ -240,29 +270,31 @@ class CapitalizationTable extends React.Component {
         if (typeof capitalizationData.tags === "string") {
           let row = {
             tag: capitalizationData.tags,
-            presentationLabel: capitalizationData.presentationLabels
-          }
+            presentationLabel: capitalizationData.presentationLabels,
+          };
 
           if (capitalizationData.tags !== "StockPrice") {
-            row.value = Math.round(capitalizationTableStats.values).toLocaleString()
+            row.value = Math.round(capitalizationData.values).toLocaleString();
           } else {
-            row.value = capitalizationTableStats.values.toLocaleString("en-US", {
+            row.value = capitalizationData.values.toLocaleString("en-US", {
               style: "currency",
-              currency: "USD"
-            })
+              currency: "USD",
+            });
           }
-          tableData.push(row)
+          tableData.push(row);
         } else {
           let tags = capitalizationData.tags;
           let values = capitalizationData.values;
           let presentationLabels = capitalizationData.presentationLabels;
-          for (const idx in tags) {
-            let row = {
-              tag: tags[idx],
-              value: Math.round(values[idx]).toLocaleString(),
-              presentationLabel: presentationLabels[idx]
+          if (tags.length) {
+            for (const idx in tags) {
+              let row = {
+                tag: tags[idx],
+                value: Math.round(values[idx]).toLocaleString(),
+                presentationLabel: presentationLabels[idx],
+              };
+              tableData.push(row);
             }
-            tableData.push(row)
           }
         }
       }

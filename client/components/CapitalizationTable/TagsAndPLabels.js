@@ -1,4 +1,4 @@
-export const cashTags = [
+export const cashTagsAndPLabels = [
   ["CommercialPaperAtCarryingValue", "Commercial Paper, at Carrying Value"],
   ["CashFDICInsuredAmount", "Cash, FDIC Insured Amount"],
   [
@@ -369,7 +369,7 @@ export const cashTags = [
   ],
 ];
 
-export const debtTags = [
+export const debtTagsAndPLabels = [
   ["NonRecourseDebt", "Non-Recourse Debt"],
   ["ShortTermBorrowings", "Short-term Debt"],
   [
@@ -1523,7 +1523,7 @@ export const debtTags = [
   ["ConvertibleDebenture", "ConvertibleDebenture"],
 ];
 
-export const NCITags = [
+export const NCITagsAndPLabels = [
   [
     "BusinessCombinationAcquisitionOfLessThan100PercentNoncontrollingInterestFairValue",
     "Business Combination, Acquisition of Less than 100 Percent, Noncontrolling Interest, Fair Value",
@@ -1655,7 +1655,7 @@ export const NCITags = [
   ],
 ];
 
-export const preferredEquityTags = [
+export const preferredEquityTagsAndPLabels = [
   [
     "PreferredStockIncludingAdditionalPaidInCapitalNetOfDiscount",
     "Preferred Stock, Including Additional Paid in Capital, Net of Discount",

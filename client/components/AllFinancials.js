@@ -64,7 +64,7 @@ class AllFinancials extends React.Component {
         return financial;
       });
 
-      //sort the current quarter financials based on order of appearance in the income statement
+      //sort the current quarter financials based on order of appearance
       financials = financials.sort(
         (x, y) => x.presentation[0].line - y.presentation[0].line
       );
