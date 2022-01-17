@@ -25,11 +25,11 @@ function filterFinancials(company, statementName, currentQuarter, numQtrs){
     return financial
   })
 
-  //sort the current quarter financials based on order of appearance in the income statement
-  currentQuarterFinancials = currentQuarterFinancials.sort((x,y) => x.presentation[0].line - y.presentation[0].line)
-
   //remove all current quarter financials without a specified line on the income statement
   currentQuarterFinancials = currentQuarterFinancials.filter((financial) => financial.presentation[0].line !== Infinity)
+
+  //sort the current quarter financials based on order of appearance in the income statement
+  currentQuarterFinancials = currentQuarterFinancials.sort((x,y) => x.presentation[0].line - y.presentation[0].line)
 
   return currentQuarterFinancials
 }
