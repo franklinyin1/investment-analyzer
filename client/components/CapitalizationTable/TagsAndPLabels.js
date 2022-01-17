@@ -367,6 +367,10 @@ export const cashTagsAndPLabels = [
     "CashAndCashEquivalentsAtCarryingValueSuccessor",
     "Cash And Cash Equivalents At Carrying Value Successor",
   ],
+  [
+    "CashAndCashEquivalentsAtCarryingValue",
+    "Cash and Cash Equivalents, at Carrying Value",
+  ],
 ];
 
 export const debtTagsAndPLabels = [

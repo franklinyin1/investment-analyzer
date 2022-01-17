@@ -149,11 +149,19 @@ class CapitalizationTable extends React.Component {
             presentation.tag === financial.tag
           );
         });
-        if (presentation.length > 0) {
-          financial.presentation = presentation;
+        if (presentation.length > 0){
+          financial.presentation = presentation
+        } else {
+          financial.presentation = [{line: Infinity}]
         }
         return financial;
       });
+
+      //sort the current quarter financials based on order of appearance in the income statement
+      financials = financials.sort((x,y) => x.presentation[0].line - y.presentation[0].line)
+
+      //remove all current quarter financials without a specified line on the income statement
+      financials = financials.filter((financial) => financial.presentation[0].line !== Infinity)
 
       console.log("financials:", financials);
 
@@ -168,12 +176,12 @@ class CapitalizationTable extends React.Component {
           capitalizationData.values = Number(company.priceData["05. price"]);
         } else if (typeof capitalizationData.tags === "string") {
           //check if we are dealing with an array of tags, or just a single tag
-          let tag = capitalizationData[0];
-          let filingFinancial = financials.filter((financial) => {
+          let tag = capitalizationData.tags;
+          let singleFinancial = financials.filter((financial) => {
             return financial.tag === tag;
           });
-          if (filingFinancial.length) {
-            capitalizationData.values = filingFinancial[0].value / oneMillion;
+          if (singleFinancial.length) {
+            capitalizationData.values = singleFinancial[0].value / oneMillion;
           } else {
             capitalizationData.values = 0;
           }
@@ -182,15 +190,15 @@ class CapitalizationTable extends React.Component {
           let tags = capitalizationData.tags;
           for (const idx in tags) {
             let tag = tags[idx];
-            let filingFinancial = financials.filter((financial) => {
-              return (financial.tag = tag);
+            let singleFinancial = financials.filter((financial) => {
+              return (financial.tag === tag);
             });
-            if (filingFinancial.length) {
+            if (singleFinancial.length) {
               capitalizationData.values[idx] =
-                filingFinancial[0].value / oneMillion;
-              if (filingFinancial.presentation) {
+                singleFinancial[0].value / oneMillion;
+              if (singleFinancial.presentation) {
                 capitalizationData.presentationLabels[idx] =
-                  filingFinancial[0].presentation[0].plabel;
+                  singleFinancial[0].presentation[0].plabel;
               }
             } else {
               capitalizationData.values[idx] = 0;
@@ -220,11 +228,14 @@ class CapitalizationTable extends React.Component {
         let tags = capitalizationData.tags;
         let values = capitalizationData.values;
         let presentationLabels = capitalizationData.presentationLabels;
-        for (const idx in tags) {
+        let idx = 0
+        while (idx < tags.length) {
           if (values[idx] === 0) {
             tags.splice(idx, 1);
             values.splice(idx, 1);
             presentationLabels.splice(idx, 1);
+          } else {
+            idx++
           }
         }
       }
