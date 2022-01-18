@@ -211,6 +211,34 @@ async function readCSVTags() {
   prefTagsStream.end()
   console.log('extracted preferred-equity-tags')
 
+  //read sharesoutstanding-tags
+
+  const sharesoutstandingTagsCSV = await fsPromises.readFile("./csv/shares-oustanding/sharesoutstanding-tags.csv");
+  const parsedSharesoutstandingTags = parse(sharesoutstandingTagsCSV);
+
+  parsedSharesoutstandingTags.shift();
+
+  let sharesoutstandingTags = parsedSharesoutstandingTags.map((tag) => {
+    if (tag[2] === '1') {
+      return [tag[0],tag[1]]
+    }
+  })
+
+  sharesoutstandingTags = sharesoutstandingTags.filter((tag) => {
+    return tag !== undefined
+  })
+
+  const sharesoutstandingTagsPath = "./tags/shares-oustanding-tags.txt"
+
+  if (fs.existsSync(sharesoutstandingTagsPath)) {
+    await fsPromises.rm(sharesoutstandingTagsPath)
+  }
+
+  let sharesoutstandingTagsStream = fs.createWriteStream(sharesoutstandingTagsPath, {flags:'a'})
+  sharesoutstandingTagsStream.write(JSON.stringify(sharesoutstandingTags))
+  sharesoutstandingTagsStream.end()
+  console.log('extracted shares-outstandings-tags')
+
 }
 
 readCSVTags()
