@@ -20,7 +20,7 @@ function determineGrowthLabel(submissions, currentQtr, statementName) {
     }
   }
 
-  return 'QoQ Growth'
+  return 'YoY Growth'
 }
 
 export default determineGrowthLabel

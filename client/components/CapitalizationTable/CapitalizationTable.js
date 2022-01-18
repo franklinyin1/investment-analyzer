@@ -69,8 +69,7 @@ class CapitalizationTable extends React.Component {
       commonStockShares: {
         tags: sharesoutstandingTags,
         source: "Filing",
-        presentationLabels:
-          sharesoutstandingPLabels,
+        presentationLabels: sharesoutstandingPLabels,
         values: sharesoutstandingValues,
       },
       stockPrice: {
@@ -260,11 +259,11 @@ class CapitalizationTable extends React.Component {
         }
         if (capitalizationData.tags === "MarketCap") {
           //shares outstanding * share price
-          let commonStockSharesOutstanding = 0
+          let commonStockSharesOutstanding = 0;
           for (const sharesOutstanding of capitalizationTableStats[
             "commonStockShares"
           ].values) {
-            commonStockSharesOutstanding += sharesOutstanding
+            commonStockSharesOutstanding += sharesOutstanding;
           }
           capitalizationData.values =
             commonStockSharesOutstanding *
@@ -310,36 +309,41 @@ class CapitalizationTable extends React.Component {
         }
       }
 
-      //next, let's push our data into tableData
-      for (const key in capitalizationTableStats) {
-        let capitalizationData = capitalizationTableStats[key];
-        if (typeof capitalizationData.tags === "string") {
-          let row = {
-            tag: capitalizationData.tags,
-            presentationLabel: capitalizationData.presentationLabels,
-          };
+      //if market cap is 0, then we wil not display the data
+      if (capitalizationTableStats["marketCap"].values !== 0) {
+        //next, let's push our data into tableData
+        for (const key in capitalizationTableStats) {
+          let capitalizationData = capitalizationTableStats[key];
+          if (typeof capitalizationData.tags === "string") {
+            let row = {
+              tag: capitalizationData.tags,
+              presentationLabel: capitalizationData.presentationLabels,
+            };
 
-          if (capitalizationData.tags !== "StockPrice") {
-            row.value = Math.round(capitalizationData.values).toLocaleString();
+            if (capitalizationData.tags !== "StockPrice") {
+              row.value = Math.round(
+                capitalizationData.values
+              ).toLocaleString();
+            } else {
+              row.value = capitalizationData.values.toLocaleString("en-US", {
+                style: "currency",
+                currency: "USD",
+              });
+            }
+            tableData.push(row);
           } else {
-            row.value = capitalizationData.values.toLocaleString("en-US", {
-              style: "currency",
-              currency: "USD",
-            });
-          }
-          tableData.push(row);
-        } else {
-          let tags = capitalizationData.tags;
-          let values = capitalizationData.values;
-          let presentationLabels = capitalizationData.presentationLabels;
-          if (tags.length) {
-            for (const idx in tags) {
-              let row = {
-                tag: tags[idx],
-                value: Math.round(values[idx]).toLocaleString(),
-                presentationLabel: presentationLabels[idx],
-              };
-              tableData.push(row);
+            let tags = capitalizationData.tags;
+            let values = capitalizationData.values;
+            let presentationLabels = capitalizationData.presentationLabels;
+            if (tags.length) {
+              for (const idx in tags) {
+                let row = {
+                  tag: tags[idx],
+                  value: Math.round(values[idx]).toLocaleString(),
+                  presentationLabel: presentationLabels[idx],
+                };
+                tableData.push(row);
+              }
             }
           }
         }

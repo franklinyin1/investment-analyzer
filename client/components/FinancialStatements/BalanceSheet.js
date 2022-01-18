@@ -1,10 +1,10 @@
 import React from "react";
 
-import createMaterialTable from "../../helper-functions/FinancialStatements/createMaterialTable"
+import createMaterialTable from "../../helper-functions/FinancialStatements/createMaterialTable";
 
 import XLSX from "xlsx";
 
-import filterFinancials from '../../helper-functions/FinancialStatements/filterFinancials'
+import filterFinancials from "../../helper-functions/FinancialStatements/filterFinancials";
 
 import convertDateAndQuartersToFiscalPeriod from "../../helper-functions/FinancialStatements/convertDateToQuarter";
 
@@ -20,62 +20,110 @@ class BalanceSheet extends React.Component {
   render() {
     const { company } = this.props;
 
-    let columns
+    let columns;
 
     let tableData = [];
 
     if (company.financials) {
+      let currentQuarter = "20210630";
+      let statementName = "BS";
+      let quarters = determineNumQtrs(
+        company.submissions,
+        currentQuarter,
+        statementName
+      );
+      let priorQuarter = determinePriorQtr(
+        company.submissions,
+        currentQuarter,
+        statementName
+      );
+      let growthLabel = determineGrowthLabel(
+        company.submissions,
+        currentQuarter,
+        statementName
+      );
 
-      let currentQuarter = '20210630'
-      let statementName = 'BS'
-      let quarters = determineNumQtrs(company.submissions, currentQuarter, statementName)
-      let priorQuarter = determinePriorQtr(company.submissions, currentQuarter, statementName)
-      let growthLabel = determineGrowthLabel(company.submissions, currentQuarter, statementName)
+      let currentFiscalPeriod = convertDateAndQuartersToFiscalPeriod(
+        currentQuarter,
+        quarters
+      );
+      let priorFiscalPeriod = convertDateAndQuartersToFiscalPeriod(
+        priorQuarter,
+        quarters
+      );
 
-      let currentFiscalPeriod = convertDateAndQuartersToFiscalPeriod(currentQuarter, quarters)
-      let priorFiscalPeriod = convertDateAndQuartersToFiscalPeriod(priorQuarter, quarters)
-
-      let oneMillion = 1000000
+      let oneMillion = 1000000;
 
       columns = [
-        { title: "$ in millions, unless otherwise noted", field: "presentationLabel" },
-        { title: priorFiscalPeriod,
-          field: "priorValue",
-          align: "center",
+        {
+          title: "$ in millions, unless otherwise noted",
+          field: "presentationLabel",
         },
+        { title: priorFiscalPeriod, field: "priorValue", align: "center" },
         { title: currentFiscalPeriod, field: "currentValue", align: "center" },
         {
           title: "Tag",
           field: "tag",
           align: "center",
         },
-        { title: growthLabel, field: "growth"},
+        { title: growthLabel, field: "growth" },
         // { title: "Version", field: "version"}
       ];
 
-      let currentQuarterFinancials = filterFinancials(company, 'BS', currentQuarter, quarters)
+      let currentQuarterFinancials = filterFinancials(
+        company,
+        "BS",
+        currentQuarter,
+        quarters
+      );
 
-      let priorQuarterFinancials = filterFinancials(company, 'BS', priorQuarter, quarters)
+      let priorQuarterFinancials = filterFinancials(
+        company,
+        "BS",
+        priorQuarter,
+        quarters
+      );
 
-      let growthRates = []
+      let growthRates = [];
 
-      for (let i = 0; i < currentQuarterFinancials.length; i++){
-        growthRates[i] = Number(currentQuarterFinancials[i].value)/Number(priorQuarterFinancials[i].value) - 1
+      for (let i = 0; i < currentQuarterFinancials.length; i++) {
+        if (priorQuarterFinancials.length) {
+          growthRates[i] =
+            Number(currentQuarterFinancials[i].value) /
+              Number(priorQuarterFinancials[i].value) -
+            1;
+        } else {
+          growthRates[i] = null
+        }
       }
 
       for (let i = 0; i < currentQuarterFinancials.length; i++) {
         let row = {
           tag: currentQuarterFinancials[i].tag,
           presentationLabel: currentQuarterFinancials[i].presentation[0].plabel,
-          priorValue: (priorQuarterFinancials[i].value/oneMillion).toLocaleString('en-US', { style: 'decimal', maximumFractionDigits : 0, minimumFractionDigits : 0 }),
-          currentValue: (currentQuarterFinancials[i].value/oneMillion).toLocaleString('en-US', { style: 'decimal', maximumFractionDigits : 0, minimumFractionDigits : 0 }),
-          growth: Math.round(growthRates[i]*100) + '%',
+          priorValue: priorQuarterFinancials.length
+            ? (priorQuarterFinancials[i].value / oneMillion).toLocaleString(
+                "en-US",
+                {
+                  style: "decimal",
+                  maximumFractionDigits: 0,
+                  minimumFractionDigits: 0,
+                }
+              )
+            : null,
+          currentValue: (
+            currentQuarterFinancials[i].value / oneMillion
+          ).toLocaleString("en-US", {
+            style: "decimal",
+            maximumFractionDigits: 0,
+            minimumFractionDigits: 0,
+          }),
+          growth: growthRates[i] !== null ? Math.round(growthRates[i] * 100) + "%" : null,
           // version: currentQuarterFinancials[i].version,
         };
 
         tableData.push(row);
       }
-
     }
 
     const downloadExcel = () => {
@@ -97,7 +145,12 @@ class BalanceSheet extends React.Component {
       XLSX.writeFile(workBook, "balanceSheet.xlsx");
     };
 
-    let materialTable = createMaterialTable(columns, tableData, "Balance Sheet", downloadExcel)
+    let materialTable = createMaterialTable(
+      columns,
+      tableData,
+      "Balance Sheet",
+      downloadExcel
+    );
 
     return (
       <React.Fragment>

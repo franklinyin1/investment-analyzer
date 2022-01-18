@@ -8,6 +8,7 @@ function determinePriorQtr(submissions, currentQtr, statementName) {
   let priorYear = `${Number(year)-1}`
   let month = currentQtr.slice(4,6)
   let day = currentQtr.slice(6,8)
+  let fye = submissions[0].fye
 
   if (submissions[0].form === '10-K') {
     return priorYear + month + day
@@ -19,7 +20,7 @@ function determinePriorQtr(submissions, currentQtr, statementName) {
     }
 
     if (statementName === 'BS') {
-      return priorYear + '12' + '31'
+      return priorYear + fye
     }
   }
 
