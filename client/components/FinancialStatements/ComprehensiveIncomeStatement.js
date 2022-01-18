@@ -103,4 +103,4 @@ class ComprehensiveIncomeStatement extends React.Component {
  * CONTAINER
  */
 
-export default connect(null)(ComprehensiveIncomeStatement);
+export default ComprehensiveIncomeStatement;

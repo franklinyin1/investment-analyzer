@@ -92,4 +92,4 @@ class UnclassifiableStatement extends React.Component {
  * CONTAINER
  */
 
-export default connect(null)(UnclassifiableStatement);
+export default UnclassifiableStatement;

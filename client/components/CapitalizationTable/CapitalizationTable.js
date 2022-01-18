@@ -391,4 +391,4 @@ class CapitalizationTable extends React.Component {
  * CONTAINER
  */
 
-export default connect(null)(CapitalizationTable);
+export default CapitalizationTable;

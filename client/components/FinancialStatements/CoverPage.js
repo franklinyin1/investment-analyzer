@@ -90,4 +90,4 @@ class CoverPage extends React.Component {
  * CONTAINER
  */
 
-export default connect(null)(CoverPage);
+export default CoverPage;

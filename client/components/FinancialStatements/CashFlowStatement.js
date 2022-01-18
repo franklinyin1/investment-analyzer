@@ -108,4 +108,4 @@ class CashFlowStatement extends React.Component {
  * CONTAINER
  */
 
-export default connect(null)(CashFlowStatement);
+export default CashFlowStatement;

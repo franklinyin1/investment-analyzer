@@ -28,4 +28,4 @@ class Title extends React.Component {
  * CONTAINER
  */
 
-export default connect(null)(Title);
+export default Title;

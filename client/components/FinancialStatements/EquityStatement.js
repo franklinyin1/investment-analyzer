@@ -92,4 +92,4 @@ class EquityStatement extends React.Component {
  * CONTAINER
  */
 
-export default connect(null)(EquityStatement);
+export default EquityStatement;

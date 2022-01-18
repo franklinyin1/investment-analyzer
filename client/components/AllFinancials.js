@@ -145,4 +145,4 @@ class AllFinancials extends React.Component {
  * CONTAINER
  */
 
-export default connect(null)(AllFinancials);
+export default AllFinancials;
