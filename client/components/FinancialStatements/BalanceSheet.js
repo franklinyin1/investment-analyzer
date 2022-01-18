@@ -1,5 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
 
 import createMaterialTable from "../../helper-functions/FinancialStatements/createMaterialTable"
 
@@ -119,4 +118,4 @@ class BalanceSheet extends React.Component {
  * CONTAINER
  */
 
-export default connect(null)(BalanceSheet);
+export default BalanceSheet;

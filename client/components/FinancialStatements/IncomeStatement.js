@@ -172,4 +172,4 @@ class IncomeStatement extends React.Component {
  * CONTAINER
  */
 
-export default connect(null)(IncomeStatement);
+export default IncomeStatement;
