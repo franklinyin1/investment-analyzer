@@ -87,30 +87,23 @@ class BalanceSheet extends React.Component {
       let growthRates = [];
 
       for (let i = 0; i < currentQuarterFinancials.length; i++) {
-        if (priorQuarterFinancials.length) {
-          growthRates[i] =
-            Number(currentQuarterFinancials[i].value) /
-              Number(priorQuarterFinancials[i].value) -
-            1;
-        } else {
-          growthRates[i] = null
-        }
+        growthRates[i] =
+          Number(currentQuarterFinancials[i].value) /
+            Number(priorQuarterFinancials[i].value) -
+          1;
       }
 
       for (let i = 0; i < currentQuarterFinancials.length; i++) {
         let row = {
           tag: currentQuarterFinancials[i].tag,
           presentationLabel: currentQuarterFinancials[i].presentation[0].plabel,
-          priorValue: priorQuarterFinancials.length
-            ? (priorQuarterFinancials[i].value / oneMillion).toLocaleString(
-                "en-US",
-                {
-                  style: "decimal",
-                  maximumFractionDigits: 0,
-                  minimumFractionDigits: 0,
-                }
-              )
-            : null,
+          priorValue: (
+            priorQuarterFinancials[i].value / oneMillion
+          ).toLocaleString("en-US", {
+            style: "decimal",
+            maximumFractionDigits: 0,
+            minimumFractionDigits: 0,
+          }),
           currentValue: (
             currentQuarterFinancials[i].value / oneMillion
           ).toLocaleString("en-US", {
@@ -118,7 +111,7 @@ class BalanceSheet extends React.Component {
             maximumFractionDigits: 0,
             minimumFractionDigits: 0,
           }),
-          growth: growthRates[i] !== null ? Math.round(growthRates[i] * 100) + "%" : null,
+          growth: Math.round(growthRates[i] * 100) + "%",
           // version: currentQuarterFinancials[i].version,
         };
 
