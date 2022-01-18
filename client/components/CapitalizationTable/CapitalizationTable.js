@@ -252,23 +252,27 @@ class CapitalizationTable extends React.Component {
             capitalizationTableStats["commonStockShares"].values *
             capitalizationTableStats["stockPrice"].values;
         } else if (capitalizationData.tags === "TotalAssetValue") {
-          capitalizationData.values = capitalizationTableStats["marketCap"];
+          capitalizationData.values = capitalizationTableStats["marketCap"].values;
+          console.log('capitalizationData.values 1:', capitalizationData.values)
           for (const debtValue of capitalizationTableStats["debt"].values) {
             capitalizationData.values += debtValue;
           }
+          console.log('capitalizationData.values 2:', capitalizationData.values)
           for (const preferredEquityValue of capitalizationTableStats[
             "preferredEquity"
           ].values) {
             capitalizationData.values += preferredEquityValue;
           }
+          console.log('capitalizationData.values 3:', capitalizationData.values)
           for (const NCIValue of capitalizationTableStats[
             "nonControllingInterest"
           ].values) {
             capitalizationData.values += NCIValue;
           }
+          console.log('capitalizationData.values 4:', capitalizationData.values)
         } else if (capitalizationData.tags === "EnterpriseValue") {
           capitalizationData.values =
-            capitalizationTableStats["totalAssetValue"];
+            capitalizationTableStats["totalAssetValue"].values;
           for (const cashValue of capitalizationTableStats["cash"].values) {
             capitalizationData.values -= cashValue;
           }
