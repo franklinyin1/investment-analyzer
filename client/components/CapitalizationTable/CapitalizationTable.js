@@ -5,12 +5,10 @@ import createMaterialTable from "../../helper-functions/CapitalizationTable/crea
 
 import XLSX from "xlsx";
 
-import {
-  cashTagsAndPLabels,
-  debtTagsAndPLabels,
-  NCITagsAndPLabels,
-  preferredEquityTagsAndPLabels,
-} from "./TagsAndPLabels";
+import { cashTagsAndPLabels } from "./TagsAndPLabels/CashTagsAndPLabels";
+import { debtTagsAndPLabels } from "./TagsAndPLabels/DebtTagsAndPLabels";
+import { NCITagsAndPLabels } from "./TagsAndPLabels/NCITagsAndPLabels";
+import { preferredEquityTagsAndPLabels } from "./TagsAndPLabels/PreferredEquityTagsAndPLabels";
 
 class CapitalizationTable extends React.Component {
   constructor(props) {
@@ -149,19 +147,23 @@ class CapitalizationTable extends React.Component {
             presentation.tag === financial.tag
           );
         });
-        if (presentation.length > 0){
-          financial.presentation = presentation
+        if (presentation.length > 0) {
+          financial.presentation = presentation;
         } else {
-          financial.presentation = [{line: Infinity}]
+          financial.presentation = [{ line: Infinity }];
         }
         return financial;
       });
 
       //sort the current quarter financials based on order of appearance in the income statement
-      financials = financials.sort((x,y) => x.presentation[0].line - y.presentation[0].line)
+      financials = financials.sort(
+        (x, y) => x.presentation[0].line - y.presentation[0].line
+      );
 
       //remove all current quarter financials without a specified line on the income statement
-      financials = financials.filter((financial) => financial.presentation[0].line !== Infinity)
+      financials = financials.filter(
+        (financial) => financial.presentation[0].line !== Infinity
+      );
 
       console.log("financials:", financials);
 
@@ -191,7 +193,7 @@ class CapitalizationTable extends React.Component {
           for (const idx in tags) {
             let tag = tags[idx];
             let singleFinancial = financials.filter((financial) => {
-              return (financial.tag === tag);
+              return financial.tag === tag;
             });
             if (singleFinancial.length) {
               capitalizationData.values[idx] =
@@ -228,14 +230,14 @@ class CapitalizationTable extends React.Component {
         let tags = capitalizationData.tags;
         let values = capitalizationData.values;
         let presentationLabels = capitalizationData.presentationLabels;
-        let idx = 0
+        let idx = 0;
         while (idx < tags.length) {
           if (values[idx] === 0) {
             tags.splice(idx, 1);
             values.splice(idx, 1);
             presentationLabels.splice(idx, 1);
           } else {
-            idx++
+            idx++;
           }
         }
       }
@@ -252,24 +254,37 @@ class CapitalizationTable extends React.Component {
             capitalizationTableStats["commonStockShares"].values *
             capitalizationTableStats["stockPrice"].values;
         } else if (capitalizationData.tags === "TotalAssetValue") {
-          capitalizationData.values = capitalizationTableStats["marketCap"].values;
-          console.log('capitalizationData.values 1:', capitalizationData.values)
+          capitalizationData.values =
+            capitalizationTableStats["marketCap"].values;
+          console.log(
+            "capitalizationData.values 1:",
+            capitalizationData.values
+          );
           for (const debtValue of capitalizationTableStats["debt"].values) {
             capitalizationData.values += debtValue;
           }
-          console.log('capitalizationData.values 2:', capitalizationData.values)
+          console.log(
+            "capitalizationData.values 2:",
+            capitalizationData.values
+          );
           for (const preferredEquityValue of capitalizationTableStats[
             "preferredEquity"
           ].values) {
             capitalizationData.values += preferredEquityValue;
           }
-          console.log('capitalizationData.values 3:', capitalizationData.values)
+          console.log(
+            "capitalizationData.values 3:",
+            capitalizationData.values
+          );
           for (const NCIValue of capitalizationTableStats[
             "nonControllingInterest"
           ].values) {
             capitalizationData.values += NCIValue;
           }
-          console.log('capitalizationData.values 4:', capitalizationData.values)
+          console.log(
+            "capitalizationData.values 4:",
+            capitalizationData.values
+          );
         } else if (capitalizationData.tags === "EnterpriseValue") {
           capitalizationData.values =
             capitalizationTableStats["totalAssetValue"].values;
