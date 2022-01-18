@@ -213,7 +213,7 @@ async function readCSVTags() {
 
   //read sharesoutstanding-tags
 
-  const sharesoutstandingTagsCSV = await fsPromises.readFile("./csv/shares-oustanding/sharesoutstanding-tags.csv");
+  const sharesoutstandingTagsCSV = await fsPromises.readFile("./csv/common-stock-shares-oustanding/sharesoutstanding-tags.csv");
   const parsedSharesoutstandingTags = parse(sharesoutstandingTagsCSV);
 
   parsedSharesoutstandingTags.shift();

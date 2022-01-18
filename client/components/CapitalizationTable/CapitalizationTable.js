@@ -9,6 +9,7 @@ import { cashTagsAndPLabels } from "./TagsAndPLabels/CashTagsAndPLabels";
 import { debtTagsAndPLabels } from "./TagsAndPLabels/DebtTagsAndPLabels";
 import { NCITagsAndPLabels } from "./TagsAndPLabels/NCITagsAndPLabels";
 import { preferredEquityTagsAndPLabels } from "./TagsAndPLabels/PreferredEquityTagsAndPLabels";
+import { sharesoutstandingTagsAndPLabels } from "./TagsAndPLabels/SharesoutstandingTagsAndPLabels";
 
 class CapitalizationTable extends React.Component {
   constructor(props) {
@@ -17,6 +18,15 @@ class CapitalizationTable extends React.Component {
 
   render() {
     const { company } = this.props;
+
+    let sharesoutstandingTags = [];
+    let sharesoutstandingPLabels = [];
+    let sharesoutstandingValues = [];
+    for (const idx in sharesoutstandingTagsAndPLabels) {
+      sharesoutstandingTags.push(sharesoutstandingTagsAndPLabels[idx][0]);
+      sharesoutstandingPLabels.push(sharesoutstandingTagsAndPLabels[idx][1]);
+      sharesoutstandingValues.push(null);
+    }
 
     let debtTags = [];
     let debtPLabels = [];
@@ -57,11 +67,11 @@ class CapitalizationTable extends React.Component {
     //tag, source, presentation label, value
     let capitalizationTableStats = {
       commonStockShares: {
-        tags: "CommonStockSharesOutstanding",
+        tags: sharesoutstandingTags,
         source: "Filing",
         presentationLabels:
-          "Common Stock Shares Outstanding (millions of shares)",
-        values: null,
+          sharesoutstandingPLabels,
+        values: sharesoutstandingValues,
       },
       stockPrice: {
         tags: "StockPrice",
@@ -188,7 +198,7 @@ class CapitalizationTable extends React.Component {
             capitalizationData.values = 0;
           }
         } else {
-          //in this case, we are dealing with an array of tags (such as debt, pref, NCI, or cash)
+          //in this case, we are dealing with an array of tags (such as debt, pref, NCI, cash, or sharesoustanding)
           let tags = capitalizationData.tags;
           for (const idx in tags) {
             let tag = tags[idx];
@@ -226,7 +236,7 @@ class CapitalizationTable extends React.Component {
           continue;
         }
 
-        //now we know we are dealing with the capitalizationTableStats for debt, preferred-equity, NCI, and cash
+        //now we know we are dealing with the capitalizationTableStats for debt, preferred-equity, NCI, cash, and sharesoutstanding
         let tags = capitalizationData.tags;
         let values = capitalizationData.values;
         let presentationLabels = capitalizationData.presentationLabels;
@@ -250,8 +260,14 @@ class CapitalizationTable extends React.Component {
         }
         if (capitalizationData.tags === "MarketCap") {
           //shares outstanding * share price
+          let commonStockSharesOutstanding = 0
+          for (const sharesOutstanding of capitalizationTableStats[
+            "commonStockShares"
+          ].values) {
+            commonStockSharesOutstanding += sharesOutstanding
+          }
           capitalizationData.values =
-            capitalizationTableStats["commonStockShares"].values *
+            commonStockSharesOutstanding *
             capitalizationTableStats["stockPrice"].values;
         } else if (capitalizationData.tags === "TotalAssetValue") {
           capitalizationData.values =
