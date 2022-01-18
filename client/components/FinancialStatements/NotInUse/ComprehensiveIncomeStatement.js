@@ -1,13 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import createMaterialTable from "../../helper-functions/FinancialStatements/createMaterialTable"
+import createMaterialTable from "../../../helper-functions/FinancialStatements/createMaterialTable"
 
 import XLSX from "xlsx";
 
-import filterFinancials from "../../helper-functions/FinancialStatements/filterFinancials";
+import filterFinancials from "../../../helper-functions/FinancialStatements/filterFinancials";
 
-class EquityStatement extends React.Component {
+class ComprehensiveIncomeStatement extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -34,9 +34,20 @@ class EquityStatement extends React.Component {
       },
     ];
 
+    let rows = [
+      [
+        <td key={`cell${0}-1`}>Tag</td>,
+        <td key={`cell${0}-2`}>Version</td>,
+        <td key={`cell${0}-3`}>Period End Date</td>,
+        <td key={`cell${0}-4`}>Quarters</td>,
+        <td key={`cell${0}-5`}>Value</td>,
+        <td key={`cell${0}-6`}>Unit Of Measure</td>,
+      ],
+    ];
+
     if (company.financials) {
 
-      let currentQuarterFinancials = filterFinancials(company, 'EQ', '20210630', '1')
+      let currentQuarterFinancials = filterFinancials(company, 'CI', '20210630', '1')
 
       for (let i = 0; i < currentQuarterFinancials.length; i++) {
         let row = {
@@ -71,7 +82,7 @@ class EquityStatement extends React.Component {
       XLSX.writeFile(workBook, "incomeStatement.xlsx");
     };
 
-    let materialTable = createMaterialTable(columns, tableData, "Equity Statement", downloadExcel)
+    let materialTable = createMaterialTable(columns, tableData, "Comprehensive Income Statement", downloadExcel)
 
     return (
       <React.Fragment>
@@ -92,4 +103,4 @@ class EquityStatement extends React.Component {
  * CONTAINER
  */
 
-export default EquityStatement;
+export default ComprehensiveIncomeStatement;

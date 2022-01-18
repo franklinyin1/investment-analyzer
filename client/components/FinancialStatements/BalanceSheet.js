@@ -45,11 +45,13 @@ class BalanceSheet extends React.Component {
 
       let currentFiscalPeriod = convertDateAndQuartersToFiscalPeriod(
         currentQuarter,
-        quarters
+        quarters,
+        company.submissions
       );
       let priorFiscalPeriod = convertDateAndQuartersToFiscalPeriod(
         priorQuarter,
-        quarters
+        quarters,
+        company.submissions
       );
 
       let oneMillion = 1000000;

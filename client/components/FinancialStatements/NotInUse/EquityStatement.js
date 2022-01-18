@@ -1,13 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import createMaterialTable from "../../helper-functions/FinancialStatements/createMaterialTable"
+import createMaterialTable from "../../../helper-functions/FinancialStatements/createMaterialTable"
 
 import XLSX from "xlsx";
 
-import filterFinancials from "../../helper-functions/FinancialStatements/filterFinancials";
+import filterFinancials from "../../../helper-functions/FinancialStatements/filterFinancials";
 
-class UnclassifiableStatement extends React.Component {
+class EquityStatement extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -32,11 +32,11 @@ class UnclassifiableStatement extends React.Component {
         field: "unitOfMeasure",
         align: "center",
       },
-    ]
+    ];
 
     if (company.financials) {
 
-      let currentQuarterFinancials = filterFinancials(company, 'UN', '20210630', null)
+      let currentQuarterFinancials = filterFinancials(company, 'EQ', '20210630', '1')
 
       for (let i = 0; i < currentQuarterFinancials.length; i++) {
         let row = {
@@ -71,7 +71,7 @@ class UnclassifiableStatement extends React.Component {
       XLSX.writeFile(workBook, "incomeStatement.xlsx");
     };
 
-    let materialTable = createMaterialTable(columns, tableData, "Unclassifiable Statement", downloadExcel)
+    let materialTable = createMaterialTable(columns, tableData, "Equity Statement", downloadExcel)
 
     return (
       <React.Fragment>
@@ -92,4 +92,4 @@ class UnclassifiableStatement extends React.Component {
  * CONTAINER
  */
 
-export default UnclassifiableStatement;
+export default EquityStatement;

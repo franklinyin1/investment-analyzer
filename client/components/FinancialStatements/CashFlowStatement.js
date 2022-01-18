@@ -33,8 +33,8 @@ class CashFlowStatement extends React.Component {
       let priorQuarter = determinePriorQtr(company.submissions, currentQuarter, statementName)
       let growthLabel = determineGrowthLabel(company.submissions, currentQuarter, statementName)
 
-      let currentFiscalPeriod = convertDateAndQuartersToFiscalPeriod(currentQuarter, quarters)
-      let priorFiscalPeriod = convertDateAndQuartersToFiscalPeriod(priorQuarter, quarters)
+      let currentFiscalPeriod = convertDateAndQuartersToFiscalPeriod(currentQuarter, quarters, company.submissions)
+      let priorFiscalPeriod = convertDateAndQuartersToFiscalPeriod(priorQuarter, quarters, company.submissions)
 
       let oneMillion = 1000000
 

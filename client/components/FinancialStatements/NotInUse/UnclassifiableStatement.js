@@ -1,13 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import createMaterialTable from "../../helper-functions/FinancialStatements/createMaterialTable"
+import createMaterialTable from "../../../helper-functions/FinancialStatements/createMaterialTable"
 
 import XLSX from "xlsx";
 
-import filterFinancials from "../../helper-functions/FinancialStatements/filterFinancials";
+import filterFinancials from "../../../helper-functions/FinancialStatements/filterFinancials";
 
-class ComprehensiveIncomeStatement extends React.Component {
+class UnclassifiableStatement extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -32,22 +32,11 @@ class ComprehensiveIncomeStatement extends React.Component {
         field: "unitOfMeasure",
         align: "center",
       },
-    ];
-
-    let rows = [
-      [
-        <td key={`cell${0}-1`}>Tag</td>,
-        <td key={`cell${0}-2`}>Version</td>,
-        <td key={`cell${0}-3`}>Period End Date</td>,
-        <td key={`cell${0}-4`}>Quarters</td>,
-        <td key={`cell${0}-5`}>Value</td>,
-        <td key={`cell${0}-6`}>Unit Of Measure</td>,
-      ],
-    ];
+    ]
 
     if (company.financials) {
 
-      let currentQuarterFinancials = filterFinancials(company, 'CI', '20210630', '1')
+      let currentQuarterFinancials = filterFinancials(company, 'UN', '20210630', null)
 
       for (let i = 0; i < currentQuarterFinancials.length; i++) {
         let row = {
@@ -82,7 +71,7 @@ class ComprehensiveIncomeStatement extends React.Component {
       XLSX.writeFile(workBook, "incomeStatement.xlsx");
     };
 
-    let materialTable = createMaterialTable(columns, tableData, "Comprehensive Income Statement", downloadExcel)
+    let materialTable = createMaterialTable(columns, tableData, "Unclassifiable Statement", downloadExcel)
 
     return (
       <React.Fragment>
@@ -103,4 +92,4 @@ class ComprehensiveIncomeStatement extends React.Component {
  * CONTAINER
  */
 
-export default ComprehensiveIncomeStatement;
+export default UnclassifiableStatement;

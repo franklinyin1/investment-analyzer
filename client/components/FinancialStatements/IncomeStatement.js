@@ -48,11 +48,13 @@ class IncomeStatement extends React.Component {
 
       let currentFiscalPeriod = convertDateAndQuartersToFiscalPeriod(
         currentQuarter,
-        quarters
+        quarters,
+        company.submissions
       );
       let priorFiscalPeriod = convertDateAndQuartersToFiscalPeriod(
         priorQuarter,
-        quarters
+        quarters,
+        company.submissions
       );
 
       let oneMillion = 1000000;
@@ -82,7 +84,6 @@ class IncomeStatement extends React.Component {
         quarters
       );
 
-
       let growthRates = [];
 
       for (let i = 0; i < currentQuarterFinancials.length; i++) {
@@ -102,10 +103,18 @@ class IncomeStatement extends React.Component {
         if (!isPerShareItem(currentQuarterFinancials[i].tag)) {
           row.priorValue = (
             priorQuarterFinancials[i].value / oneMillion
-          ).toLocaleString('en-US', { style: 'decimal', maximumFractionDigits : 0, minimumFractionDigits : 0 });
+          ).toLocaleString("en-US", {
+            style: "decimal",
+            maximumFractionDigits: 0,
+            minimumFractionDigits: 0,
+          });
           row.currentValue = (
             currentQuarterFinancials[i].value / oneMillion
-          ).toLocaleString('en-US', { style: 'decimal', maximumFractionDigits : 0, minimumFractionDigits : 0 });
+          ).toLocaleString("en-US", {
+            style: "decimal",
+            maximumFractionDigits: 0,
+            minimumFractionDigits: 0,
+          });
         } else {
           row.priorValue = priorQuarterFinancials[i].value.toLocaleString(
             "en-US",
