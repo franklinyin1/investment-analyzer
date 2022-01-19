@@ -28,12 +28,12 @@ async function seed() {
   // })
 
   // Creating Users
-  const users = await Promise.all([
-    User.create({ username: 'cody', password: '123' }),
-    User.create({ username: 'murphy', password: '123' }),
-  ])
+  // const users = await Promise.all([
+  //   User.create({ username: 'cody', password: '123' }),
+  //   User.create({ username: 'murphy', password: '123' }),
+  // ])
 
-  console.log(`seeded ${users.length} users`)
+  // console.log(`seeded ${users.length} users`)
 
   // Creating Financials
 
@@ -102,55 +102,55 @@ async function seed() {
 
   // console.log(`seeded ${presentation.length} presentation data`)
 
-  // // Creating Submission Table
+  // Creating Submission Table
 
-  // //slice off the first element, which is the label
-  // submissions = submissions.slice(1)
+  //slice off the first element, which is the label
+  submissions = submissions.slice(1)
 
-  // submissions = await Promise.all(
-  //   submissions.map((submission) => {
-  //     return Submission.create({
-  //       adsh: submission[0],
-  //       cik: submission[1],
-  //       name: submission[2],
-  //       sic: submission[3],
-  //       countryrba: submission[4],
-  //       stprba: submission[5],
-  //       cityba: submission[6],
-  //       zipba: submission[7],
-  //       bas1: submission[8],
-  //       bas2: submission[9],
-  //       baph: submission[10],
-  //       countryma: submission[11],
-  //       stprma: submission[12],
-  //       cityma: submission[13],
-  //       zipma: submission[14],
-  //       mas1: submission[15],
-  //       mas2: submission[16],
-  //       countryinc: submission[17],
-  //       stprinc: submission[18],
-  //       ein: submission[19],
-  //       former: submission[20],
-  //       changed: submission[21],
-  //       afs: submission[22],
-  //       wksi: submission[23],
-  //       fye: submission[24],
-  //       form: submission[25],
-  //       period: submission[26],
-  //       fy: submission[27],
-  //       fp: submission[28],
-  //       filed: submission[29],
-  //       accepted: submission[30],
-  //       prevrpt: submission[31],
-  //       detail: submission[32],
-  //       instance: submission[33],
-  //       nciks: submission[34],
-  //       aciks: submission[35],
-  //     })
-  //   })
-  // )
+  submissions = await Promise.all(
+    submissions.map((submission) => {
+      return Submission.create({
+        adsh: submission[0],
+        cik: submission[1],
+        name: submission[2],
+        sic: submission[3],
+        countryrba: submission[4],
+        stprba: submission[5],
+        cityba: submission[6],
+        zipba: submission[7],
+        bas1: submission[8],
+        bas2: submission[9],
+        baph: submission[10],
+        countryma: submission[11],
+        stprma: submission[12],
+        cityma: submission[13],
+        zipma: submission[14],
+        mas1: submission[15],
+        mas2: submission[16],
+        countryinc: submission[17],
+        stprinc: submission[18],
+        ein: submission[19],
+        former: submission[20],
+        changed: submission[21],
+        afs: submission[22],
+        wksi: submission[23],
+        fye: submission[24],
+        form: submission[25],
+        period: submission[26],
+        fy: submission[27],
+        fp: submission[28],
+        filed: submission[29],
+        accepted: submission[30],
+        prevrpt: submission[31],
+        detail: submission[32],
+        instance: submission[33],
+        nciks: submission[34],
+        aciks: submission[35],
+      })
+    })
+  )
 
-  // console.log(`seeded ${submissions.length} submission data`)
+  console.log(`seeded ${submissions.length} submission data`)
 
   // // Creating Tags Table
 
