@@ -15,7 +15,12 @@ async function seed() {
   console.log('db synced!')
 
   //process is used to gather important data from other directories
-  let {financials, presentation, submissions, tags, tickers} = await process()
+  // let {financials, presentation, submissions, tags, tickers} = await process()
+  // let {financials} = await process()
+  // let {presentations} = await process()
+  // let {submissions} = await process()
+  // let {tags} = await process()
+  // let {tickers} = await process()
 
   // //use this syntax to destroy a DB table
   // Submission.destroy({
