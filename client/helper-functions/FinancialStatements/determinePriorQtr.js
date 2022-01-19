@@ -10,21 +10,12 @@ function determinePriorQtr(submissions, currentQtr, statementName) {
   let day = currentQtr.slice(6,8)
   let fye = submissions[0].fye
 
-  if (submissions[0].form === '10-K') {
-    return priorYear + month + day
-  }
-
-  if (month === '06') {
-    if (statementName === 'IS' || statementName === 'CF') {
-      return priorYear + month + day
-    }
-
-    if (statementName === 'BS') {
-      return priorYear + fye
-    }
+  if (statementName === 'BS') {
+    return priorYear + fye
   }
 
   return priorYear + month + day
+
 }
 
 export default determinePriorQtr
