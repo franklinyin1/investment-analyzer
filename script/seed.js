@@ -18,7 +18,7 @@ async function seed() {
   // let {financials, presentation, submissions, tags, tickers} = await process()
   // let {financials} = await process()
   // let {presentations} = await process()
-  // let {submissions} = await process()
+  let {submissions} = await process()
   // let {tags} = await process()
   // let {tickers} = await process()
 

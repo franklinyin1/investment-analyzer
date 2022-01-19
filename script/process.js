@@ -12,19 +12,19 @@ async function process() {
   let tag = await fsPromise.readFile("./sec-data/2021q3/tag.txt", "utf8");
   let tickers = await fsPromise.readFile("./ticker-json/company-tickers.json", "utf8")
 
-  //split each row into a separate entry in the array
-  let financials = lineTokenizer.tokenize(num)
+  // //split each row into a separate entry in the array
+  // let financials = lineTokenizer.tokenize(num)
 
-  //split each array entry into an another array delimited by tabs
-  financials = financials.map((financial) => {
-    return financial.split("\t")
-  })
+  // //split each array entry into an another array delimited by tabs
+  // financials = financials.map((financial) => {
+  //   return financial.split("\t")
+  // })
 
-  let presentation = lineTokenizer.tokenize(pre)
+  // let presentation = lineTokenizer.tokenize(pre)
 
-  presentation = presentation.map((data) => {
-    return data.split("\t")
-  })
+  // presentation = presentation.map((data) => {
+  //   return data.split("\t")
+  // })
 
   let submissions = lineTokenizer.tokenize(sub)
 
@@ -32,13 +32,13 @@ async function process() {
     return submission.split("\t")
   })
 
-  let tags = lineTokenizer.tokenize(tag)
+  // let tags = lineTokenizer.tokenize(tag)
 
-  tags = tags.map((tag) => {
-    return tag.split("\t")
-  })
+  // tags = tags.map((tag) => {
+  //   return tag.split("\t")
+  // })
 
-  tickers = JSON.parse(tickers)
+  // tickers = JSON.parse(tickers)
 
   return {financials, presentation, submissions, tags, tickers}
 
