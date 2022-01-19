@@ -18,7 +18,7 @@ if(process.env.LOGGING === 'true'){
 }
 
 //https://stackoverflow.com/questions/61254851/heroku-postgres-sequelize-no-pg-hba-conf-entry-for-host
-if(process.env.DHEROKU_POSTGRESQL_CYAN_URL){
+if(process.env.HEROKU_POSTGRESQL_CYAN_URL){
   config.dialectOptions = {
     ssl: {
       rejectUnauthorized: false
