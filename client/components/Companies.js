@@ -43,7 +43,6 @@ class Companies extends React.Component {
     const { handleSubmit, handleChange } = this;
     const { ticker, loading } = this.state;
     const { company } = this.props;
-    console.log('company:', company)
 
     return (
       <React.Fragment>

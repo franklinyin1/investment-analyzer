@@ -31,7 +31,6 @@ async function readCSVTags() {
   let cashTagsStream = fs.createWriteStream(cashTagsPath, {flags:'a'})
   cashTagsStream.write(JSON.stringify(cashTags))
   cashTagsStream.end()
-  console.log('extracted cash-tags')
 
   //read debt-tags
 
@@ -153,7 +152,6 @@ async function readCSVTags() {
   let debtTagsStream = fs.createWriteStream(debtTagsPath, {flags:'a'})
   debtTagsStream.write(JSON.stringify(debtTags))
   debtTagsStream.end()
-  console.log('extracted debt-tags')
 
   //read non-controlling-interest tags
 
@@ -181,7 +179,6 @@ async function readCSVTags() {
   let NCITagsStream = fs.createWriteStream(NCITagsPath, {flags:'a'})
   NCITagsStream.write(JSON.stringify(NCITags))
   NCITagsStream.end()
-  console.log('extracted NCI-tags')
 
   //read preferred-equity tags
 
@@ -209,7 +206,6 @@ async function readCSVTags() {
   let prefTagsStream = fs.createWriteStream(prefTagsPath, {flags:'a'})
   prefTagsStream.write(JSON.stringify(prefTags))
   prefTagsStream.end()
-  console.log('extracted preferred-equity-tags')
 
   //read sharesoutstanding-tags
 
@@ -237,7 +233,6 @@ async function readCSVTags() {
   let sharesoutstandingTagsStream = fs.createWriteStream(sharesoutstandingTagsPath, {flags:'a'})
   sharesoutstandingTagsStream.write(JSON.stringify(sharesoutstandingTags))
   sharesoutstandingTagsStream.end()
-  console.log('extracted shares-outstandings-tags')
 
 }
 

@@ -174,8 +174,6 @@ class CapitalizationTable extends React.Component {
         (financial) => financial.presentation[0].line !== Infinity
       );
 
-      console.log("financials:", financials);
-
       //first, let's update all of the filing data in capitalization table stats
       for (const key in capitalizationTableStats) {
         let capitalizationData = capitalizationTableStats[key];
@@ -217,8 +215,6 @@ class CapitalizationTable extends React.Component {
           }
         }
       }
-
-      console.log("capitalizationTableStats:", capitalizationTableStats);
 
       //next, let's update the capitalizationTableStats for debt, preferred-equity, NCI, and cash to remove any zero-values
       for (const key in capitalizationTableStats) {
@@ -271,35 +267,19 @@ class CapitalizationTable extends React.Component {
         } else if (capitalizationData.tags === "TotalAssetValue") {
           capitalizationData.values =
             capitalizationTableStats["marketCap"].values;
-          console.log(
-            "capitalizationData.values 1:",
-            capitalizationData.values
-          );
           for (const debtValue of capitalizationTableStats["debt"].values) {
             capitalizationData.values += debtValue;
           }
-          console.log(
-            "capitalizationData.values 2:",
-            capitalizationData.values
-          );
           for (const preferredEquityValue of capitalizationTableStats[
             "preferredEquity"
           ].values) {
             capitalizationData.values += preferredEquityValue;
           }
-          console.log(
-            "capitalizationData.values 3:",
-            capitalizationData.values
-          );
           for (const NCIValue of capitalizationTableStats[
             "nonControllingInterest"
           ].values) {
             capitalizationData.values += NCIValue;
           }
-          console.log(
-            "capitalizationData.values 4:",
-            capitalizationData.values
-          );
         } else if (capitalizationData.tags === "EnterpriseValue") {
           capitalizationData.values =
             capitalizationTableStats["totalAssetValue"].values;
