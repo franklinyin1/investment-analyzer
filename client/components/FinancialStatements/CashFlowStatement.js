@@ -42,8 +42,8 @@ class CashFlowStatement extends React.Component {
         { title: "$ in millions, unless otherwise noted", field: "presentationLabel" },
         { title: priorFiscalPeriod, field: "priorValue", align: "center"},
         { title: currentFiscalPeriod, field: "currentValue", align: "center" },
-        { title: "Tag", field: "tag" },
-        { title: growthLabel, field: "growth"}
+        { title: growthLabel, field: "growth", align: "center"},
+        { title: "Tag", field: "tag", align: "center" },
       ]
 
       let currentQuarterFinancials = filterFinancials(company, 'CF', currentQuarter, quarters)

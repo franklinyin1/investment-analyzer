@@ -66,8 +66,8 @@ class IncomeStatement extends React.Component {
         },
         { title: priorFiscalPeriod, field: "priorValue", align: "center" },
         { title: currentFiscalPeriod, field: "currentValue", align: "center" },
-        { title: "Tag", field: "tag" },
-        { title: growthLabel, field: "growth" },
+        { title: growthLabel, field: "growth", align: "center" },
+        { title: "Tag", field: "tag", align: "center" },
       ];
 
       let currentQuarterFinancials = filterFinancials(

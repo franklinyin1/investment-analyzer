@@ -63,12 +63,12 @@ class BalanceSheet extends React.Component {
         },
         { title: priorFiscalPeriod, field: "priorValue", align: "center" },
         { title: currentFiscalPeriod, field: "currentValue", align: "center" },
+        { title: growthLabel, field: "growth", align: "center" },
         {
           title: "Tag",
           field: "tag",
           align: "center",
         },
-        { title: growthLabel, field: "growth" },
         // { title: "Version", field: "version"}
       ];
 
