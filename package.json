@@ -1,7 +1,7 @@
 {
   "name": "investment-analyzer",
   "version": "2.0.0",
-  "description": "app for algorithmically scraping, analyzing, and displaying investment data for public-traded corporations",
+  "description": "app for algorithmically analyzing and displaying investment data for public-traded corporations",
   "main": "index.js",
   "scripts": {
     "build": "webpack",
