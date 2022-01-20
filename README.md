@@ -10,6 +10,7 @@ In order to run the app, follow the below steps:
 - Navigate to the following link: https://www.sec.gov/dera/data/financial-statement-data-sets.html
 - Download the 2021 Q3 dataset (45.13 MB)
 - Move the downloaded dataset (labeled '2021q3') into your sec-data folder
+- Increase max node memory by typing the following into your browser `export NODE_OPTIONS=--max_old_space_size=32768`
 - Run `npm run seed`
 - Run `npm run start:dev`
 - Open your chrome browser and enter "localhost:8080" in your address bar
