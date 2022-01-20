@@ -2,6 +2,11 @@ node_modules
 public/bundle.js
 public/bundle.js.map
 sec-data/2021q3
+sec-data/2021q3/num.txt
+sec-data/2021q3/pre.txt
+sec-data/2021q3/readme.htm
+sec-data/2021q3/sub.txt
+sec-data/2021q3/tag.txt
 .DS_Store
 npm-debug.log
 yarn-error.log
