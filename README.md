@@ -8,8 +8,8 @@ In order to run the app, follow the below steps:
 - Run `npm install`
 - Run `createdb investment-analyzer` (note: you will need to have PostgreSQL installed on your machine and running port 5432)
 - Navigate to the following link: https://www.sec.gov/dera/data/financial-statement-data-sets.html
-- Download the 2021 Q3 data-set (45.13 MB)
--
+- Download the 2021 Q3 dataset (45.13 MB)
+- Move the downloaded dataset (labeled '2021q3') into your sec-data folder
 
 
 
