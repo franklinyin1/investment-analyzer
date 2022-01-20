@@ -17,19 +17,19 @@ async function process() {
   let submissions
   let tags
 
-  // //split each row into a separate entry in the array
-  // financials = lineTokenizer.tokenize(num)
+  //split each row into a separate entry in the array
+  financials = lineTokenizer.tokenize(num)
 
-  // //split each array entry into an another array delimited by tabs
-  // financials = financials.map((financial) => {
-  //   return financial.split("\t")
-  // })
+  //split each array entry into an another array delimited by tabs
+  financials = financials.map((financial) => {
+    return financial.split("\t")
+  })
 
-  // presentation = lineTokenizer.tokenize(pre)
+  presentation = lineTokenizer.tokenize(pre)
 
-  // presentation = presentation.map((data) => {
-  //   return data.split("\t")
-  // })
+  presentation = presentation.map((data) => {
+    return data.split("\t")
+  })
 
   submissions = lineTokenizer.tokenize(sub)
 
@@ -37,13 +37,13 @@ async function process() {
     return submission.split("\t")
   })
 
-  // tags = lineTokenizer.tokenize(tag)
+  tags = lineTokenizer.tokenize(tag)
 
-  // tags = tags.map((tag) => {
-  //   return tag.split("\t")
-  // })
+  tags = tags.map((tag) => {
+    return tag.split("\t")
+  })
 
-  // tickers = JSON.parse(tickers)
+  tickers = JSON.parse(tickers)
 
   return {financials, presentation, submissions, tags, tickers}
 
