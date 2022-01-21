@@ -1,7 +1,11 @@
 node_modules
 public/bundle.js
 public/bundle.js.map
+<<<<<<< HEAD
 sec-data/2021q3
+=======
+sec-data/
+>>>>>>> 2676007 (cleanup repo)
 .DS_Store
 npm-debug.log
 yarn-error.log

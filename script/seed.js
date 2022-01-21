@@ -18,7 +18,7 @@ async function seed() {
   let {financials, presentation, submissions, tags, tickers} = await process()
   // let {financials} = await process()
   // let {presentations} = await process()
-  let {submissions} = await process()
+  // let {submissions} = await process()
   // let {tags} = await process()
   // let {tickers} = await process()
 
@@ -28,79 +28,79 @@ async function seed() {
   // })
 
   // Creating Users
-  // const users = await Promise.all([
-  //   User.create({ username: 'cody', password: '123' }),
-  //   User.create({ username: 'murphy', password: '123' }),
-  // ])
+  const users = await Promise.all([
+    User.create({ username: 'cody', password: '123' }),
+    User.create({ username: 'murphy', password: '123' }),
+  ])
 
-  // console.log(`seeded ${users.length} users`)
+  console.log(`seeded ${users.length} users`)
 
   // Creating Financials
 
 
-  // //split financials into batches. Remove the first entry which is the labels
-  // let financials1 = financials.slice(1, Math.round(financials.length/2))
-  // let financials2 = financials.slice(Math.round(financials.length/2))
+  //split financials into batches. Remove the first entry which is the labels
+  let financials1 = financials.slice(1, Math.round(financials.length/2))
+  let financials2 = financials.slice(Math.round(financials.length/2))
 
-  // financials1 = await Promise.all(
-  //   financials1.map((financial) => {
-  //     return Financial.create({
-  //       adsh: financial[0],
-  //       tag: financial[1],
-  //       version: financial[2],
-  //       coreg: financial[3],
-  //       ddate: financial[4],
-  //       qtrs: financial[5],
-  //       uom: financial[6],
-  //       value: financial[7],
-  //       footnote: financial[8]
-  //     })
-  //   })
-  // )
+  financials1 = await Promise.all(
+    financials1.map((financial) => {
+      return Financial.create({
+        adsh: financial[0],
+        tag: financial[1],
+        version: financial[2],
+        coreg: financial[3],
+        ddate: financial[4],
+        qtrs: financial[5],
+        uom: financial[6],
+        value: financial[7],
+        footnote: financial[8]
+      })
+    })
+  )
 
-  // financials2 = await Promise.all(
-  //   financials2.map((financial) => {
-  //     return Financial.create({
-  //       adsh: financial[0],
-  //       tag: financial[1],
-  //       version: financial[2],
-  //       coreg: financial[3],
-  //       ddate: financial[4],
-  //       qtrs: financial[5],
-  //       uom: financial[6],
-  //       value: financial[7],
-  //       footnote: financial[8]
-  //     })
-  //   })
-  // )
+  financials2 = await Promise.all(
+    financials2.map((financial) => {
+      return Financial.create({
+        adsh: financial[0],
+        tag: financial[1],
+        version: financial[2],
+        coreg: financial[3],
+        ddate: financial[4],
+        qtrs: financial[5],
+        uom: financial[6],
+        value: financial[7],
+        footnote: financial[8]
+      })
+    })
+  )
 
-  // financials = [...financials1, ...financials2]
+  financials = [...financials1, ...financials2]
 
-  // console.log(`seeded ${financials.length} financials`)
+  console.log(`seeded ${financials.length} financials`)
 
-  // // Creating Presentation Table
+  // Creating Presentation Table
 
-  // //slice off the first element, which is the label
-  // presentation = presentation.slice(1)
+  //slice off the first element, which is the label
+  presentation = presentation.slice(1)
 
-  // presentation = await Promise.all(
-  //   presentation.map((data) => {
-  //     return Presentation.create({
-  //       adsh: data[0],
-  //       report: data[1],
-  //       line: data[2],
-  //       stmt: data[3],
-  //       inpth: data[4],
-  //       rfile: data[5],
-  //       tag: data[6],
-  //       version: data[7],
-  //       plabel: data[8],
-  //       negating: data[9]
-  //     })
-  //   })
-  // )
+  presentation = await Promise.all(
+    presentation.map((data) => {
+      return Presentation.create({
+        adsh: data[0],
+        report: data[1],
+        line: data[2],
+        stmt: data[3],
+        inpth: data[4],
+        rfile: data[5],
+        tag: data[6],
+        version: data[7],
+        plabel: data[8],
+        negating: data[9]
+      })
+    })
+  )
 
-  // console.log(`seeded ${presentation.length} presentation data`)
+  console.log(`seeded ${presentation.length} presentation data`)
 
   // Creating Submission Table
 
@@ -152,55 +152,55 @@ async function seed() {
 
   console.log(`seeded ${submissions.length} submission data`)
 
-  // // Creating Tags Table
+  // Creating Tags Table
 
-  // // slice off the first element, which is the label
-  // tags = tags.slice(1)
+  // slice off the first element, which is the label
+  tags = tags.slice(1)
 
-  // tags = await Promise.all(
-  //   tags.map((tag) => {
-  //     return Tag.create({
-  //       tag: tag[0],
-  //       version: tag[1],
-  //       custom: tag[2],
-  //       abstract: tag[3],
-  //       dataype: tag[4],
-  //       iord: tag[5],
-  //       crdr: tag[6],
-  //       tlabel: tag[7],
-  //       doc: tag[8]
-  //     })
-  //   })
-  // )
+  tags = await Promise.all(
+    tags.map((tag) => {
+      return Tag.create({
+        tag: tag[0],
+        version: tag[1],
+        custom: tag[2],
+        abstract: tag[3],
+        dataype: tag[4],
+        iord: tag[5],
+        crdr: tag[6],
+        tlabel: tag[7],
+        doc: tag[8]
+      })
+    })
+  )
 
-  // console.log(`seeded ${tags.length} tag data`)
+  console.log(`seeded ${tags.length} tag data`)
 
-  // //Creating tickers table
+  //Creating tickers table
 
-  // let tickersArray = []
-  // for (const ticker in tickers) {
-  //   tickersArray.push(tickers[ticker])
-  // }
+  let tickersArray = []
+  for (const ticker in tickers) {
+    tickersArray.push(tickers[ticker])
+  }
 
-  // tickers = await Promise.all(
-  //   tickersArray.map((ticker) => {
-  //     return Ticker.create({
-  //       cik_str: ticker.cik_str,
-  //       ticker: ticker.ticker,
-  //       title: ticker.title
-  //     })
-  //   })
-  // )
+  tickers = await Promise.all(
+    tickersArray.map((ticker) => {
+      return Ticker.create({
+        cik_str: ticker.cik_str,
+        ticker: ticker.ticker,
+        title: ticker.title
+      })
+    })
+  )
 
-  // console.log(`seeded ${tickers.length} ticker data`)
+  console.log(`seeded ${tickers.length} ticker data`)
 
-  // console.log(`seeded successfully`)
-  // return {
-  //   users: {
-  //     cody: users[0],
-  //     murphy: users[1]
-  //   }
-  // }
+  console.log(`seeded successfully`)
+  return {
+    users: {
+      cody: users[0],
+      murphy: users[1]
+    }
+  }
 
 
 }
