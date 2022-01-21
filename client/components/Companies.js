@@ -6,10 +6,6 @@ import { fetchCompany } from "../store/company";
 import IncomeStatement from "./FinancialStatements/IncomeStatement";
 import BalanceSheet from "./FinancialStatements/BalanceSheet";
 import CashFlowStatement from "./FinancialStatements/CashFlowStatement";
-import EquityStatement from "./FinancialStatements/NotInUse/EquityStatement";
-import ComprehensiveIncomeStatement from "./FinancialStatements/NotInUse/ComprehensiveIncomeStatement";
-import UnclassifiableStatement from "./FinancialStatements/NotInUse/UnclassifiableStatement";
-import CoverPage from "./FinancialStatements/NotInUse/CoverPage";
 
 import AllFinancials from "./AllFinancials";
 import Title from "./Title";
@@ -45,7 +41,7 @@ class Companies extends React.Component {
     const { company } = this.props;
 
     return (
-      <React.Fragment>
+      <div id="companies">
         <form id="submit-company" onSubmit={handleSubmit}>
           <div id="companyPrompt">
             <label htmlFor="ticker">
@@ -68,7 +64,7 @@ class Companies extends React.Component {
           {/* <CoverPage company={company} /> */}
           <AllFinancials company={company} />
         </React.Fragment>
-      </React.Fragment>
+        </div>
     );
   }
 }

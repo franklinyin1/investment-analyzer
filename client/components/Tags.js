@@ -92,7 +92,7 @@ class Tags extends React.Component {
     };
 
     return (
-      <React.Fragment>
+      <div id="tags">
         {loading ? <h3>Loading...</h3> : ""}
         {tableData.length > 1 ? (
           <React.Fragment>
@@ -125,7 +125,7 @@ class Tags extends React.Component {
         ) : (
           ""
         )}
-      </React.Fragment>
+      </div>
     );
   }
 }

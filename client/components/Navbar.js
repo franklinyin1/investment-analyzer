@@ -1,48 +1,69 @@
-import React from 'react'
-import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
-import {logout} from '../store'
+import React from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { logout } from "../store";
 
-const Navbar = ({handleClick, isLoggedIn}) => (
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import ButtonGroup from "@material-ui/core/ButtonGroup";
+
+const Navbar = ({ handleClick, isLoggedIn }) => (
   <div>
-    <h1>Investment Analyzer</h1>
     <nav>
-      {isLoggedIn ? (
-        <div>
-          {/* The navbar will show these links after you log in */}
-          <Link to="/Companies">Companies</Link>
-          <Link to="/Tags">Tags</Link>
-          <a href="#" onClick={handleClick}>
-            Logout
-          </a>
-        </div>
-      ) : (
-        <div>
-          {/* The navbar will show these links before you log in */}
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
-        </div>
-      )}
+      <AppBar>
+        <Toolbar>
+          <Typography variant="h4">Investment Analyzer</Typography>
+          {isLoggedIn ? (
+            <div>
+              {/* The navbar will show these links after you log in */}
+              <ButtonGroup variant="contained" color="primary">
+                <Button component={Link} to={"/Companies"}>
+                  Companies
+                </Button>
+                <Button component={Link} to={"/Tags"}>
+                  Tags
+                </Button>
+                <Button href="#" onClick={handleClick}>
+                  Logout
+                </Button>
+              </ButtonGroup>
+            </div>
+          ) : (
+            <div>
+              {/* The navbar will show these links before you log in */}
+              <ButtonGroup variant="contained" color="primary">
+                <Button component={Link} to={"/login"}>
+                  Login
+                </Button>
+                <Button component={Link} to={"/signup"}>
+                  Sign Up
+                </Button>
+              </ButtonGroup>
+            </div>
+          )}
+        </Toolbar>
+      </AppBar>
     </nav>
-    <hr />
   </div>
-)
+);
 
 /**
  * CONTAINER
  */
-const mapState = state => {
+const mapState = (state) => {
   return {
-    isLoggedIn: !!state.auth.id
-  }
-}
+    isLoggedIn: !!state.auth.id,
+  };
+};
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch) => {
   return {
     handleClick() {
-      dispatch(logout())
-    }
-  }
-}
+      dispatch(logout());
+    },
+  };
+};
 
-export default connect(mapState, mapDispatch)(Navbar)
+export default connect(mapState, mapDispatch)(Navbar);
