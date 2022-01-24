@@ -11,12 +11,12 @@ class Title extends React.Component {
   render() {
     const { company } = this.props;
 
-    let fyeEndMonth
-    let fyeEndDay
+    let fyeEndMonth;
+    let fyeEndDay;
 
-    let periodEndDateYear
-    let periodEndDateMonth
-    let periodEndDateDay
+    let periodEndDateYear;
+    let periodEndDateMonth;
+    let periodEndDateDay;
 
     if (company.submissions) {
       let submissions = company.submissions;

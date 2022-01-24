@@ -10,48 +10,59 @@ import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import Box from "@material-ui/core/Box";
 
-const Navbar = ({ handleClick, isLoggedIn }) => (
-  <div>
-    <nav>
-      <AppBar>
-        <Toolbar display='flex'>
-          <Typography flexGrow={1} variant="h4">Investment Analyzer</Typography>
-          {/* <Typography flexGrow={1}>Investment Analyzer</Typography> */}
-          {isLoggedIn ? (
-            // <div>
+import { makeStyles } from "@material-ui/core";
+
+const useStyles = makeStyles({
+
+});
+
+function Navbar({ handleClick, isLoggedIn }) {
+  const classes = useStyles()
+
+  return (
+    <div>
+      <nav>
+        <AppBar>
+          <Toolbar display="flex">
+            <Typography flexGrow={1} variant="h4">
+              Investment Analyzer
+            </Typography>
+            {/* <Typography flexGrow={1}>Investment Analyzer</Typography> */}
+            {isLoggedIn ? (
+              // <div>
               // {/* The navbar will show these links after you log in */}
 
-                <ButtonGroup variant="contained" color="primary">
-                  <Button component={Link} to={"/Companies"}>
-                    Companies
-                  </Button>
-                  <Button component={Link} to={"/Tags"}>
-                    Tags
-                  </Button>
-                  <Button href="#" onClick={handleClick}>
-                    Logout
-                  </Button>
-                </ButtonGroup>
-
-            // </div>
-          ) : (
-            <div>
-              {/* The navbar will show these links before you log in */}
               <ButtonGroup variant="contained" color="primary">
-                <Button component={Link} to={"/login"}>
-                  Login
+                <Button component={Link} to={"/Companies"}>
+                  Companies
                 </Button>
-                <Button component={Link} to={"/signup"}>
-                  Sign Up
+                <Button component={Link} to={"/Tags"}>
+                  Tags
+                </Button>
+                <Button href="#" onClick={handleClick}>
+                  Logout
                 </Button>
               </ButtonGroup>
-            </div>
-          )}
-        </Toolbar>
-      </AppBar>
-    </nav>
-  </div>
-);
+            ) : (
+              // </div>
+              <div>
+                {/* The navbar will show these links before you log in */}
+                <ButtonGroup variant="contained" color="primary">
+                  <Button component={Link} to={"/login"}>
+                    Login
+                  </Button>
+                  <Button component={Link} to={"/signup"}>
+                    Sign Up
+                  </Button>
+                </ButtonGroup>
+              </div>
+            )}
+          </Toolbar>
+        </AppBar>
+      </nav>
+    </div>
+  );
+}
 
 /**
  * CONTAINER
