@@ -12,6 +12,9 @@ import Title from "./Title";
 import CapitalizationTable from "./CapitalizationTable/CapitalizationTable";
 
 import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import SearchIcon from '@material-ui/icons/Search';
+
 
 class Companies extends React.Component {
   constructor(props) {
@@ -51,7 +54,7 @@ class Companies extends React.Component {
             </label>
           </div>
           <input name="ticker" onChange={handleChange} value={ticker} />
-          <button type="submit">Submit</button>
+          <Button type="submit" variant="outlined" endIcon={<SearchIcon />}>Submit</Button>
         </form>
         {loading ? <Typography variant="h6">Loading...</Typography> : ""}
         <React.Fragment>
