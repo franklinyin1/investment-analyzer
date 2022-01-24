@@ -1,6 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 
+import Typography from "@material-ui/core/Typography";
+
 class Title extends React.Component {
   constructor(props) {
     super(props);
@@ -35,15 +37,15 @@ class Title extends React.Component {
       <React.Fragment>
         {company.company ? (
           <React.Fragment>
-            <h2>
+            <Typography variant="h6">
               Displaying the financial data of: {company.company.title} (
               {company.company.ticker})
-            </h2>
-            <div id="title-subtitle" >
+            </Typography>
+            <Typography variant="div">
               For the period ending {periodEndDateYear}/{periodEndDateMonth}/
               {periodEndDateDay}. {company.company.title}'s fiscal year ends on{" "}
               {fyeEndMonth}/{fyeEndDay}
-            </div>
+            </Typography>
             <h2></h2>
           </React.Fragment>
         ) : (

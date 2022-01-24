@@ -11,6 +11,8 @@ import AllFinancials from "./AllFinancials";
 import Title from "./Title";
 import CapitalizationTable from "./CapitalizationTable/CapitalizationTable";
 
+import Typography from "@material-ui/core/Typography";
+
 class Companies extends React.Component {
   constructor(props) {
     super(props);
@@ -45,13 +47,13 @@ class Companies extends React.Component {
         <form id="submit-company" onSubmit={handleSubmit}>
           <div id="companyPrompt">
             <label htmlFor="ticker">
-              <span>Enter Stock Ticker:</span>
+              <Typography variant="span">Enter Stock Ticker:</Typography>
             </label>
           </div>
           <input name="ticker" onChange={handleChange} value={ticker} />
           <button type="submit">Submit</button>
         </form>
-        {loading ? <h3>Loading...</h3> : ""}
+        {loading ? <Typography variant="h6">Loading...</Typography> : ""}
         <React.Fragment>
           <Title company={company} />
           <CapitalizationTable company={company} />
@@ -64,7 +66,7 @@ class Companies extends React.Component {
           {/* <CoverPage company={company} /> */}
           <AllFinancials company={company} />
         </React.Fragment>
-        </div>
+      </div>
     );
   }
 }

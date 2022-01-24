@@ -2,6 +2,9 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {authenticate} from '../store'
 
+import Typography from "@material-ui/core/Typography";
+
+
 /**
  * COMPONENT
  */
@@ -13,13 +16,13 @@ const AuthForm = props => {
       <form onSubmit={handleSubmit} name={name}>
         <div>
           <label htmlFor="username">
-            <small>Username</small>
+            <Typography variant="span">Username</Typography>
           </label>
           <input name="username" type="text" />
         </div>
         <div>
           <label htmlFor="password">
-            <small>Password</small>
+            <Typography variant="span">Password</Typography>
           </label>
           <input name="password" type="password" />
         </div>

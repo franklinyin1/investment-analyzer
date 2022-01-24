@@ -7,6 +7,8 @@ import MaterialTable from "material-table";
 
 import XLSX from "xlsx";
 
+import Typography from "@material-ui/core/Typography";
+
 class Tags extends React.Component {
   constructor(props) {
     super(props);
@@ -93,7 +95,7 @@ class Tags extends React.Component {
 
     return (
       <div id="tags">
-        {loading ? <h3>Loading...</h3> : ""}
+        {loading ? <Typography variant="h6">Loading...</Typography> : ""}
         {tableData.length > 1 ? (
           <React.Fragment>
             <MaterialTable
