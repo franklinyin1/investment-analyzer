@@ -8,28 +8,32 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
+import Box from "@material-ui/core/Box";
 
 const Navbar = ({ handleClick, isLoggedIn }) => (
   <div>
     <nav>
       <AppBar>
-        <Toolbar>
-          <Typography variant="h4">Investment Analyzer</Typography>
+        <Toolbar display='flex'>
+          <Typography flexGrow={1} variant="h4">Investment Analyzer</Typography>
+          {/* <Typography flexGrow={1}>Investment Analyzer</Typography> */}
           {isLoggedIn ? (
-            <div>
-              {/* The navbar will show these links after you log in */}
-              <ButtonGroup variant="contained" color="primary">
-                <Button component={Link} to={"/Companies"}>
-                  Companies
-                </Button>
-                <Button component={Link} to={"/Tags"}>
-                  Tags
-                </Button>
-                <Button href="#" onClick={handleClick}>
-                  Logout
-                </Button>
-              </ButtonGroup>
-            </div>
+            // <div>
+              // {/* The navbar will show these links after you log in */}
+
+                <ButtonGroup variant="contained" color="primary">
+                  <Button component={Link} to={"/Companies"}>
+                    Companies
+                  </Button>
+                  <Button component={Link} to={"/Tags"}>
+                    Tags
+                  </Button>
+                  <Button href="#" onClick={handleClick}>
+                    Logout
+                  </Button>
+                </ButtonGroup>
+
+            // </div>
           ) : (
             <div>
               {/* The navbar will show these links before you log in */}
