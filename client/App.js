@@ -1,17 +1,19 @@
-import React from 'react'
+import React from "react";
 
-import Navbar from './components/Navbar'
-import Routes from './Routes'
+import Navbar from "./components/Navbar";
+import Routes from "./Routes";
 
-import { createMuiTheme, ThemeProvider } from '@material-ui/core'
+import { createTheme, ThemeProvider } from "@material-ui/core";
 
-const App = () => {
+const theme = createTheme({});
+
+function App() {
   return (
-    <div>
+    <ThemeProvider theme={theme}>
       <Navbar />
       <Routes />
-    </div>
-  )
+    </ThemeProvider>
+  );
 }
 
-export default App
+export default App;

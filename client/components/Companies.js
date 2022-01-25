@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { connect } from "react-redux";
 
 import { fetchCompany } from "../store/company";
@@ -14,65 +14,58 @@ import CapitalizationTable from "./CapitalizationTable/CapitalizationTable";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import SearchIcon from '@material-ui/icons/Search';
+import TextField from '@material-ui/core/TextField'
+import { makeStyles } from '@material-ui/core'
 
+function Companies(props) {
+  const [ticker, setTicker] = useState('')
+  const [loading, setLoading] = useState(false)
 
-class Companies extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      ticker: "",
-      loading: false,
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+  function handleChange(evt) {
+    setTicker({[evt.target.name]: evt.target.value})
   }
 
-  handleChange(evt) {
-    this.setState({
-      [evt.target.name]: evt.target.value,
-    });
-  }
-
-  async handleSubmit(evt) {
+  async function handleSubmit(evt) {
     evt.preventDefault();
-    this.setState({ loading: true });
-    await this.props.fetchCompany(this.state.ticker);
-    this.setState({ ticker: "", loading: false });
+    setLoading(true)
+    await props.fetchCompany(state.ticker);
+    setLoading(false)
+    setTicker(')')
   }
 
-  render() {
-    const { handleSubmit, handleChange } = this;
-    const { ticker, loading } = this.state;
-    const { company } = this.props;
+  const { company } = props;
 
-    return (
-      <div id="companies">
-        <form id="submit-company" onSubmit={handleSubmit}>
-          <div id="companyPrompt">
-            <label htmlFor="ticker">
-              <Typography variant="span">Enter Stock Ticker:</Typography>
-            </label>
-          </div>
-          <input name="ticker" onChange={handleChange} value={ticker} />
-          <Button type="submit" variant="outlined" endIcon={<SearchIcon />}>Submit</Button>
-        </form>
-        {loading ? <Typography variant="h6">Loading...</Typography> : ""}
-        <React.Fragment>
-          <Title company={company} />
-          <CapitalizationTable company={company} />
-          <IncomeStatement company={company} />
-          <BalanceSheet company={company} />
-          <CashFlowStatement company={company} />
-          {/* <EquityStatement company={company} /> */}
-          {/* <ComprehensiveIncomeStatement company={company} /> */}
-          {/* <UnclassifiableStatement company={company} /> */}
-          {/* <CoverPage company={company} /> */}
-          <AllFinancials company={company} />
-        </React.Fragment>
-      </div>
-    );
-  }
+  return (
+    <div id="companies">
+      <form noValidate autoComplete="off" id="submit-company" onSubmit={handleSubmit}>
+        {/* <div id="companyPrompt">
+        </div> */}
+        <TextField
+          label="Enter Stock Ticker"
+          variant="outlined"
+          onChange={handleChange} value={ticker}
+          name="ticker"
+        />
+        {/* <input name="ticker"  /> */}
+        <Button type="submit" variant="outlined" endIcon={<SearchIcon />}>Search</Button>
+      </form>
+      {loading ? <Typography variant="h6">Loading...</Typography> : ""}
+      <React.Fragment>
+        <Title company={company} />
+        <CapitalizationTable company={company} />
+        <IncomeStatement company={company} />
+        <BalanceSheet company={company} />
+        <CashFlowStatement company={company} />
+        {/* <EquityStatement company={company} /> */}
+        {/* <ComprehensiveIncomeStatement company={company} /> */}
+        {/* <UnclassifiableStatement company={company} /> */}
+        {/* <CoverPage company={company} /> */}
+        <AllFinancials company={company} />
+      </React.Fragment>
+    </div>
+  );
 }
+
 
 /**
  * CONTAINER
