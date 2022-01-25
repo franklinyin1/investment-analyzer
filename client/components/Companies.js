@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 
 import { fetchCompany } from "../store/company";
@@ -13,41 +13,59 @@ import CapitalizationTable from "./CapitalizationTable/CapitalizationTable";
 
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import SearchIcon from '@material-ui/icons/Search';
-import TextField from '@material-ui/core/TextField'
-import { makeStyles } from '@material-ui/core'
+import SearchIcon from "@material-ui/icons/Search";
+import TextField from "@material-ui/core/TextField";
+import { makeStyles } from "@material-ui/core";
+
+const useStyles = makeStyles({
+  field: {
+    marginTop: 65,
+    marginBottom: 20,
+    display: "block",
+  },
+});
 
 function Companies(props) {
-  const [ticker, setTicker] = useState('')
-  const [loading, setLoading] = useState(false)
+  const classes = useStyles();
+  const [ticker, setTicker] = useState("");
+  const [loading, setLoading] = useState(false);
 
   function handleChange(evt) {
-    setTicker({[evt.target.name]: evt.target.value})
+    setTicker(evt.target.value);
   }
 
   async function handleSubmit(evt) {
     evt.preventDefault();
-    setLoading(true)
-    await props.fetchCompany(state.ticker);
-    setLoading(false)
-    setTicker(')')
+    setLoading(true);
+    await props.fetchCompany(ticker);
+    setLoading(false);
+    setTicker("");
   }
 
   const { company } = props;
 
   return (
     <div id="companies">
-      <form noValidate autoComplete="off" id="submit-company" onSubmit={handleSubmit}>
+      <form
+        noValidate
+        autoComplete="off"
+        id="submit-company"
+        onSubmit={handleSubmit}
+      >
         {/* <div id="companyPrompt">
         </div> */}
         <TextField
+          className={classes.field}
           label="Enter Stock Ticker"
           variant="outlined"
-          onChange={handleChange} value={ticker}
+          onChange={handleChange}
+          value={ticker}
           name="ticker"
         />
         {/* <input name="ticker"  /> */}
-        <Button type="submit" variant="outlined" endIcon={<SearchIcon />}>Search</Button>
+        <Button type="submit" variant="outlined" endIcon={<SearchIcon />}>
+          Search
+        </Button>
       </form>
       {loading ? <Typography variant="h6">Loading...</Typography> : ""}
       <React.Fragment>
@@ -65,7 +83,6 @@ function Companies(props) {
     </div>
   );
 }
-
 
 /**
  * CONTAINER
