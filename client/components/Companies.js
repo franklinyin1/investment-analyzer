@@ -17,12 +17,13 @@ import SearchIcon from "@material-ui/icons/Search";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core";
 
-import Grid from '@material-ui/core/Grid'
-import Paper from '@material-ui/core/Paper'
+import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
+import { Container } from "@material-ui/core";
 
 const useStyles = makeStyles({
   field: {
-    marginTop: 65,
+    marginTop: 20,
     marginBottom: 20,
     display: "block",
   },
@@ -71,18 +72,27 @@ function Companies(props) {
         </Button>
       </form>
       {loading ? <Typography variant="h6">Loading...</Typography> : ""}
-      <React.Fragment>
-        <Title company={company} />
-        <CapitalizationTable company={company} />
-        <IncomeStatement company={company} />
-        <BalanceSheet company={company} />
-        <CashFlowStatement company={company} />
+      <Title company={company} />
+
+      <Grid container spacing={3}>
+        <Grid item md={12} lg={6}>
+          <CapitalizationTable company={company} />
+        </Grid>
+        <Grid item md={12} lg={6}>
+          <IncomeStatement company={company} />
+        </Grid>
+        <Grid item md={12} lg={6}>
+          <BalanceSheet company={company} />
+        </Grid>
+        <Grid item md={12} lg={6}>
+          <CashFlowStatement company={company} />
+        </Grid>
         {/* <EquityStatement company={company} /> */}
         {/* <ComprehensiveIncomeStatement company={company} /> */}
         {/* <UnclassifiableStatement company={company} /> */}
         {/* <CoverPage company={company} /> */}
         <AllFinancials company={company} />
-      </React.Fragment>
+      </Grid>
     </div>
   );
 }
