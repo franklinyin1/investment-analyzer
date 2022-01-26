@@ -23,9 +23,9 @@ import { Container } from "@material-ui/core";
 
 const useStyles = makeStyles({
   field: {
-    marginTop: 20,
-    marginBottom: 20,
-    display: "block",
+  //   marginTop: 20,
+  //   marginBottom: 20,
+    // display: "block",
   },
 });
 
@@ -49,7 +49,7 @@ function Companies(props) {
   const { company } = props;
 
   return (
-    <div id="companies">
+    <div>
       <form
         noValidate
         autoComplete="off"
@@ -75,16 +75,16 @@ function Companies(props) {
       <Title company={company} />
 
       <Grid container spacing={3}>
-        <Grid item md={12} lg={6}>
+        <Grid item lg={12} xl={6}>
           <CapitalizationTable company={company} />
         </Grid>
-        <Grid item md={12} lg={6}>
+        <Grid item lg={12} xl={6}>
           <IncomeStatement company={company} />
         </Grid>
-        <Grid item md={12} lg={6}>
+        <Grid item lg={12} xl={6}>
           <BalanceSheet company={company} />
         </Grid>
-        <Grid item md={12} lg={6}>
+        <Grid item lg={12} xl={6}>
           <CashFlowStatement company={company} />
         </Grid>
         {/* <EquityStatement company={company} /> */}

@@ -25,22 +25,10 @@ form div {
 IDs
 *********/
 
-#authForm {
-  margin-top: 65px;
-}
-
 #tags {
-  margin-top: 75px;
   margin-left: 10px;
 }
 
-#logInNav {
-  justify-content: right;
-}
-
-#companies {
-  margin-top: 65px;
-}
 
 /*********
 Classes

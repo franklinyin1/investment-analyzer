@@ -1,19 +1,26 @@
 import React from "react";
 
-import Navbar from "./components/Navbar";
 import Routes from "./Routes";
 
 import Layout from "./components/Layout";
 
 import { createTheme, ThemeProvider } from "@material-ui/core";
 
-const theme = createTheme({});
+import { purple } from '@material-ui/core/colors'
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#fefefe'
+    },
+    secondary: purple
+  }
+});
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <Layout>
-        <Navbar />
         <Routes />
       </Layout>
     </ThemeProvider>
