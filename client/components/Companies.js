@@ -17,6 +17,9 @@ import SearchIcon from "@material-ui/icons/Search";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core";
 
+import Grid from '@material-ui/core/Grid'
+import Paper from '@material-ui/core/Paper'
+
 const useStyles = makeStyles({
   field: {
     marginTop: 65,
