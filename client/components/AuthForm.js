@@ -43,6 +43,7 @@ const AuthForm = props => {
           label="Password"
           variant="outlined"
           name="password"
+          type="password"
           className={classes.field}
         />
         </div>
