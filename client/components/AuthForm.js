@@ -7,6 +7,8 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core";
 
+import { useHistory } from "react-router-dom";
+
 const useStyles = makeStyles({
   field: {
     marginTop: 10,
@@ -25,6 +27,7 @@ const useStyles = makeStyles({
  */
 const AuthForm = props => {
   const classes = useStyles();
+  const history = useHistory();
   const {name, displayName, handleSubmit, error} = props
 
   return (

@@ -51,6 +51,18 @@ const useStyles = makeStyles((theme) => {
     date: {
       flexGrow: 1,
     },
+    appBarOptions: {
+      display: "flex",
+      flexDirection: "row",
+      marginLeft: 10,
+      marginRight: 10,
+    },
+    appBarOptionButtons: {
+      whiteSpace: "nowrap",
+    },
+    icon: {
+      minWidth: '30px'
+    }
   };
 });
 
@@ -59,7 +71,7 @@ function Layout({ children, handleClick, isLoggedIn, auth }) {
   const history = useHistory();
   const location = useLocation();
 
-  const loggedInMenuItems = [
+  const drawerItems = [
     {
       text: "Companies",
       icon: <ShowChartIcon color="secondary" />,
@@ -89,8 +101,40 @@ function Layout({ children, handleClick, isLoggedIn, auth }) {
     <div className={classes.root}>
       <AppBar className={classes.appbar} elevation={0}>
         <Toolbar>
-          <Typography className={classes.date}></Typography>
-          <Typography>{auth.username}</Typography>
+          {!isLoggedIn ? (
+            <Typography className={classes.date}></Typography>
+          ) : (
+            <Typography className={classes.date}>
+              Welcome, {auth.username}
+            </Typography>
+          )}
+          <List className={classes.appBarOptions}>
+            {!isLoggedIn ? (
+              loggedOutMenuItems.map((item) => (
+                <ListItem
+                  button
+                  key={item.text}
+                  onClick={() => history.push(item.path)}
+                  className={
+                    location.pathname === item.path ? classes.active : null
+                  }
+                >
+                  <ListItemIcon className={classes.icon}>{item.icon}</ListItemIcon>
+                  <ListItemText
+                    primary={item.text}
+                    className={classes.appBarOptionButtons}
+                  ></ListItemText>
+                </ListItem>
+              ))
+            ) : (
+              <ListItem button key="Logout" onClick={handleClick}>
+                <ListItemIcon className={classes.icon}>
+                  <Lock color="secondary" />
+                </ListItemIcon>
+                <ListItemText primary="Logout"></ListItemText>
+              </ListItem>
+            )}
+          </List>
         </Toolbar>
       </AppBar>
 
@@ -107,45 +151,21 @@ function Layout({ children, handleClick, isLoggedIn, auth }) {
         </div>
 
         {/* list / links */}
-        {isLoggedIn ? (
-          <List>
-            {loggedInMenuItems.map((item) => (
-              <ListItem
-                button
-                key={item.text}
-                onClick={() => history.push(item.path)}
-                className={
-                  location.pathname === item.path ? classes.active : null
-                }
-              >
-                <ListItemIcon>{item.icon}</ListItemIcon>
-                <ListItemText primary={item.text}></ListItemText>
-              </ListItem>
-            ))}
-            <ListItem button key="Logout" onClick={handleClick}>
-              <ListItemIcon>
-                <Lock color="secondary" />
-              </ListItemIcon>
-              <ListItemText primary="Logout"></ListItemText>
+        <List>
+          {drawerItems.map((item) => (
+            <ListItem
+              button
+              key={item.text}
+              onClick={() => history.push(item.path)}
+              className={
+                location.pathname === item.path ? classes.active : null
+              }
+            >
+              <ListItemIcon>{item.icon}</ListItemIcon>
+              <ListItemText primary={item.text}></ListItemText>
             </ListItem>
-          </List>
-        ) : (
-          <List>
-            {loggedOutMenuItems.map((item) => (
-              <ListItem
-                button
-                key={item.text}
-                onClick={() => history.push(item.path)}
-                className={
-                  location.pathname === item.path ? classes.active : null
-                }
-              >
-                <ListItemIcon>{item.icon}</ListItemIcon>
-                <ListItemText primary={item.text}></ListItemText>
-              </ListItem>
-            ))}
-          </List>
-        )}
+          ))}
+        </List>
       </Drawer>
       <div class={classes.page}>
         <div className={classes.toolbar}></div>
