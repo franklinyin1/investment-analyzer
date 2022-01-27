@@ -3,31 +3,57 @@ import {connect} from 'react-redux'
 import {authenticate} from '../store'
 
 import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import { makeStyles } from "@material-ui/core";
+
+const useStyles = makeStyles({
+  field: {
+    marginTop: 10,
+    marginBottom: 10,
+    display: "block",
+  },
+  button: {
+    marginTop: 10,
+    marginBottom: 10,
+  },
+})
 
 
 /**
  * COMPONENT
  */
 const AuthForm = props => {
+  const classes = useStyles();
   const {name, displayName, handleSubmit, error} = props
 
   return (
     <div>
       <form onSubmit={handleSubmit} name={name}>
         <div>
-          <label htmlFor="username">
-            <Typography variant="span">Username</Typography>
-          </label>
-          <input name="username" type="text" />
+          <TextField
+          label="Username"
+          variant="outlined"
+          name="username"
+          className={classes.field}
+        />
         </div>
         <div>
-          <label htmlFor="password">
-            <Typography variant="span">Password</Typography>
-          </label>
-          <input name="password" type="password" />
+          <TextField
+          label="Password"
+          variant="outlined"
+          name="password"
+          className={classes.field}
+        />
         </div>
         <div>
-          <button type="submit">{displayName}</button>
+        <Button
+          type="submit"
+          variant="outlined"
+          className={classes.button}
+        >
+          {displayName}
+        </Button>
         </div>
         {error && error.response && <div> {error.response.data} </div>}
       </form>

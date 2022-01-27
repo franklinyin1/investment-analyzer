@@ -11,9 +11,11 @@ import { purple } from '@material-ui/core/colors'
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#fefefe'
+      main: '#E7ECEF'
     },
-    secondary: purple
+    secondary: {
+      main: '#274C77'
+    },
   }
 });
 

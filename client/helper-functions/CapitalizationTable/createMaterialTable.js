@@ -16,14 +16,14 @@ function createMaterialTable(columns, tableData, title, downloadExcel) {
         columnsButton: true,
         rowStyle: (data, index) => {
           let returnObj = {}
-          index % 2 == 0 ? returnObj.background = "#f5f5f5" : returnObj.background = null
+          index % 2 == 0 ? returnObj.background = "#E7ECEF" : returnObj.background = null
           summations(data.tag) ?
           returnObj.borderTop = '2px solid #000000' : returnObj.borderTop = null
           summations(data.tag) ?
           returnObj.fontWeight = 'bold' : returnObj.fontWeight = null
           return returnObj
         },
-        headerStyle: { background: "#00004d", color: "white" },
+        headerStyle: { background: "#274C77", color: "white" },
       }}
       actions={[
         {

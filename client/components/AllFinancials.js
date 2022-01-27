@@ -119,8 +119,8 @@ class AllFinancials extends React.Component {
                 grouping: true,
                 columnsButton: true,
                 rowStyle: (data, index) =>
-                  index % 2 == 0 ? { background: "#f5f5f5" } : null,
-                headerStyle: { background: "#00004d", color: "white" },
+                  index % 2 == 0 ? { background: "#E7ECEF" } : null,
+                headerStyle: { background: "#274C77", color: "white" },
               }}
               actions={[
                 {

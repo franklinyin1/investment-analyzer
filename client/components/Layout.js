@@ -16,19 +16,18 @@ import Lock from "@material-ui/icons/Lock";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
 import HowToRegIcon from "@material-ui/icons/HowToReg";
 
-import AppBar from '@material-ui/core/AppBar'
-import Toolbar from '@material-ui/core/Toolbar'
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
 
-import { format } from 'date-fns'
+import { format } from "date-fns";
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => {
   return {
     page: {
-      background: "#f9f9f9",
       width: "100%",
-      padding: theme.spacing(3)
+      padding: theme.spacing(3),
     },
     drawer: {
       width: drawerWidth,
@@ -40,18 +39,18 @@ const useStyles = makeStyles((theme) => {
       display: "flex",
     },
     active: {
-      background: "#f4f4f4",
+      background: "#E7ECEF",
     },
     title: {
-      padding: theme.spacing(2)
+      padding: theme.spacing(2),
     },
     appbar: {
-      width: `calc(100% - ${drawerWidth}px)`
+      width: `calc(100% - ${drawerWidth}px)`,
     },
     toolbar: theme.mixins.toolbar,
     date: {
-      flexGrow: 1
-    }
+      flexGrow: 1,
+    },
   };
 });
 
@@ -88,15 +87,10 @@ function Layout({ children, handleClick, isLoggedIn, auth }) {
 
   return (
     <div className={classes.root}>
-      {/* app bar */}
       <AppBar className={classes.appbar} elevation={0}>
         <Toolbar>
-          <Typography className={classes.date}>
-            Today is { format(new Date(), 'MMMM do, Y') }
-          </Typography>
-          <Typography>
-            {auth.username}
-          </Typography>
+          <Typography className={classes.date}></Typography>
+          <Typography>{auth.username}</Typography>
         </Toolbar>
       </AppBar>
 
@@ -107,7 +101,9 @@ function Layout({ children, handleClick, isLoggedIn, auth }) {
         classes={{ paper: classes.drawerPaper }}
       >
         <div>
-          <Typography variant="h5" className={classes.title}>Investment Analyzer</Typography>
+          <Typography variant="h5" className={classes.title}>
+            Investment Analyzer
+          </Typography>
         </div>
 
         {/* list / links */}
@@ -152,7 +148,9 @@ function Layout({ children, handleClick, isLoggedIn, auth }) {
         )}
       </Drawer>
       <div class={classes.page}>
-        <div className={classes.toolbar}></div>{children}</div>
+        <div className={classes.toolbar}></div>
+        {children}
+      </div>
     </div>
   );
 }

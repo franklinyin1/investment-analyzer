@@ -18,14 +18,15 @@ import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core";
 
 import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
-import { Container } from "@material-ui/core";
 
 const useStyles = makeStyles({
   field: {
-  //   marginTop: 20,
-  //   marginBottom: 20,
-    // display: "block",
+    marginBottom: 10,
+    display: "block",
+  },
+  button: {
+    marginTop: 10,
+    marginBottom: 20,
   },
 });
 
@@ -49,15 +50,8 @@ function Companies(props) {
   const { company } = props;
 
   return (
-    <div>
-      <form
-        noValidate
-        autoComplete="off"
-        id="submit-company"
-        onSubmit={handleSubmit}
-      >
-        {/* <div id="companyPrompt">
-        </div> */}
+    <React.Fragment>
+      <form noValidate autoComplete="off" onSubmit={handleSubmit}>
         <TextField
           className={classes.field}
           label="Enter Stock Ticker"
@@ -65,9 +59,15 @@ function Companies(props) {
           onChange={handleChange}
           value={ticker}
           name="ticker"
+          fullWidth
+          placeholder="GOOG"
         />
-        {/* <input name="ticker"  /> */}
-        <Button type="submit" variant="outlined" endIcon={<SearchIcon />}>
+        <Button
+          type="submit"
+          variant="outlined"
+          endIcon={<SearchIcon />}
+          className={classes.button}
+        >
           Search
         </Button>
       </form>
@@ -87,13 +87,9 @@ function Companies(props) {
         <Grid item lg={12} xl={6}>
           <CashFlowStatement company={company} />
         </Grid>
-        {/* <EquityStatement company={company} /> */}
-        {/* <ComprehensiveIncomeStatement company={company} /> */}
-        {/* <UnclassifiableStatement company={company} /> */}
-        {/* <CoverPage company={company} /> */}
         <AllFinancials company={company} />
       </Grid>
-    </div>
+    </React.Fragment>
   );
 }
 
