@@ -23,7 +23,7 @@ class Routes extends Component {
             <Route exact path="/" component={Companies} />
             <Route path="/Tags" component={Tags} />
             <Route path="/Companies" component={Companies} />
-            <Route path="/login" component={Login} />
+            <Route path="/login" component={isLoggedIn ? Companies : Login} />
             <Route path="/signup" component={Signup} />
             <Redirect to="/Companies" />
           </Switch>
