@@ -88,8 +88,8 @@ function Companies(props) {
         <Grid item lg={12} xl={6}>
           <CashFlowStatement company={company} />
         </Grid>
-        <AllFinancials company={company} />
       </Grid>
+      <AllFinancials company={company} />
     </React.Fragment>
   );
 }
