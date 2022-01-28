@@ -7,7 +7,7 @@ import MaterialTable from "material-table";
 
 import XLSX from "xlsx";
 
-import Typography from "@material-ui/core/Typography";
+import CircularProgress from '@material-ui/core/CircularProgress'
 
 class Tags extends React.Component {
   constructor(props) {
@@ -95,7 +95,7 @@ class Tags extends React.Component {
 
     return (
       <div id="tags">
-        {loading ? <Typography variant="h6">Loading...</Typography> : ""}
+        {loading ? <CircularProgress /> : ""}
         {tableData.length > 1 ? (
           <React.Fragment>
             <MaterialTable
