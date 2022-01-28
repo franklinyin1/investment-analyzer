@@ -11,13 +11,19 @@ import { NCITagsAndPLabels } from "./TagsAndPLabels/NCITagsAndPLabels";
 import { preferredEquityTagsAndPLabels } from "./TagsAndPLabels/PreferredEquityTagsAndPLabels";
 import { sharesoutstandingTagsAndPLabels } from "./TagsAndPLabels/SharesoutstandingTagsAndPLabels";
 
+import Typography from "@material-ui/core/Typography";
+
 class CapitalizationTable extends React.PureComponent {
   constructor(props) {
     super(props);
+    this.state = {
+      zeroMarketCap: false,
+    };
   }
 
   render() {
     const { company } = this.props;
+    let { zeroMarketCap } = this.state;
 
     let sharesoutstandingTags = [];
     let sharesoutstandingPLabels = [];
@@ -289,8 +295,10 @@ class CapitalizationTable extends React.PureComponent {
         }
       }
 
-      //if market cap is 0, then we wil not display the data
-      if (capitalizationTableStats["marketCap"].values !== 0) {
+      //if market cap is 0, then we will indicate that we are not displaying the cap table due to missing data
+      if (capitalizationTableStats["marketCap"].values === 0) {
+        zeroMarketCap = true;
+      } else {
         //next, let's push our data into tableData
         for (const key in capitalizationTableStats) {
           let capitalizationData = capitalizationTableStats[key];
@@ -358,7 +366,11 @@ class CapitalizationTable extends React.PureComponent {
 
     return (
       <React.Fragment>
-        {tableData.length > 1 ? (
+        {zeroMarketCap ? (
+          <Typography variant="p">
+            Unable to display Capitalization Table due to missing data
+          </Typography>
+        ) : tableData.length > 1 ? (
           <React.Fragment>
             {materialTable}
             <h1></h1>
