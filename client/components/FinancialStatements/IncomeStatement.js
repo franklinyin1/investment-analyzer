@@ -15,7 +15,7 @@ import determineGrowthLabel from "../../helper-functions/FinancialStatements/det
 
 import isPerShareItem from "../../helper-functions/FinancialStatements/isPerShareItem";
 
-class IncomeStatement extends React.Component {
+class IncomeStatement extends React.PureComponent {
   constructor(props) {
     super(props);
   }

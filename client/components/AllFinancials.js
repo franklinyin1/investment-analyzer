@@ -5,7 +5,7 @@ import MaterialTable from "material-table";
 
 import XLSX from "xlsx";
 
-class AllFinancials extends React.Component {
+class AllFinancials extends React.PureComponent {
   constructor(props) {
     super(props);
   }

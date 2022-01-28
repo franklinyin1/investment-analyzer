@@ -11,7 +11,7 @@ import { NCITagsAndPLabels } from "./TagsAndPLabels/NCITagsAndPLabels";
 import { preferredEquityTagsAndPLabels } from "./TagsAndPLabels/PreferredEquityTagsAndPLabels";
 import { sharesoutstandingTagsAndPLabels } from "./TagsAndPLabels/SharesoutstandingTagsAndPLabels";
 
-class CapitalizationTable extends React.Component {
+class CapitalizationTable extends React.PureComponent {
   constructor(props) {
     super(props);
   }

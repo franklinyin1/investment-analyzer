@@ -13,7 +13,7 @@ import determineNumQtrs from "../../helper-functions/FinancialStatements/determi
 import determinePriorQtr from "../../helper-functions/FinancialStatements/determinePriorQtr";
 import determineGrowthLabel from "../../helper-functions/FinancialStatements/determineGrowthLabel";
 
-class CashFlowStatement extends React.Component {
+class CashFlowStatement extends React.PureComponent {
   constructor(props) {
     super(props);
   }
