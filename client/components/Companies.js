@@ -16,6 +16,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import Typography from "@material-ui/core/Typography";
 
 import Grid from "@material-ui/core/Grid";
 
@@ -53,48 +54,58 @@ function Companies(props) {
 
   const { company } = props;
 
-  return (
-    <ErrorBoundary priorTicker={priorTicker}>
-      <form noValidate autoComplete="off" onSubmit={handleSubmit}>
-        <TextField
-          className={classes.field}
-          label="Enter Stock Ticker"
-          variant="outlined"
-          onChange={handleChange}
-          value={ticker}
-          name="ticker"
-          fullWidth
-          placeholder="GOOG"
-        />
-        <Button
-          type="submit"
-          variant="outlined"
-          endIcon={<SearchIcon />}
-          className={classes.button}
-        >
-          Search
-        </Button>
-      </form>
-      {loading ? <CircularProgress /> : ""}
-      <Title company={company} />
+  if (company === "error") {
+    return (
+      <Typography variant="p">
+        Apologies, something went wrong when trying to load the following stock
+        ticker: {priorTicker.toUpperCase()}. Please refresh the page to
+        continue.{" "}
+      </Typography>
+    );
+  } else {
+    return (
+      <ErrorBoundary priorTicker={priorTicker}>
+        <form noValidate autoComplete="off" onSubmit={handleSubmit}>
+          <TextField
+            className={classes.field}
+            label="Enter Stock Ticker"
+            variant="outlined"
+            onChange={handleChange}
+            value={ticker}
+            name="ticker"
+            fullWidth
+            placeholder="GOOG"
+          />
+          <Button
+            type="submit"
+            variant="outlined"
+            endIcon={<SearchIcon />}
+            className={classes.button}
+          >
+            Search
+          </Button>
+        </form>
+        {loading ? <CircularProgress /> : ""}
+        <Title company={company} />
 
-      <Grid container spacing={3}>
-        <Grid item lg={12} xl={6}>
-          <CapitalizationTable company={company} />
+        <Grid container spacing={3}>
+          <Grid item lg={12} xl={6}>
+            <CapitalizationTable company={company} />
+          </Grid>
+          <Grid item lg={12} xl={6}>
+            <IncomeStatement company={company} />
+          </Grid>
+          <Grid item lg={12} xl={6}>
+            <BalanceSheet company={company} />
+          </Grid>
+          <Grid item lg={12} xl={6}>
+            <CashFlowStatement company={company} />
+          </Grid>
         </Grid>
-        <Grid item lg={12} xl={6}>
-          <IncomeStatement company={company} />
-        </Grid>
-        <Grid item lg={12} xl={6}>
-          <BalanceSheet company={company} />
-        </Grid>
-        <Grid item lg={12} xl={6}>
-          <CashFlowStatement company={company} />
-        </Grid>
-      </Grid>
-      <AllFinancials company={company} />
-    </ErrorBoundary>
-  );
+        <AllFinancials company={company} />
+      </ErrorBoundary>
+    );
+  }
 }
 
 /**
