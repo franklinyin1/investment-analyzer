@@ -19,6 +19,8 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 
 import Grid from "@material-ui/core/Grid";
 
+import ErrorBoundary from "./ErrorBoundary";
+
 const useStyles = makeStyles({
   field: {
     marginBottom: 10,
@@ -34,6 +36,7 @@ function Companies(props) {
   const classes = useStyles();
   const [ticker, setTicker] = useState("");
   const [loading, setLoading] = useState(false);
+  const [priorTicker, setPriorTicker] = useState("");
 
   function handleChange(evt) {
     setTicker(evt.target.value);
@@ -42,6 +45,7 @@ function Companies(props) {
   async function handleSubmit(evt) {
     evt.preventDefault();
     setLoading(true);
+    setPriorTicker(ticker);
     await props.fetchCompany(ticker);
     setLoading(false);
     setTicker("");
@@ -50,7 +54,7 @@ function Companies(props) {
   const { company } = props;
 
   return (
-    <React.Fragment>
+    <ErrorBoundary priorTicker={priorTicker}>
       <form noValidate autoComplete="off" onSubmit={handleSubmit}>
         <TextField
           className={classes.field}
@@ -89,7 +93,7 @@ function Companies(props) {
         </Grid>
       </Grid>
       <AllFinancials company={company} />
-    </React.Fragment>
+    </ErrorBoundary>
   );
 }
 

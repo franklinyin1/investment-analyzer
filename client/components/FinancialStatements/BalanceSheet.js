@@ -12,6 +12,8 @@ import determineNumQtrs from "../../helper-functions/FinancialStatements/determi
 import determinePriorQtr from "../../helper-functions/FinancialStatements/determinePriorQtr";
 import determineGrowthLabel from "../../helper-functions/FinancialStatements/determineGrowthLabel";
 
+import ErrorBoundary from "../ErrorBoundary";
+
 class BalanceSheet extends React.PureComponent {
   constructor(props) {
     super(props);

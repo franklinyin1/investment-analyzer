@@ -13,6 +13,9 @@ import { sharesoutstandingTagsAndPLabels } from "./TagsAndPLabels/Sharesoutstand
 
 import Typography from "@material-ui/core/Typography";
 
+import ErrorBoundary from "../ErrorBoundary";
+
+
 class CapitalizationTable extends React.PureComponent {
   constructor(props) {
     super(props);

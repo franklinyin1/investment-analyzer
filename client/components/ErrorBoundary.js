@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import Typography from "@material-ui/core/Typography";
+
 export class ErrorBoundary extends Component {
 
   constructor(props) {
@@ -17,8 +19,9 @@ export class ErrorBoundary extends Component {
   }
 
   render() {
+    const {priorTicker} = this.props
     if (this.state.hasError) {
-      return <h1>Something went wrong</h1>
+      return <Typography variant="p">Apologies, something went wrong when trying to load the following stock ticker: {priorTicker.toUpperCase()}. Please refresh the page to continue. </Typography>
     }
     return this.props.children;
   }

@@ -1,7 +1,6 @@
 import React from "react";
 
 import Routes from "./Routes";
-import ErrorBoundary from "./components/ErrorBoundary";
 import Layout from "./components/Layout";
 
 import { createTheme, ThemeProvider } from "@material-ui/core";
@@ -19,13 +18,11 @@ const theme = createTheme({
 
 function App() {
   return (
-    <ErrorBoundary>
       <ThemeProvider theme={theme}>
         <Layout>
           <Routes />
         </Layout>
       </ThemeProvider>
-    </ErrorBoundary>
   );
 }
 
