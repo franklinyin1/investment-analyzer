@@ -23,6 +23,10 @@ class Routes extends Component {
           <Route exact path="/" component={Companies} />
           <Route path="/Tags" component={Tags} />
           <Route path="/Companies" component={Companies} />
+          <Route path='/GitHub' component={() => {
+            window.location.href = 'https://github.com/franklinyin1/investment-analyzer';
+            return null;
+          }}/>
           <Route path="/login">
             {isLoggedIn ? <Redirect to="/" /> : <Login />}
           </Route>

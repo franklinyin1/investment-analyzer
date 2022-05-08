@@ -86,7 +86,7 @@ function Layout({ children, handleClick, isLoggedIn, auth }) {
     {
       text: "GitHub Repo",
       icon: <GitHubIcon color="secondary" />,
-      path: "github.com/franklinyin1/investment-analyzer",
+      path: "/GitHub",
     },
   ];
 
@@ -158,19 +158,7 @@ function Layout({ children, handleClick, isLoggedIn, auth }) {
 
         {/* list / links */}
         <List>
-          {drawerItems.map((item) => item.text === 'GitHub Repo' ? (
-            <ListItem
-              button
-              key={item.text}
-              onClick={() => window.location.href='www.github.com/franklinyin1/investment-analyzer'}
-              className={
-                location.pathname === item.path ? classes.active : null
-              }
-            >
-              <ListItemIcon>{item.icon}</ListItemIcon>
-              <ListItemText primary={item.text}></ListItemText>
-            </ListItem>
-          ): (
+          {drawerItems.map((item) => (
             <ListItem
               button
               key={item.text}
