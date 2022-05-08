@@ -11,6 +11,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import ShowChartIcon from "@material-ui/icons/ShowChart";
 import LabelIcon from "@material-ui/icons/Label";
+import GitHubIcon from "@material-ui/icons/GitHub";
 import { useHistory, useLocation } from "react-router-dom";
 import Lock from "@material-ui/icons/Lock";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
@@ -82,6 +83,11 @@ function Layout({ children, handleClick, isLoggedIn, auth }) {
       icon: <LabelIcon color="secondary" />,
       path: "/Tags",
     },
+    {
+      text: "GitHub Repo",
+      icon: <GitHubIcon color="secondary" />,
+      path: "github.com/franklinyin1/investment-analyzer",
+    },
   ];
 
   const loggedOutMenuItems = [
@@ -152,7 +158,19 @@ function Layout({ children, handleClick, isLoggedIn, auth }) {
 
         {/* list / links */}
         <List>
-          {drawerItems.map((item) => (
+          {drawerItems.map((item) => item.text === 'GitHub Repo' ? (
+            <ListItem
+              button
+              key={item.text}
+              onClick={() => window.location.href='www.github.com/franklinyin1/investment-analyzer'}
+              className={
+                location.pathname === item.path ? classes.active : null
+              }
+            >
+              <ListItemIcon>{item.icon}</ListItemIcon>
+              <ListItemText primary={item.text}></ListItemText>
+            </ListItem>
+          ): (
             <ListItem
               button
               key={item.text}
